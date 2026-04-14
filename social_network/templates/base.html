@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{% static 'css/profile.css' %}">
         <link rel="stylesheet" href="{% static 'css/header.css' %}">
         <link rel="stylesheet" href="{% static 'css/layouts.css' %}">
+        <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
         {% block links %}
         {% endblock %}
     </head>
@@ -16,29 +17,44 @@
         <header>
             <div class="header">
                 <div class="logo">
-                    <img src="{% static 'images/logo/worldIT-logo.png' %}" alt="">
+                    <img src="{% static 'images/logo/worldIT-logo.svg' %}" alt="">
                 </div>
                 <nav class = 'navigation'>
-                    <div>
-                    <img src="{% static 'images/logo/home-logo.png' %}" alt=""><a href="{% url 'home' %}">Головна</a>
+                    <div class = "nav-item{% if request.resolver_match.url_name == 'home' %} active {% endif %}">
+                        <div class = "img-item">
+                            <img class = "img-cover" src="{% static 'images/logo/home-logo.svg' %}" alt="">
+                        </div>
+                            <a href="{% url 'home' %}">Головна</a>
                     </div>
 
-                    <div>
-                        <img src="{% static 'images/logo/post-logo.png' %}" alt=""><a href="">Мої публікаціЇ</a>
+                    <div class="nav-item{% if request.resolver_match.url_name == 'my_posts' %} active {% endif %}">
+                        <div class = "img-item">
+                            <img class = "img-cover" src="{% static 'images/logo/post-logo.svg' %}" alt="">
+                        </div>
+                        <a href="{% url 'my_posts' %}">Мої публікації</a>
                     </div>
 
-                    <div>
-                        <img src="{% static 'images/logo/people-logo.png' %}" alt=""><a href="">Друзі</a>
+                    <div class="nav-item{% if request.resolver_match.url_name == 'friends' %} active {% endif %}">
+                        <div class = "img-item">
+                            <img class = "img-cover" src="{% static 'images/logo/people-logo.svg' %}" alt="">
+                        </div>
+                        <a href="{% url 'friends' %}">Друзі</a>
                     </div>
 
-                    <div>
-                        <img src="{% static 'images/logo/chat-logo.png' %}" alt=""><a href="">Чати</a>
+                    <div class="nav-item">
+                        <div class = "img-item">
+                            <img class = "img-cover" src="{% static 'images/logo/chat-logo.svg' %}" alt="">
+                        </div>
+                        <a href="">Чати</a>
                     </div>
 
-                    <div>
-                        <img src="{% static 'images/logo/settings-logo.png' %}" alt=""><a href="">Налаштування</a>
+                    <div class="nav-item{% if request.resolver_match.url_name == 'settings' %} active {% endif %}">
+                        <div class = "img-item">
+                            <img class = "img-cover" src="{% static 'images/logo/settings-logo.svg' %}" alt="">
+                        </div>
+                        <a href="{% url 'settings' %}">Налаштування</a>
                     </div>
-                    <button><img src="{% static 'images/logo/exit-logo.png' %}" alt=""> Вихід </button>
+                    <button><img src="{% static 'images/logo/exit-logo.svg' %}" alt=""> Вихід </button>
                 </nav>
             </div>
         </header>
@@ -58,9 +74,9 @@
                                     <div class= "user-status"></div>
                                 </div>
 
-                                <div class= "profile-info">
-                                    <p class = "profile-name">Lina Li</p>
-                                    <p class = "profile-username">@thelili</p>
+                                <div class= "main-profile-info">
+                                    <p class = "main-profile-name">Lina Li</p>
+                                    <p class = "main-profile-username">@thelili</p>
                                 </div>
                             </div>
 

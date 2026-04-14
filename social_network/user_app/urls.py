@@ -1,6 +1,6 @@
 from django. urls import path
-from .views import render_settings
+from .views import SettingsPageView
 
 urlpatterns = [
-    path('settings/', render_settings, name='my_posts')
+    path('', SettingsPageView.as_view(), name='settings')
 ]

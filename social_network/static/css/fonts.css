@@ -1,0 +1,20 @@
+:root{
+    --FontMedium : "medium" ;
+    --FontBold : "bold" ;
+    --FontRegular : "regular" ;
+}
+
+@font-face {
+    font-family: "medium";
+    src: url(../fonts/GTWalsheimPro-Medium.ttf);
+}
+
+@font-face {
+    font-family: "bold";
+    src: url(../fonts/GTWalsheimPro-Bold.ttf);
+}
+
+@font-face {
+    font-family: "regular";
+    src: url(../fonts/GTWalsheimPro-Regular.ttf);
+}

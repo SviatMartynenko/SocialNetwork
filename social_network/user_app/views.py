@@ -1,6 +1,6 @@
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
 
-# Create your views here.
 
-def render_settings(request):
-    return render(request, 'settings.html')
+class SettingsPageView(TemplateView):
+    template_name = "user_app/settings.html"

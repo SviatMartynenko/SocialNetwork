@@ -2,5 +2,5 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
 
-class PostPageView(TemplateView):
-    template_name = "post_app/my_posts.html"
+class FriendsPageView(TemplateView):
+    template_name = "friends_app/friends.html"

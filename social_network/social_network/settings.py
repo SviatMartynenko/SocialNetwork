@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home_app',
     'post_app',
     'user_app',
+    'friends_app'
 ]
 
 MIDDLEWARE = [
