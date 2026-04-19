@@ -1,27 +1,6 @@
-body {
-    margin: 0;
-    font-size: 1rem;
-    background-color: #FAF8FF;
-}
-
-
-.header{
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 3.4vh 5.55vw;
-    background-color: #ffffff;
-    flex-direction: row;
-    height: 8.6vh;
-    width: 100vw;
-}
-
 .nav-item{
-    padding-left: clamp(0.1rem, 0.5vw, 0.5rem);
-    padding-top: clamp(0.1rem, 0.3vh, 0.25rem);
-    padding-right: clamp(0.1rem, 0.5vw, 0.5rem);
-    padding-bottom: clamp(0.1rem, 0.3vh, 0.25rem);
-    border-radius: clamp(0.1rem, 0.2vh, 0.18rem);
+    padding: clamp(0.1rem, 0.3vh, 0.25rem) clamp(0.1rem, 0.5vw, 0.5rem);
+    border-radius: 2%/10%;
     display: flex;
     align-items: center;
     gap: clamp(0.1rem, 0.5vw, 0.5rem);
@@ -40,12 +19,6 @@ body {
     max-height: 20px;
 }
 
-.navigation {
-    display: flex;
-    align-items: center;
-    gap: 1.5vw;
-}
-
 .navigation a{
     text-decoration: none;
     font-family: var(--FontMedium);
@@ -54,21 +27,21 @@ body {
 
 .logo{
     height: 1.8vh;
-    width: 10vw;
+    max-height: 18px;
     display: flex;
 }
 
 .navigation button {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 0.5vw; 
+    align-items: center;
+    gap: clamp(0.1rem, 0.5vw, 0.5rem); 
     background: transparent;
-    border: 0.15vw solid #543C52;
-    padding: 1vh 1vw; 
-    border-radius: 4vh;
-    border-width: 0.2vh;
-    font-size: 0.9rem;
+    border: 0.1vh solid #543C52;
+    padding: clamp(0.1rem, 1vh, 0.625rem) clamp(0.1rem, 1vw, 1rem); 
+    border-radius: 20%/50%; 
+    font-size: clamp(0.1rem, 1.3vh, 0.875rem);
     color: #543C52;
     font-family: var(--FontMedium);
+    font-weight: 500;
 }

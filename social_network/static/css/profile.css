@@ -88,3 +88,7 @@
     font-size: clamp(0.1rem, 1.5vh, 1rem);
     font-family: var(--FontMedium);
 }
+
+.vertical-line{
+    border-right: solid rgba(205, 206, 210, 1)  0.1vw;
+}

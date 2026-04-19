@@ -83,10 +83,6 @@
     max-height: 186px;
 }
 
-.vertical-line{
-    border-right: solid rgba(205, 206, 210, 1)  0.1vw;
-}
-
 .request-profile{
     height: 4.4vh;
     max-width: 318px;

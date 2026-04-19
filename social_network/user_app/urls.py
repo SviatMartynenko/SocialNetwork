@@ -1,6 +1,7 @@
 from django. urls import path
-from .views import SettingsPageView
+from .views import AuthTemplateView
 
 urlpatterns = [
-    path('', SettingsPageView.as_view(), name='settings')
+    path('', AuthTemplateView.as_view(), name = 'auth')
 ]
+

@@ -6,11 +6,24 @@
 
 body{
     overflow-x: hidden;
+    background-color: #FAF8FF;
 }
 
 main{
     display: flex;
     justify-content: center;
+}
+header{
+    position: fixed;
+    height: 8.6vh;
+    width: 100%;
+    max-height: 88px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #ffffff;
+    justify-content: center;
+    z-index: 1;
 }
 
 .img-cover{

@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
 {% endblock %}
 
-{% block additional_side_blocks %}
+{% block side_block %}
+    {% include 'particles/user_profile.html' %}
     <div class = "requests">
         <div class="side-block-header">
             <div class= "title-container">
