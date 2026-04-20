@@ -7,43 +7,52 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-        <link rel="stylesheet" href="{% static 'css/header.css' %}">
+        <link rel="stylesheet" href="{% static 'css/nav.css' %}">
         <link rel="stylesheet" href="{% static 'css/layouts.css' %}">
         <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
         {% block links %} {% endblock %}
     </head>
 
     <body>
-        <header>
-            
+        <header>  
             <nav class = "navigation">
-                <a href="" class="logo">
+                <a href="{% url 'home' %}" class="logo">
                     <img src="{% static 'images/logo/worldIT-logo.svg' %}" alt="">
                 </a>
                 {% if request.path != '/auth' %}
                     <div class="menu">
                         <a class = "nav-item" href="{% url 'home' %}">
-                            <img src= "{% static 'images/logo/home-logo.svg' %}" alt="">
-                            <span>Головна</span>
+                            <div class= "nav-img-container">
+                                <img class = "img-cover" src= "{% static 'images/logo/home-logo.svg' %}" alt="">
+                            </div>
+                            <span class="nav-item-text">Головна</span>
                         </a>
                         <a class = "nav-item" href="{% url 'my_posts' %}">
-                            <img src= "{% static 'images/logo/post-logo.svg' %}"" alt="">
-                            <span>Мої публікації</span>
+                            <div class= "nav-img-container">
+                                <img class = "img-cover" src= "{% static 'images/logo/post-logo.svg' %}"" alt="">
+                            </div>
+                            <span class="nav-item-text">Мої публікації</span>
                         </a>
                         <a class = "nav-item" href="{% url 'friends' %}">
-                            <img src="{% static 'images/logo/people-logo.svg' %}" alt="">
-                            <span>Друзі</span>
+                            <div class= "nav-img-container">
+                                <img class = "img-cover" src="{% static 'images/logo/people-logo.svg' %}" alt="">
+                            </div>
+                            <span class="nav-item-text">Друзі</span>
                         </a>
                         <a class = "nav-item" href="">
-                            <img src="{% static 'images/logo/chat-logo.svg' %}" alt="">
-                            <span>Чати</span>
+                            <div class= "nav-img-container">
+                                <img class = "img-cover" src="{% static 'images/logo/chat-logo.svg' %}" alt="">
+                            </div>
+                            <span class="nav-item-text">Чати</span>
                         </a>
                         <a class = "nav-item" href="{% url 'settings' %}">
-                            <img src="{% static 'images/logo/settings-logo.svg' %}" alt="">
-                            <span>Налаштування</span>
+                            <div class= "nav-img-container">
+                                <img class = "img-cover" src="{% static 'images/logo/settings-logo.svg' %}" alt="">
+                            </div>
+                            <span class="nav-item-text">Налаштування</span>
                         </a>
                         <a href="" class="logout">
-                            <img src="{% static 'images/logo/logout_button.svg' %}" alt="">
+                            <img class = "img-cover" src="{% static 'images/logo/logout_button.svg' %}" alt="">
                         </a>
                     </div>
                 {% endif %}   
@@ -51,21 +60,18 @@
         </header>
 
         <main>
-            <div class = "main-container">
-                <div class= "side-block-spacer">
-                    <div class = "side-block">  
-                        {% block side_block %}{% endblock %}
-    
-                    </div>
-                </div>
-            
-                <div class = "content">
-                    {% block content %}
+            <div class= "side-block-spacer">
+                <div class = "side-block">  
+                    {% block side_block %}{% endblock %}
 
-                    {% endblock %}
-                </div>    
-                    
+                </div>
             </div>
+        
+            <div class = "content">
+                {% block content %}
+
+                {% endblock %}
+            </div>    
         </main>
         {% block scripts %}{% endblock %}
     </body>
