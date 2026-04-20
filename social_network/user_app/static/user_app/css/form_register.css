@@ -1,0 +1,13 @@
+.register-div{
+    width: 33.8vw;
+    height: 53.9vh;
+    background-color: grey;
+    border-radius: 2vh;
+}
+
+.register-title{
+    width: 33vw;
+    height: 4.5vh;
+    display: flex;
+    justify-content: center;
+}

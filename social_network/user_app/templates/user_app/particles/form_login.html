@@ -1,5 +1,9 @@
-<div>
-    <div>
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'user_app/css/form_login.css' %}">
+{% endblock %}
+<div class="login-div">
+    <div class="login-title">
         <span>Реєстрація</span>
         <span>Авторизація</span>
     </div>
@@ -9,3 +13,4 @@
         <button type="submit">Увійти</button>
     </form>
 </div>
+

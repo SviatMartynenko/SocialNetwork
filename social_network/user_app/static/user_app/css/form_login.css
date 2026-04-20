@@ -1,0 +1,14 @@
+.login-div{
+    width: 33.8vw;
+    height: 53.9vh;
+    background-color: hsl(0, 94%, 52%);
+    border-radius: 2vh;
+}
+
+.login-title{
+    width: 33vw;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 10vh;
+}
