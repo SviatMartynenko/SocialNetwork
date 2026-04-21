@@ -13,12 +13,19 @@
         <div class="input-containers">
             <div class = "form-input-container">
                 <span class = "form-input-label">{{ form_login.username.label }}</span>
-                {{ form_login.username }}
+                <div class = "form-input-field-container">
+                    {{ form_login.username }}
+                </div>
                 {{ form_login.username.errors }}
             </div>
             <div class = "form-input-container">
                 <span class = "form-input-label">{{ form_login.password.label }}</span>
-                {{ form_login.password }}
+                <div class = "form-input-field-container">
+                    {{ form_login.password }}
+                    <div class="eye-img-container">
+                        <img class="img-cover eye" src = "{% static 'user_app/images/eye_close.svg'%}" eye-open-src = "{% static 'user_app/images/eye_open.svg'%}" eye-close-src = "{% static 'user_app/images/eye_close.svg'%}" alt="">
+                    </div>
+                </div>
                 {{ form_login.password.errors }}
             </div>
         </div>

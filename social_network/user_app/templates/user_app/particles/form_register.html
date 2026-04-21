@@ -13,17 +13,29 @@
         <div class= "input-containers">
             <div class = "form-input-container">
             <span class = "form-input-label">{{ form_register.email.label }}</span>
-            {{ form_register.email }}
+            <div class = "form-input-field-container">
+                {{ form_register.email }}
+            </div>
             {{ form_register.email.errors }}
             </div>
             <div class = "form-input-container">
                 <span class = "form-input-label">{{ form_register.password1.label }}</span>
+            <div class = "form-input-field-container">
                 {{ form_register.password1 }}
+                <div class="eye-img-container">
+                    <img class="img-cover eye" eye-open-src = "{% static 'user_app/images/eye_open.svg'%}" eye-close-src = "{% static 'user_app/images/eye_close.svg'%}" src = "{% static 'user_app/images/eye_close.svg'%}" alt="">
+                </div>
+            </div>  
                 {{ form_register.password1.errors }}
             </div>
             <div class = "form-input-container">
                 <span class = "form-input-label">{{ form_register.password2.label }}</span>
-                {{ form_register.password2 }}
+                <div class = "form-input-field-container">
+                    {{ form_register.password2 }}
+                    <div class="eye-img-container">
+                        <img class="img-cover eye" eye-open-src = "{% static 'user_app/images/eye_open.svg'%}" eye-close-src = "{% static 'user_app/images/eye_close.svg'%}" src = "{% static 'user_app/images/eye_close.svg'%}" alt="">
+                    </div>
+                </div>
                 {{ form_register.password2.errors }}
             </div>
         </div>

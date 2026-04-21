@@ -1,16 +1,15 @@
 .form-field{
-    border-radius: 0.9vh;
-    height: 4.1vh;
-    border: 1px solid rgba(205, 206, 210, 1);
+    border: none;
     width: 100%;
-    padding: 0.9vh 1.1vw;
-}   
-.form-field:focus {
-    outline: none;
-    border: 1px solid black;
     color: rgba(7, 10, 28, 1);
     font-size: 1.5vh;
     font-family: var(--FontRegular);
+}   
+.form-field:focus {
+    outline: none;
+}
+.form-input-field-container:focus-within{
+    border: solid black 1px;
 }
 .form-field:focus::placeholder{
     color: transparent;
@@ -38,4 +37,27 @@
     flex-direction: column;
     width: 27.7vw;
     gap: 1.5vh;
+}
+.form-input-field-container{
+    border-radius: 0.9vh;
+    height: 4.1vh;
+    border: 1px solid rgba(205, 206, 210, 1);
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 1.1vw;
+    padding-right: 1.1vw;
+    gap: 0.6vw;
+}
+.eye-img-container{
+    width: 1.9vh;
+    max-width: 20px;
+    height: 1.9vh;
+    max-height: 20px;
+}
+
+.eye{
+    cursor: pointer;
 }

@@ -21,3 +21,22 @@ registerTitle.addEventListener("click", () => {
     formLogin.style.display = "none";
     formRegister.style.display = "flex";
 });
+
+const eyes = document.querySelectorAll(".eye")
+
+eyes.forEach(eye => {
+    eye.addEventListener('click', function() {
+        const container = eye.closest('.form-input-field-container');
+        const passwordInput = container.querySelector('input');
+        const openSrc = eye.getAttribute('eye-open-src');
+        const closeSrc = eye.getAttribute('eye-close-src');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eye.src = openSrc; 
+        }
+        else {
+            passwordInput.type = 'password';
+            eye.src = closeSrc;
+        }
+    });
+});
