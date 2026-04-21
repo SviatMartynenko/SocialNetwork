@@ -39,6 +39,7 @@ p{
     font-size: 2.3rem;
     font-family: var(--FontBold);
     border-bottom: 0.3vh solid #543C52;
+    cursor: default;
 }
 
 span{
@@ -49,6 +50,7 @@ span{
     font-size: 2.3rem;
     font-family: var(--FontMedium);
     color: #81818D;
+    cursor: pointer;
 }
 
 .register-button{
