@@ -8,19 +8,21 @@
         <span class = "login-text">Авторизація</span>
     </div>
     <p>Раді тебе знову бачити!</p>
-    <form  action="{% url 'login' %}" method="post">
+    <form class="login-form" action="{% url 'login' %}" method="post">
         {% csrf_token %}
-        <div class = "form-input-container">
-            <span>{{ form_login.username.label }}</span>
-            {{ form_login.username }}
-            {{ form_login.username.errors }}
+        <div class="input-containers">
+            <div class = "form-input-container">
+                <span class = "form-input-label">{{ form_login.username.label }}</span>
+                {{ form_login.username }}
+                {{ form_login.username.errors }}
+            </div>
+            <div class = "form-input-container">
+                <span class = "form-input-label">{{ form_login.password.label }}</span>
+                {{ form_login.password }}
+                {{ form_login.password.errors }}
+            </div>
         </div>
-        <div class = "form-input-container">
-            <span>{{ form_login.password.label }}</span>
-            {{ form_login.password }}
-            {{ form_login.password.errors }}
-        </div>
-        <button type="submit">Увійти</button>
+        <button class="login-button" type="submit">Увійти</button>
     </form>
 </div>
 

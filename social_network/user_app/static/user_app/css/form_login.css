@@ -1,15 +1,70 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .login-div{
     width: 33.8vw;
-    height: 53.9vh;
-    background-color: hsl(0, 94%, 52%);
-    border-radius: 2vh;
-    
+    height: 46.7vh;
+    background-color: lightgray;
+    border-radius: 3vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-text{
+    font-size: 2.3rem;
+    font-family: var(--FontBold);
+    border-bottom: 0.3vh solid #543C52;
+    display: inline-block;
+}
+
+span {
+    padding-bottom: 0.5vh;
+}
+
+.registration-text{
+    font-size: 2.3rem;
+    font-family: var(--FontMedium);
+    color: gray;
+}
+
+p{
+    display: flex;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-family: var(--FontMedium);
 }
 
 .login-title{
-    width: 33vw;
-    height: 35vh;
     display: flex;
     justify-content: center;
-    padding-top: 10vh;
+    align-items: center;
+    gap: 1.6vw;
+    padding-top: 4.2vh;
+    padding-bottom: 3.5vh;
+}
+
+
+.login-button{
+    width: 27.7vw;
+    height: 5vh;
+    color: white;
+    border-radius: 2.5vh;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    background-color: #543C52;
+    margin: 0 auto;
+    margin-top: 3.5vh;
+    top: 3.5vh;
+    border: none;
+    font-family: var(--FontRegular);
+}
+
+.login-form{
+    padding-top: 3.5vh;
+    padding-bottom: 12.8vh;
 }

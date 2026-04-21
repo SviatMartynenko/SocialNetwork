@@ -1,13 +1,66 @@
-.register-div{
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.register-div{  
     width: 33.8vw;
     height: 53.9vh;
-    background-color: grey;
-    border-radius: 2vh;
+    background-color: lightblue;
+    border-radius: 3vh;
+    display: flex;
+    flex-direction: column;     
+    align-items: center;
 }
 
 .register-title{
-    width: 33vw;
-    height: 4.5vh;
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 1.6vw;
+    padding-top: 4.2vh;
+    padding-bottom: 3.5vh;
+}
+
+p{
+    display: flex;
+    justify-content: center;
+    font-size: 1.66rem;
+    font-family: var(--FontMedium);
+}
+
+.register-form{
+    padding-top: 3.5vh;
+    padding-bottom: 12.8vh;
+}
+
+.register-text{
+    font-size: 2.3rem;
+    font-family: var(--FontBold);
+    border-bottom: 0.3vh solid #543C52;
+}
+
+span{
+    padding-bottom: 0.5vh;
+}
+
+.register-login-text{
+    font-size: 2.3rem;
+    font-family: var(--FontMedium);
+    color: #81818D;
+}
+
+.register-button{
+    position: relative;
+    top: 3.5vh;
+    width: 27.7vw;
+    height: 5vh;
+    display: block;          
+    margin: 0 auto;
+    color: white;
+    background-color: #543C52;
+    border-radius: 2.5vh;
+    border: none;
+    font-family: var(--FontRegular);
 }
