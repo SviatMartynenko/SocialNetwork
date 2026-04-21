@@ -4,12 +4,28 @@
 {% endblock %}
 <div class="register-div">
     <div class="register-title">
-        <span>Реєстрація</span>
-        <span>Авторизація</span>
+        <span class = "registration-text">Реєстрація</span>
+        <span class = "login-text">Авторизація</span>
     </div>
     <p>Приєднуйся до World IT</p>
-    <form  action="" method="post">
-        {{ form_register.as_p }}
+    <form  action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <div class = "form-input-container">
+            <span>{{ form_register.email.label }}</span>
+            {{ form_register.email }}
+            {{ form_register.email.errors }}
+        </div>
+        <div class = "form-input-container">
+            <span>{{ form_register.password1.label }}</span>
+            {{ form_register.password1 }}
+            {{ form_register.password1.errors }}
+        </div>
+        <div class = "form-input-container">
+            <span>{{ form_register.password2.label }}</span>
+            {{ form_register.password2 }}
+            {{ form_register.password2.errors }}
+        </div>
+ 
         <button type="submit">Створити акаунт</button>
-    <form>
+    </form>
 </div>

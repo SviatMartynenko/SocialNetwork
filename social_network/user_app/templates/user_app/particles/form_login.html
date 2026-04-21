@@ -4,12 +4,22 @@
 {% endblock %}
 <div class="login-div">
     <div class="login-title">
-        <span>Реєстрація</span>
-        <span>Авторизація</span>
+        <span class = "registration-text">Реєстрація</span>
+        <span class = "login-text">Авторизація</span>
     </div>
     <p>Раді тебе знову бачити!</p>
-    <form  action="" method="post">
-        {{ form_login.as_p }}
+    <form  action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class = "form-input-container">
+            <span>{{ form_login.username.label }}</span>
+            {{ form_login.username }}
+            {{ form_login.username.errors }}
+        </div>
+        <div class = "form-input-container">
+            <span>{{ form_login.password.label }}</span>
+            {{ form_login.password }}
+            {{ form_login.password.errors }}
+        </div>
         <button type="submit">Увійти</button>
     </form>
 </div>

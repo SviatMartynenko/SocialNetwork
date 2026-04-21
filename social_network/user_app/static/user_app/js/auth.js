@@ -5,3 +5,4 @@ console.log(getCSRFtoken())
 
 const navigation = document.querySelector(".navigation");
 navigation.style.justifyContent = "center";
+

@@ -9,7 +9,12 @@
 {% block title %}
     Auth
 {% endblock %}
-{% block links %}{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'user_app/css/form_confirm_email.css' %}">
+    <link rel="stylesheet" href="{% static 'user_app/css/auth.css' %}">
+{% endblock %}
+
 {% block content %}
    <div>
         <div>

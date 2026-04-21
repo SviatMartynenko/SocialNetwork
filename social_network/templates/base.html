@@ -19,7 +19,7 @@
                 <a href="{% url 'home' %}" class="logo">
                     <img src="{% static 'images/logo/worldIT-logo.svg' %}" alt="">
                 </a>
-                {% if request.path != '/auth/' %}
+                {% if '/auth/' not in request.path %}
                     <div class="menu">
                         <a class = "nav-item" href="{% url 'home' %}">
                             <div class= "nav-img-container">
@@ -60,7 +60,7 @@
         </header>
 
         <main>
-            {% if request.path != '/auth/' %}
+            {% if '/auth/' not in request.path %}
                 <div class= "side-block-spacer">
                     <div class = "side-block">  
                         {% block side_block %}{% endblock %}
