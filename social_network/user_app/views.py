@@ -16,15 +16,19 @@ class AuthTemplateView(TemplateView):
         login_data = self.request.session.pop('login_form_data', None)
         if register_data:
             form_register = RegisterForm(register_data)
-            form_register.is_valid() 
-            context["form_register"] = form_register
+            if form_register.is_valid():
+                context["form_register"] = form_register
+            else:
+                context["form_register"] = RegisterForm()
         else:
             context["form_register"] = RegisterForm()
         
         if login_data:
             form_login = RegisterForm(login_data)
-            form_login.is_valid() 
-            context["form_login"] = form_register
+            if form_login.is_valid():
+                context["form_login"] = form_login
+            else:
+                context["form_login"] = LoginForm()
         else:
             context["form_login"] = LoginForm()
         
