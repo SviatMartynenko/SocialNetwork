@@ -8,7 +8,9 @@
 
 .content{
     width: 64vw;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .side-block-spacer{
     width: 24vw;

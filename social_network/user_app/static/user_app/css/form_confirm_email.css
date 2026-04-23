@@ -1,3 +1,68 @@
 .confirm-email-div{
     display: none;
+    flex-direction: column;
+    width: 33.8vw;
+    height: 43.3vh;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    gap: 3.5vh;
+    border-radius: 1.9vh;
+}
+.confirm-email-form{
+    display: flex;
+    flex-direction: column;
+    gap: 3.5vh;
+}
+.code-input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.code-input-decoration-container{
+    display: flex;
+    flex-direction: row;
+    height: 4.3vh;
+    gap: 1.8vw;
+}
+.input-couple{
+    display: flex;
+    flex-direction: row;
+    gap: 1.1vw;
+}
+.confirm-email-message{
+    font-weight: 500;
+    color: rgba(7, 10, 28, 1);
+    font-size: 1.5vh;
+    font-family: var(--FontMedium);
+    text-align: center;
+    width: 27.7vw;
+}
+.confirm-email-title{
+    font-weight: 500;
+    color: rgba(7, 10, 28, 1);
+    font-size: 3.3vh;
+    font-family: var(--FontMedium);
+}
+.confirm-email-form-confirm-btn{
+    background-color: rgba(84, 60, 82, 1);
+    border-radius: 1234px;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 500;
+    font-size: 1.5vh;
+    font-family: var(--FontMedium);
+    height: 5vh;
+    border: none;
+}
+.confirm-email-form-btns{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+}
+.confirm-email-form-back-btn{
+    color: rgba(84, 60, 82, 1);
+    font-weight: 500;
+    font-size: 1.5vh;
+    font-family: var(--FontMedium);
+    cursor: pointer;
 }

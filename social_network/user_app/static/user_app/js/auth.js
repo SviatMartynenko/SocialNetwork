@@ -8,6 +8,7 @@ navigation.style.justifyContent = "center";
 
 const formRegister = document.querySelector(".register-div");
 const formLogin = document.querySelector(".login-div");
+const formConfirmEmail = document.querySelector(".confirm-email-div")
 
 const loginTitle = formRegister.querySelector(".register-login-text")
 const registerTitle = formLogin.querySelector(".registration-text")
@@ -39,4 +40,14 @@ eyes.forEach(eye => {
             eye.src = closeSrc;
         }
     });
+});
+
+document.querySelector('.register-button').addEventListener("click", () => {
+    formRegister.style.display = "none";
+    formConfirmEmail.style.display = "flex";
+});
+
+document.querySelector(".confirm-email-form-back-btn").addEventListener("click", () => {
+    formRegister.style.display = "flex";
+    formConfirmEmail.style.display = "none";
 });

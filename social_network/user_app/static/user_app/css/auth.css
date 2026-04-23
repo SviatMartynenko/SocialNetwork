@@ -61,3 +61,22 @@
 .eye{
     cursor: pointer;
 }
+.auth-content{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.laptop-img-container{
+    position: absolute;
+    z-index: 1;
+    height: 51vh;
+    left: 50%;
+}
+.auth-forms{
+    position: relative;
+    z-index: 2;
+}
+.laptop-img{
+    height: 100%;
+}

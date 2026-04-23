@@ -16,16 +16,18 @@
 {% endblock %}
 
 {% block content %}
-   <div>
-        <div>
+   
+    <div class = "auth-content">
+        <div class="auth-forms">
             {% include "user_app/particles/form_register.html" %}
             {% include "user_app/particles/form_login.html" %}
             {% include "user_app/particles/form_confirm_email.html" %}
         </div>
-        <div>
-            <img src="{% static 'user_app/images/laptop.svg' %}" alt="">
+        <div class="laptop-img-container">
+            <img class="laptop-img" src="{% static 'user_app/images/laptop.svg' %}" alt="">
         </div>
-   </div>
+    </div>
+   
 {% endblock %}
 
 {% block scripts %}

@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
 from .models import User
 
 class RegisterForm(UserCreationForm):
@@ -19,7 +20,10 @@ class RegisterForm(UserCreationForm):
         )
     class Meta:
         model = User
-        fields = ['email','password1', 'password2']
+        fields = ['email']
+        labels = {
+            'email':"Електронна пошта"
+        }
         widgets = {
             'email': forms.EmailInput(attrs = {
                 'class': 'form-field',
@@ -28,12 +32,16 @@ class RegisterForm(UserCreationForm):
         }
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget = forms.TextInput(attrs = {
+    username = forms.CharField(
+        label = "Електронна пошта",
+        widget = forms.TextInput(attrs = {
         'class': 'form-field',
         'placeholder': 'you@example.com'
         }))
-    password = forms.CharField(widget = forms.PasswordInput(attrs = {
+    password = forms.CharField(
+        label="Пароль",
+        widget = forms.PasswordInput(attrs = {
         'class': 'form-field',
         'placeholder': 'Введи пароль'
         }))
-        
+
