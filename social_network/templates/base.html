@@ -51,9 +51,12 @@
                             </div>
                             <span class="nav-item-text">Налаштування</span>
                         </a>
-                        <a href="" class="logout">
+                        <a href="#" class="logout">
                             <img class = "img-cover" src="{% static 'images/logo/logout_button.svg' %}" alt="">
                         </a>
+                        <form id = "logout-form" action="{% url 'logout' %}" method= "post">
+                            {% csrf_token %}
+                        </form>
                     </div>
                 {% endif %}   
             </nav>
@@ -76,5 +79,8 @@
         </main>
         {% block scripts %}{% endblock %}
         <script src= "{% static 'js/active.js' %}"></script>
+        {% if '/auth/' not in request.path %}
+            <script src= "{% static 'js/logout.js' %}"></script>
+        {% endif %}
     </body>
 </html>

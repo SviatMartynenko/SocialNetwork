@@ -30,10 +30,10 @@
     flex-direction: row;
     gap: 1.1vw;
 }
-.confirm-email-message{
+.confirm-email-message p{
     font-weight: 500;
     color: rgba(7, 10, 28, 1);
-    font-size: 1.5vh;
+    font-size: 1.8vh;
     font-family: var(--FontMedium);
     text-align: center;
     width: 27.7vw;

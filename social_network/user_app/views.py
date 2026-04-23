@@ -35,7 +35,7 @@ class RegisterView(View):
         if form.is_valid():
             form.save()
             return redirect('home')
-    
+        
         request.session['register_form_data'] = request.POST
         return redirect('auth')
 
