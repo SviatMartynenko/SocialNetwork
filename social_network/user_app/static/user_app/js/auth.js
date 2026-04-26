@@ -51,3 +51,72 @@ document.querySelector(".confirm-email-form-back-btn").addEventListener("click",
     formRegister.style.display = "flex";
     formConfirmEmail.style.display = "none";
 });
+
+document.querySelector(".register-form").addEventListener(
+    "submit",
+    (event) => {
+        event.preventDefault();
+        
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: "POST", 
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: formData  
+        })
+            .then(async (response) => {
+                const data = await response.json()
+                if (!response.ok){
+                    throw data;    
+                }
+                return data
+            })   
+            .then((data)=>{
+                console.log("Користувач успішно створений")
+            })
+            .catch((data)=>{
+                if(data.errors){
+                    console.log(data.errors)
+                }
+            })
+            
+        
+    }
+)
+
+document.querySelector(".login-form").addEventListener(
+    "submit",
+    (event) => {
+        event.preventDefault();
+        
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: "POST", 
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: formData  
+        })
+            .then(async (response) => {
+                const data = await response.json()
+                if (!response.ok){
+                    throw data;    
+                }
+                return data
+            })   
+            .then((data)=>{
+                console.log("Користувач успішно увійшов")
+            })
+            .catch((data)=>{
+                if(data.errors){
+                    console.log(data.errors)
+                }
+            })
+            
+    }
+)

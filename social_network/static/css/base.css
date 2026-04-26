@@ -35,6 +35,8 @@ main{
     margin-top: clamp(0.1rem, 10vh, 6.5rem);  
 }
 
+
+
 .img-cover{
     height: 100%;
 }
@@ -59,4 +61,14 @@ main{
     display: flex;
     flex-direction: column;
     gap:clamp(0.1rem, 1.5vh, 1rem);
+}
+.modal-overlay{
+    position: absolute;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
 }

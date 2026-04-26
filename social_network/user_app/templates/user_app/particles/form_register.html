@@ -1,10 +1,12 @@
 {% load static %}
 <div class="register-div">
     <div class="register-title">
-        <span class = "register-text">Реєстрація</span>
+        <span class = "register-text form-title-border">Реєстрація</span>
         <span class = "register-login-text">Авторизація</span>
     </div>
-    <p>Приєднуйся до World IT</p>
+    <div class = "register-message">
+        <p>Приєднуйся до World IT</p>
+    </div>
     <form class="register-form" action="{% url 'register' %}" method="post">
         {% csrf_token %}
         <div class= "input-containers">

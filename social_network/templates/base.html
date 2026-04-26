@@ -14,6 +14,11 @@
     </head>
 
     <body>
+        <div class="modal-overlay">
+            {% block modals %}
+            {% endblock %}
+        </div>
+
         <header>  
             <nav class = "navigation">
                 <a href="{% url 'home' %}" class="logo">
@@ -61,7 +66,7 @@
                 {% endif %}   
             </nav>
         </header>
-
+        
         <main>
             {% if '/auth/' not in request.path %}
                 <div class= "side-block-spacer">

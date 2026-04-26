@@ -3,8 +3,12 @@
 
 {% block links %}  
     <link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'home_app/css/first_login.css' %}">
 {% endblock %}
 
+{% block modals %}
+    {% include 'home_app/particles/first_login.html' %}
+{% endblock %}
 {% block side_block %}
     {% include 'particles/user_profile.html' %}
     <div class = "requests">

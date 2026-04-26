@@ -17,7 +17,7 @@
 .code-input-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 0.5vh;
 }
 .code-input-decoration-container{
     display: flex;
@@ -65,4 +65,7 @@
     font-size: 1.5vh;
     font-family: var(--FontMedium);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

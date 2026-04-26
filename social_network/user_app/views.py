@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView, View
 from django.shortcuts import redirect
 from django.contrib.auth import login
+from django.http import JsonResponse, HttpResponse
 from .forms import RegisterForm, LoginForm
 
 
@@ -34,21 +35,37 @@ class RegisterView(View):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return JsonResponse({
+                    "success": True,
+                    "message": "Реєстрація успішна"
+                })
         
-        request.session['register_form_data'] = request.POST
-        return redirect('auth')
+        return JsonResponse(
+            {
+                "success": False,
+                "errors": form.errors.get_json_data(),
+            },
+            status = 400
+            )
 
 class LoginView(View):
     def post(self, request):
         form = LoginForm(data = request.POST)
         if form.is_valid():
-            user = form.get_user() # Получаем объект пользователя
+            user = form.get_user() 
             login(request, user)
-            return redirect('home')
+            return JsonResponse({
+                        "success": True,
+                        "message": "Реєстрація успішна"
+                    })
         
-        request.session['login_form_data'] = request.POST
-        return redirect('auth')
+        return JsonResponse(
+            {
+                "success": False,
+                "errors": form.errors.get_json_data(),
+            },
+            status = 400
+            )
     
 # class ConfirmEmailView(View):
 #     def post(self, request):

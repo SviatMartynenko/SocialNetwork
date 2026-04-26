@@ -7,12 +7,22 @@ main{
 header{
     max-height: 8.6vh;
 }
+
+.login-title span, .register-title span{
+    padding-bottom: 0.7vh;
+}
+
+.form-title-border{
+    border-bottom: 0.3vh solid #543C52;
+}
+
 .navigation{
     max-width: 88vw;
 }
 .logo{
     max-height: 1.8vh;
 }
+
 .form-field{
     border: none;
     width: 100%;

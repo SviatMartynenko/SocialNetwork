@@ -11,6 +11,7 @@ class User(AbstractUser):
     email = models.EmailField(
         unique=True
     )
+    email_confirmed = False
     USERNAME_FIELD = 'email' 
     REQUIRED_FIELDS = []
 

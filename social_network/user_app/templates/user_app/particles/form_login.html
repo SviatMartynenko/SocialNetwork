@@ -3,9 +3,11 @@
 <div class="login-div">
     <div class="login-title">
         <span class = "registration-text">Реєстрація</span>
-        <span class = "login-text">Авторизація</span>
+        <span class = "login-text form-title-border">Авторизація</span>
     </div>
-    <p>Раді тебе знову бачити!</p>
+    <div class = "login-message">
+        <p>Раді тебе знову бачити!</p>
+    </div>
     <form class="login-form" action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <div class="input-containers">
