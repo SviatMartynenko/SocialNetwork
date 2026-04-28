@@ -8,7 +8,7 @@
     </div>
     
     
-    <form class="confirm-email-form" action = "" method = "post">
+    <form class="confirm-email-form" action = "{% url 'confirm_email' %}" method = "post">
         {% csrf_token %}    
         <div class = "code-input-container">
             <span class="form-input-label">{{ form_confirm.code.label}}Код підтвердження</span>

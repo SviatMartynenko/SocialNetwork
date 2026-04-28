@@ -1,6 +1,23 @@
-/* .first-login-container{
+.first-login-container{
     width: 34vw;
     height: 43vh;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 1.9vh;
-} */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.3vh;
+    box-sizing: border-box;
+    gap: ;
+}
+
+.first-login-container span{
+    padding-bottom: 4vh;
+    font-size: 2.36vw;
+    /*width: 27vw;
+    height: 3.8vh;*/
+}
+
+.continue{
+    align-self: flex-end;
+}

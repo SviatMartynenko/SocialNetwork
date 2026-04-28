@@ -67,3 +67,13 @@ class LoginForm(AuthenticationForm):
         'placeholder': 'Введи пароль'
         }))
 
+class ConfirmEmailForm(forms.Form):
+    code = forms.CharField(
+        max_length = 6,
+        min_length = 6,
+        label = "Код підтвердження",
+        widget = forms.TextInput(attrs={
+            'id': 'code-input',
+            'class': 'code-input-field',
+        })
+    )
