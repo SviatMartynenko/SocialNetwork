@@ -7,7 +7,9 @@ main{
 header{
     max-height: 8.6vh;
 }
-
+.error{
+    color: red;
+}
 .login-title span, .register-title span{
     padding-bottom: 0.7vh;
 }
@@ -104,4 +106,13 @@ header{
 }
 .laptop-img{
     height: 100%;
+}
+.border-dark-blue{
+    border: 0.1rem rgba(7, 10, 28, 1) solid;
+}
+.border-green{
+    border: 0.1rem rgba(34, 197, 94, 1) solid;
+}
+.text-dark-blue{
+    color: rgba(7, 10, 28, 1);
 }

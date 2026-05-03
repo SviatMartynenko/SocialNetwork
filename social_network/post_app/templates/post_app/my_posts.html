@@ -5,9 +5,13 @@
     <link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
 {% endblock %}
 
+{% block modals %}
+{% endblock %}
+
 {% block side_block %}
     {% include 'particles/user_profile.html' %}
 {% endblock %}
 
 {% block content %}
+{{form.as_p}}
 {% endblock %}

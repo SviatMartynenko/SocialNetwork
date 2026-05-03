@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'settings_app'
 ]
 
+LOGIN_URL = 'auth'
+
 AUTH_USER_MODEL = 'user_app.User'
 
 MIDDLEWARE = [
@@ -65,8 +67,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_network.middleware.DisableBFCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'social_network.urls'
@@ -136,6 +140,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

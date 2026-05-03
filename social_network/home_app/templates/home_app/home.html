@@ -9,6 +9,7 @@
 {% block modals %}
     {% include 'home_app/particles/first_login.html' %}
 {% endblock %}
+
 {% block side_block %}
     {% include 'particles/user_profile.html' %}
     <div class = "requests">
@@ -105,4 +106,8 @@
 {% endblock %}
 
 {% block content %}
+{% endblock %}
+
+{% block scripts %}
+    <script src = "{% static 'home_app/js/first_login.js' %}"></script>
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.views.generic.base import TemplateView, View
+from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.http import JsonResponse, HttpResponse
 from .forms import RegisterForm, LoginForm, ConfirmEmailForm
@@ -11,43 +12,39 @@ class AuthTemplateView(TemplateView):
     template_name = "user_app/auth.html"
 
     
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
+    
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
-        register_data = self.request.session.pop('register_form_data', None)
-        login_data = self.request.session.pop('login_form_data', None)
-        if register_data:
-            form_register = RegisterForm(register_data)
-            context["form_register"] = form_register
-        else:
-            context["form_register"] = RegisterForm()
         
-        if login_data:
-            form_login = LoginForm(login_data)
-            context["form_login"] = form_login
-        else:
-            context["form_login"] = LoginForm()
-        
+        context["form_register"] = RegisterForm()
+        context["form_login"] = LoginForm()
         context["form_confirm"] = ConfirmEmailForm()
+
         return context
 
 class RegisterView(View):
     def post(self, request, *args, **kwargs):
         form = RegisterForm(request.POST)
         if form.is_valid():
-            code = f'{random.randint(100000,999999)}'
-            request.session['code'] = code
+            confirmation_code = f"{random.randint(100000, 999999)}"
+            request.session['user_register_data'] = request.POST
             email = form.cleaned_data.get('email')
-            form.save()
+            request.session['confirmation_code'] = confirmation_code
             send_mail(
                     'Верифікація електронної пошти',
-                    f'Ваш код {code}',
+                    f'Ваш код {confirmation_code}',
                     EMAIL_HOST_USER,
                     [email]
                 )
             return JsonResponse({
                     "success": True,
-                    "message": "Реєстрація успішна"
+                    "message": "Реєстрація успішна",
+                    "email" : email
                 })
         
         return JsonResponse(
@@ -60,13 +57,19 @@ class RegisterView(View):
 
 class LoginView(View):
     def post(self, request, *args, **kwargs):
-        form = LoginForm(data = request.POST)
+        form = LoginForm(request, data = request.POST)
         if form.is_valid():
-            user = form.get_user() 
+            user = form.get_user()
             login(request, user)
+            if user.username == '':
+               return JsonResponse({
+                        "success": True,
+                        "message": "Авторизація успішна",
+                        "redirect_url": reverse('home') + "?tab=first_login"
+                    }) 
             return JsonResponse({
                         "success": True,
-                        "message": "Реєстрація успішна",
+                        "message": "Авторизація успішна",
                         "redirect_url": reverse('home')
                     })
         
@@ -81,22 +84,26 @@ class LoginView(View):
 class ConfirmEmailView(View):
     def post(self, request, *args, **kwargs):
         form = ConfirmEmailForm(data = request.POST)
+        user_register_data = request.session.pop('user_register_data', None)
+
         if form.is_valid():
-            if form.cleaned_data.get('code') == request.session['code']:
-                
+            if form.cleaned_data.get('code') == request.session['confirmation_code']:
+                if user_register_data:
+                    register_form = RegisterForm(data = user_register_data) 
+                    register_form.save()
+                    
                 return JsonResponse({
                         "success": True,
-                        "message": "Реєстрація успішна",
+                        "message": "Код підтвержено",
                         "redirect_url": reverse('auth') + "?tab=login"
                     })
             return JsonResponse(
-            {
-                "success": False,
-                "errors": 'Невірний код',
-            },
-            status = 400
-            )
-        
+                {
+                    "success": False,
+                    "errors": "Невірний код",
+                },
+                status = 400
+                )
         return JsonResponse(
             {
                 "success": False,

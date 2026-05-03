@@ -1,23 +1,87 @@
 .first-login-container{
     width: 34vw;
     height: 43vh;
+    max-width: 490px;
+    max-height: 445px;
     background-color: rgba(255, 255, 255, 1);
-    border-radius: 1.9vh;
+    border-radius: clamp(0.1rem, 1.9vh, 1.25rem);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 2.3vh;
-    box-sizing: border-box;
-    gap: ;
+    gap: clamp(0.1rem, 4vh, 2.56rem);
 }
-
-.first-login-container span{
-    padding-bottom: 4vh;
-    font-size: 2.36vw;
-    /*width: 27vw;
-    height: 3.8vh;*/
+.first-login-title{
+    font-weight: 500;
+    color: rgba(7, 10, 28, 1);
+    font-family: var(--FontMedium);
+    font-size: clamp(0.1rem, 3.3vh, 2.125rem);
 }
-
-.continue{
-    align-self: flex-end;
+.first-login-form{
+    position: relative;
+    max-width: 402px;
+    width: 27.9vw;
+    gap: clamp(0.1rem, 4vh, 2.56rem);
+    display: flex;
+    flex-direction: column;
+}
+.input-containers-container{
+    height: 21vh;
+    max-height: 216px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(0.1rem, 1.5vh, 1rem);
+}
+.form-input-container{
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.1rem, 0.5vh, 0.375rem);
+}
+.form-input-label{
+    color: rgba(7, 10, 28, 1);
+    font-family: var(--FontRegular);
+    font-size: clamp(0.1rem, 1.5vh, 1rem);
+}
+.form-input-field-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 4.1vh;
+    max-height: 42px;
+    padding-left: clamp(0.1rem, 1.1vw, 1rem);
+    padding-right: clamp(0.1rem, 1.1vw, 1rem);
+    border: 0.1vh rgba(205, 206, 210, 1) solid;
+    border-radius: clamp(0.1rem, 0.9vh, 0.625rem);
+}
+.form-field{
+    width: 100%;
+    outline: none;
+    border: none;
+    color: rgba(7, 10, 28, 1);
+    font-size: clamp(0.1rem, 1.5vh, 1rem);
+    font-family: var(--FontRegular);
+    background: transparent;
+}
+.first-login-button{
+    position: relative;
+    left: 72%;
+    width: 7.7vw;
+    max-width: 112px;
+    height: 3.9vh;
+    max-height: 40px;
+    color: rgba(255, 255, 255, 1);
+    font-family: var(--FontMedium);
+    font-size: clamp(0.1rem, 1.3vh, 0.875rem);
+    border: none;
+    border-radius: 1234px;
+    background-color: rgba(84, 60, 82, 1);
+}
+.form-field::placeholder{
+    color: rgba(129, 129, 141, 1);
+    font-family: var(--FontRegular);
+    font-size: clamp(0.1rem, 1.5vh, 1rem);
+}
+.form-input-field-container:focus-within{
+    border: solid black 0.01rem;
 }

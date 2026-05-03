@@ -1,0 +1,50 @@
+function getCSRFtoken(){
+    return document.querySelector("meta[name='csrf-token']").getAttribute('content');
+}
+
+const modalOverlay = document.querySelector(".modal-overlay")
+
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('tab') === 'first_login') {
+        modalOverlay.style.display = "flex";
+    }
+    else{
+       modalOverlay.style.display = "none"; 
+    }
+});
+
+document.querySelector(".first-login-form").addEventListener(
+    "submit",
+    (event) => {
+        event.preventDefault();
+        
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: "POST", 
+            headers: {
+                'X-CSRFToken': getCSRFtoken(),
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: formData  
+        })
+            .then(async (response) => {
+                const data = await response.json()
+                if (!response.ok){
+                    throw data;    
+                }
+                return data
+            })   
+            .then((data)=>{
+                console.log("Інформацію додано успішно")
+                window.location.replace(data.redirect_url);
+            })
+            .catch((data)=>{
+                if(data.errors){
+                    console.log(data.errors)
+                }
+            })
+    }
+)

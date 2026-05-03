@@ -72,3 +72,10 @@ main{
     align-items: center;
     justify-content: center;
 }
+
+@media (min-height: 1024px) {
+  .modal-overlay{
+        padding-top: 329px;
+        align-items: start;
+    }
+}

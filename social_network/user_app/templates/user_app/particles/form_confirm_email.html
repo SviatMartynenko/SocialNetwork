@@ -2,32 +2,42 @@
 <div class = "confirm-email-div">
     <p class = "confirm-email-title">Підтвердження пошти</p>
     <div class="confirm-email-message">
-        <p>Ми надіслали 6-значний код на вашу пошту</p>
-        <p>(you@example.com). Введіть його нижче, щоб</p>
-        <p>підтвердити акаунт</p>
+        <p>Ми надіслали 6-значний код на вашу пошту (<span id = "entered-email"></span>). Введіть його нижче, щоб підтвердити акаунт</p>
     </div>
     
     
     <form class="confirm-email-form" action = "{% url 'confirm_email' %}" method = "post">
-        {% csrf_token %}    
         <div class = "code-input-container">
-            <span class="form-input-label">{{ form_confirm.code.label}}Код підтвердження</span>
+            <span class="form-input-label">{{ form_confirm.code.label}}</span>
             <div class = "code-input-decoration-container">
-                {{ form_confirm.code}}
+                {{ form_confirm.code }}
                 <div class = "input-couple">
-                    <img class = "img-cover" src="{% static 'user_app/images/code_input.svg'%}" alt="">
-                    <img class = "img-cover" src="{% static 'user_app/images/code_input.svg'%}" alt="">
+                    <div class= "input-cell">
+                        <span class="cell-text">___</span>
+                    </div>
+                    <div class= "input-cell">
+                        <span class="cell-text">___</span>
+                    </div>
                 </div>
                 <div class = "input-couple">
-                    <img class = "img-cover" src="{% static 'user_app/images/code_input.svg'%}" alt="">
-                    <img class = "img-cover" src="{% static 'user_app/images/code_input.svg'%}" alt="">
+                    <div class= "input-cell">
+                        <span class="cell-text">___</span>
+                    </div>
+                    <div class= "input-cell">
+                        <span class="cell-text">___</span>
+                    </div>
                 </div>
                 <div class = "input-couple">
-                    <img class = "img-cover" src="{% static 'user_app/images/code_input.svg'%}" alt="">
-                    <img class = "img-cover" src="{% static 'user_app/images/code_input.svg'%}" alt="">
+                    <div class= "input-cell">
+                        <span class="cell-text">___</span>
+                    </div>
+                    <div class= "input-cell">
+                        <span class="cell-text">___</span>
+                    </div>
                 </div>
             </div>
         </div>
+        <p class = "confirm-email-error-mesage error"></p>
         <div class= "confirm-email-form-btns">
             <button class = "confirm-email-form-confirm-btn" type="submit">Підтвердити</button>
             <p class = "confirm-email-form-back-btn" >Назад</p>

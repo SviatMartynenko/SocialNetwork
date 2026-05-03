@@ -57,3 +57,9 @@
     flex-direction: column;
     gap: 3.5vh;
 }
+
+.login-error-mesage{
+    font-family: var(--FontRegular);
+    font-size: 1.5vh;
+    gap: 1.5vh;
+}

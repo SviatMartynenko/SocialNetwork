@@ -3,7 +3,6 @@
 {% load static %}
   
 {% block meta %}
-    <meta name="csrf-token" content="{{ csrf_token }}">
 {% endblock %}
 
 {% block title %}
@@ -34,4 +33,5 @@
 
 {% block scripts %}
     <script src="{% static 'user_app/js/auth.js' %}"></script>
+    <script src="{% static 'user_app/js/confirm_email.js' %}"></script>
 {% endblock %}

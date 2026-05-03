@@ -9,7 +9,6 @@
         <p>Раді тебе знову бачити!</p>
     </div>
     <form class="login-form" action="{% url 'login' %}" method="post">
-        {% csrf_token %}
         <div class="input-containers">
             <div class = "form-input-container">
                 <span class = "form-input-label">{{ form_login.username.label }}</span>
@@ -26,6 +25,7 @@
                     </div>
                 </div>
             </div>
+            <p class = "login-error-mesage error"></p>
         </div>
         <button class="login-button" type="submit">Увійти</button>
     </form>

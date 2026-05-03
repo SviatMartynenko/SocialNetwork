@@ -5,6 +5,7 @@ from .models import User
 user = get_user_model()
 
 class RegisterForm(forms.ModelForm):
+
     password1 = forms.CharField(
             label="Пароль",
             widget = forms.PasswordInput(attrs = {
@@ -12,6 +13,7 @@ class RegisterForm(forms.ModelForm):
                     'placeholder': 'Введи пароль'
                 })
         )
+    
     password2 = forms.CharField(
             label="Підтвердити пароль",
             widget = forms.PasswordInput(attrs = {
@@ -19,6 +21,7 @@ class RegisterForm(forms.ModelForm):
                 'placeholder': 'Повтори пароль'
                 })
         )
+    
     class Meta:
         model = user
         fields = ['email']
@@ -52,6 +55,7 @@ class RegisterForm(forms.ModelForm):
         user.set_password(self.cleaned_data['password1'])
         if commit:
             user.save()
+        return user
 
 class LoginForm(AuthenticationForm):
     username = forms.EmailField(
@@ -66,6 +70,23 @@ class LoginForm(AuthenticationForm):
         'class': 'form-field',
         'placeholder': 'Введи пароль'
         }))
+
+    def clean(self):
+        email = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        if email and password:
+            self.user_cache = authenticate(
+                self.request, 
+                username = email,
+                password = password
+            )
+        
+            if not self.user_cache:
+                raise forms.ValidationError('Логін або пароль не співпадають')
+        
+            self.confirm_login_allowed(self.user_cache)
+
+        return self.cleaned_data
 
 class ConfirmEmailForm(forms.Form):
     code = forms.CharField(
