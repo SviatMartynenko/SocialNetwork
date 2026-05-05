@@ -1,3 +1,11 @@
-<div>
-    {{form.as_p}}
+{% load static %}
+<div class="create-post-container">
+    <div class = "close-modal">
+        <img class = "img-cover position-absolute-right" src="{% static 'images/cross.svg' %}" alt="">
+    </div>
+    <p class = "create-post-title">Створення публікації</p>
+    <form class="create-post-form" action=" url 'create_post' " method="post">
+        {{ form.as_div }}
+        <button type="submit">Опублікувати</button>
+    </form>
 </div>

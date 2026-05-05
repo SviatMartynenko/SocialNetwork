@@ -4,43 +4,54 @@ from django.core.files.base import ContentFile
 from .models import *
 from PIL import Image
 
+MAX_COMPRESSED_IMAGE_SIZE = 5 * 1024 * 1024
 
 class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
 
 class MultipleFileField(forms.FileField):
-    def clean(self, data, initial = True):
+    def clean(self, data, initial = None):
         single_file_clean = super().clean
 
         if isinstance(data, (list, tuple)):
-            return [single_file_clean(file, initial) for file in data]
-
-        return single_file_clean(data, initial)
+            return [single_file_clean(data= file, initial= initial) for file in data]
+        return single_file_clean(data= data, initial= initial)
     
 
 class PostForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
-        label = "Теги",
         required = False,
         queryset = PostTag.objects.all(),
         widget = forms.CheckboxSelectMultiple
     )
 
-    images = MultipleFileField(
-        label = "Зображення",
+    links = forms.ModelMultipleChoiceField(
+        label = "Посилання",
         required = False,
-        widget = MultipleFileInput
+        queryset= PostLink.objects.none(),
+        widget = forms.CheckboxSelectMultiple
+    )
+
+    images = MultipleFileField(
+        required = False,
+        widget = MultipleFileInput(attrs={"multiple": True, "accept": "image/*"})
     )
 
     class Meta:
         model = Post
-        fields = ("title", "topic", "content")
+        fields = ("title", "topic", "tags", "content")
         labels = {
             "title": "Заголовок публікації",
             "topic": "Тема публікації",
-            "content": "Контент публікації"
         }
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Напишіть заголовок публікації'}),
+            'topic': forms.TextInput(attrs={'placeholder': 'Напишіть тему публікації'}),
+            'content': forms.Textarea(attrs={'rows': 5, 'placeholder': 'Текст посту'})
+        }
+
     def __init__(self, *args, links = None, images = None, **kwargs):
+        kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
 
         self.fields['tags'].queryset = PostTag.objects.all()
@@ -70,18 +81,18 @@ class PostForm(forms.ModelForm):
             try:
                 url_field.clean(link)
             except forms.ValidationError:
-                self.add_error(None, "Некоректний файл зображення")
+                self.add_error('links', f"Некоректне посилання: {link}")
 
         for image in self.images_list:
             try:
                 image_field.clean(image)
             except forms.ValidationError:
-                self.add_error(None, "Некоректний файл зображення")
+                self.add_error('images', f"Завантажте коректне зображення")
 
         return cleaned_data
     
     def save(self, author, commit=True):
-        post = super().save(commit=False)
+        post: Post = super().save(commit= False)
         post.author = author
 
         if commit:
@@ -92,28 +103,25 @@ class PostForm(forms.ModelForm):
                 PostLink.objects.create(post=post, url=url)
 
             for image in self.images_list:
-                PostImage.object.create(
-                    post = post,
-                    original = image,
-                    compressed = self.compress_image(image)
+                PostImage.objects.create(
+                    post= post,
+                    original_image= image,
+                    compressed_image= '_compressed_image(image)'
                 )
         return post
             
-    def compress_image(self, image):
+    def _compressed_image(self, image):
 
         image.seek(0)
-        image_obj = image.open(image)
-
-        image_obj = image_obj.convert("RGB")
+        compressed_image = Image.open(image)
+        compressed_image = compressed_image.convert("RGB")
 
         quality = 85
-        width, height = image_obj.size
-
-        MAX_COMPRESSED_IMAGE_SIZE = 5 * 1024 * 1024
+        width, height = compressed_image.size
 
         while True:
             buffer = BytesIO()
-            image_obj.save(buffer, format="JPEG", quality = quality, optimize = True)
+            compressed_image.save(fp= buffer, format="JPEG", quality = quality, optimize = True)
 
             if buffer.tell() <= MAX_COMPRESSED_IMAGE_SIZE:
                 break
@@ -126,9 +134,9 @@ class PostForm(forms.ModelForm):
 
                 width = int(width * 0.9)
                 height = int(height * 0.9)
-                image_obj = image_obj.resize((width, height), Image.Resampling.LANCZOS)
+                compressed_image = compressed_image.resize((width, height), Image.Resampling.LANCZOS)
 
             image.seek(0)
             compressed_name = f"compressed_{image.name.rsplit(".", 1)[0]}.jpg"
-            return ContentFile(buffer.getvalue(), name=compressed_name)
+            return ContentFile(buffer.getvalue(), name= compressed_name)
      

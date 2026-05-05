@@ -2,10 +2,12 @@
 {% load static %}
 
 {% block links %}  
-    <link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'post_app/css/my_posts.css' %}">
+    <link rel="stylesheet" href="{% static 'post_app/css/create_post.css' %}">
 {% endblock %}
 
 {% block modals %}
+    {% include 'post_app/particles/create_post.html' %}
 {% endblock %}
 
 {% block side_block %}
@@ -13,5 +15,12 @@
 {% endblock %}
 
 {% block content %}
-{{form.as_p}}
+    <div class = "text-publication">
+        <textarea name="" id="" placeholder="Текст Публікації"></textarea>
+        <button class="Go-to-design" type="submit">Перейти до оформлення</button>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'post_app/js/create_post.js' %}"></script>
 {% endblock %}

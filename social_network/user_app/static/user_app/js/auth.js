@@ -65,17 +65,17 @@ document.querySelector(".register-form").addEventListener(
         const password = formData.get('password1')
         
     if (password.length < 8) {
-        document.querySelector('.register-password-error').innerText = 'Пароль слишком короткий (нужно от 8 символов)';
+        document.querySelector('.register-password-error').innerText = 'Пароль занадто короткий (потрібно від 8 символів)';
         return;
     }
 
     if (!/[0-9]/.test(password)) { 
-        document.querySelector('.register-password-error').innerText = 'Добавьте хотя бы одну цифру';
+        document.querySelector('.register-password-error').innerText = 'Додайте хоча б одну цифру';
         return;
     }
 
     if (password.toLowerCase() === password.toUpperCase()) {
-        document.querySelector('.register-password-error').innerText = 'Добавьте хотя бы одну букву';
+        document.querySelector('.register-password-error').innerText = 'Додайте хоча б одну букву';
         return;
     } 
       

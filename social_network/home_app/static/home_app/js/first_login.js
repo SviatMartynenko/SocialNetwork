@@ -43,6 +43,12 @@ document.querySelector(".first-login-form").addEventListener(
             })
             .catch((data)=>{
                 if(data.errors){
+                    if("username" in data.errors){
+                        document.querySelector('.username-error-mesage').innerText = data.errors.username[0].message;
+                    }
+                    else{
+                        document.querySelector('.username-error-mesage').innerText = ''; 
+                    }
                     console.log(data.errors)
                 }
             })

@@ -53,6 +53,10 @@ codeInput.addEventListener(
                 cellSpan.innerText = "|";
                 cellSpan.classList.add('text-dark-blue');
             }
+            
+            if (cell.classList.contains('border-green')){
+                cellSpan.classList.add('text-dark-blue');
+            }
         });
     }
 )

@@ -1,0 +1,85 @@
+.create-post-container{
+    width: 53.6vw;
+    background-color: white;
+    border-radius: 1.9vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.close-modal{
+    position: relative;
+    width: 47.5vw;
+    height: 1.9vh;
+}
+.position-absolute-right{
+    position: absolute;
+    right: 0;
+}
+.create-post-title{
+    width: 47.5vw;
+    color: rgba(7, 10, 28, 1);
+    font-size: 3.3vh;
+    font-weight: 500;
+    font-family: var(--FontMedium);
+}
+.create-post-form{
+    width: 47.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5vh;
+    padding: 2.3vh 0;
+}
+
+.create-post-form div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vh;
+}
+.create-post-form div label{
+    color: rgba(7, 10, 28, 1);
+    font-size: 1.5vh;
+    font-family: var(--FontRegular);
+}
+
+.create-post-form div input{
+    width: 23.8vw;
+    height: 4.1vh;
+    padding: 0 1.1vw;
+    color: rgba(7, 10, 28, 1);
+    font-size: 1.5vh;
+    font-family: var(--FontRegular);
+    border-radius: 0.9vh;
+    border: rgba(129, 129, 141, 1) solid 0.1vw;
+}
+
+.create-post-form div textarea{ 
+    height: 12.3vh;
+    padding: 1.5vh 1.1vw;
+    color: rgba(7, 10, 28, 1);
+    font-size: 1.5vh;
+    font-family: var(--FontRegular);
+    border-radius: 0.9vh;
+    border: rgba(129, 129, 141, 1) solid 0.1vw;
+    resize: none;
+}
+.create-post-form div textarea::-webkit-scrollbar {
+    width: 8px; 
+    height: 11.2vh; 
+}
+
+.create-post-form div textarea::-webkit-scrollbar-track {
+    background: rgba(233, 229, 238, 1); 
+    border-radius: 0.5vh;
+}
+
+.create-post-form div textarea::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 5px;
+    border: 2px solid #f1f1f1;
+}
+
+.create-post-form div textarea::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
