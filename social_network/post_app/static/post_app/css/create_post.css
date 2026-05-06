@@ -4,8 +4,8 @@
     border-radius: 1.9vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding-top: 2.3vh;
 }
 .close-modal{
     position: relative;
@@ -43,7 +43,7 @@
     font-family: var(--FontRegular);
 }
 
-.create-post-form div input{
+.text-input{
     width: 23.8vw;
     height: 4.1vh;
     padding: 0 1.1vw;
@@ -65,7 +65,7 @@
     resize: none;
 }
 .create-post-form div textarea::-webkit-scrollbar {
-    width: 8px; 
+    width: 0.5vw; 
     height: 11.2vh; 
 }
 
@@ -75,11 +75,38 @@
 }
 
 .create-post-form div textarea::-webkit-scrollbar-thumb {
-    background: #888; 
-    border-radius: 5px;
-    border: 2px solid #f1f1f1;
+    background: rgba(84, 60, 82, 1); 
+    border-radius: 0.9vh;
 }
 
-.create-post-form div textarea::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+.images-input{
+    display: none;
+}
+
+.create-post-form .bottom-menu{
+    display: flex;
+    flex-direction: row;
+    width: 47.5vw;
+    gap: 0.6vw;
+    height: 3.9vh;
+    justify-content: right;
+}
+
+.publish-button{
+    border-radius: 1234px;
+    background-color: rgba(84, 60, 82, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3vh;
+    font-weight: 500;
+    font-family: var(--FontMedium);
+    gap: 0.5vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 9vw;
+    border: none;
+}
+.arrow-img-container{
+    height: 1.9vh;
 }

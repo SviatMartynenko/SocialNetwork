@@ -33,8 +33,9 @@ class PostForm(forms.ModelForm):
     )
 
     images = MultipleFileField(
+        label = "",
         required = False,
-        widget = MultipleFileInput(attrs={"multiple": True, "accept": "image/*"})
+        widget = MultipleFileInput(attrs={"multiple": True, "accept": "image/*","class": "images-input"})
     )
 
     class Meta:
@@ -45,8 +46,8 @@ class PostForm(forms.ModelForm):
             "topic": "Тема публікації",
         }
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': 'Напишіть заголовок публікації'}),
-            'topic': forms.TextInput(attrs={'placeholder': 'Напишіть тему публікації'}),
+            'title': forms.TextInput(attrs={'placeholder': 'Напишіть заголовок публікації',"class": "text-input"}),
+            'topic': forms.TextInput(attrs={'placeholder': 'Напишіть тему публікації',"class": "text-input"}),
             'content': forms.Textarea(attrs={'rows': 5, 'placeholder': 'Текст посту'})
         }
 
