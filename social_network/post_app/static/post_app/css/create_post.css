@@ -80,7 +80,7 @@
 }
 
 .images-input{
-    display: none;
+    display: flex;
 }
 
 .create-post-form .bottom-menu{
@@ -109,4 +109,34 @@
 }
 .arrow-img-container{
     height: 1.9vh;
+}
+
+.create-post-link{
+    font-size: 1.5vh;
+    font-family: var(--FontRegular);
+}
+
+.links-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1vw;
+    width: auto;
+}
+
+.links-list input{
+    display: flex;
+    flex-direction: row;
+    width: 21.7vw;
+    height: 4.1vh;
+    padding: 0.1vw;
+    border-radius: 0.9vh;
+    font-size: 1.5vh;
+    font-family: var(--FontRegular);
+    box-sizing: border-box;
+}
+
+.add-link{
+    flex-shrink: 0;
 }

@@ -4,6 +4,8 @@ function getCSRFtoken(){
 
 const navigation = document.querySelector(".navigation");
 navigation.style.justifyContent = "center";
+const content = document.querySelector('.content');
+content.style.justifyContent = 'center';
 
 const formRegister = document.querySelector(".register-div");
 const formLogin = document.querySelector(".login-div");

@@ -1,0 +1,9 @@
+{% load static %}
+<div class = "text-publication">
+    <textarea name="" id="" placeholder="Текст Публікації"></textarea>
+    <button class="Go-to-design" type="submit">Перейти до оформлення</button>
+</div>
+<div class="post-list">
+    {% include 'particles/show_post.html' %}
+    <div id="postLoaderLine" style="width: 100%; height: 1px;"></div>
+</div>

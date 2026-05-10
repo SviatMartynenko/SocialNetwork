@@ -23,7 +23,7 @@ from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home_app.urls')),
-    path('my-posts/', include('post_app.urls')),
+    path('post/', include('post_app.urls')),
     path('auth/', include('user_app.urls')),
     path('friends/', include('friends_app.urls')),
     path('settings/', include('settings_app.urls')),
@@ -31,4 +31,4 @@ urlpatterns = [
 ]
 
 if DEBUG:
-    urlpatterns += static(MEDIA_URL, document_root= MEDIA_ROOT, null = True) 
+    urlpatterns += static(MEDIA_URL, document_root= MEDIA_ROOT) 

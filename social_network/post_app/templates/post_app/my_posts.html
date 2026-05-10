@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block modals %}
-    {% include 'post_app/particles/create_post.html' %}
+    {% include 'particles/create_post.html' %}
 {% endblock %}
 
 {% block side_block %}
@@ -15,12 +15,11 @@
 {% endblock %}
 
 {% block content %}
-    <div class = "text-publication">
-        <textarea name="" id="" placeholder="Текст Публікації"></textarea>
-        <button class="Go-to-design" type="submit">Перейти до оформлення</button>
-    </div>
+    {% include 'particles/content_post.html' %}
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'post_app/js/create_post.js' %}"></script>
+    <script src="{% static 'post_app/js/createPost.js' %}"></script>
+    <!-- <script type="module" src="{% static 'js/renderErrors.js' %}" ></script> -->
+    <script type="module" src="{% static 'post_app/js/postList.js' %} "></script>
 {% endblock %}

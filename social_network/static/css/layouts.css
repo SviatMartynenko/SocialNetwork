@@ -10,7 +10,6 @@
     width: 64vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 .side-block-spacer{
     width: 24vw;

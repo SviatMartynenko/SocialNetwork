@@ -1,14 +1,9 @@
 .text-publication{
-    position: relative;
-    bottom: 39.2vh;
     width: 100%;
-    height: 100%;
-    max-width: 64.1vw;
-    max-height: 11.71vh;
+    height: 11.71vh;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    position: relative;
     border: solid rgba(205, 206, 210, 1) 0.1vw;
     padding: 1.5vh 1.2vw;
     box-sizing: border-box;
