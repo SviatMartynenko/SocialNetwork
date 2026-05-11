@@ -37,6 +37,7 @@ class PostForm(forms.ModelForm):
         labels = {
             "title": "Заголовок публікації",
             "topic": "Тема публікації",
+            'content': ''
         }
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Напишіть заголовок публікації',"class": "text-input"}),
