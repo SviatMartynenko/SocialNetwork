@@ -35,7 +35,7 @@ class PostListView(ListView, LoginRequiredMixin):
                 return JsonResponse({'success': False})
             return JsonResponse({
                 'success': True,
-                'html': render_to_string(self.template_name, {'posts': page_obj.object_list})
+                'html': render_to_string("particles/show_post.html", {'posts': page_obj.object_list})
             })
         
         return super().get(request, *args, **kwargs)
