@@ -1,6 +1,7 @@
 const createPostBtn = document.querySelector(".Go-to-design")
 const modalOverlay = document.querySelector(".modal-overlay")
 const cross = document.getElementById('close-modal')
+const selectImage = document.getElementById('id_images')
 
 createPostBtn.addEventListener("click", () => {
     modalOverlay.style.display = "flex";
@@ -23,6 +24,12 @@ document.getElementById('add-link').addEventListener(
 
         document.getElementById('links-list').appendChild(document.createElement('br'))
         document.getElementById('links-list').appendChild(input)
+    }
+)
+document.getElementById('add-img').addEventListener(
+    'click',
+    function (){
+        selectImage.click()
     }
 )
 

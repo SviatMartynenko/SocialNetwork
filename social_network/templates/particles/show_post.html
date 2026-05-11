@@ -1,24 +1,13 @@
 {% for post in posts %}
     <article class="post">
+        <p>{{ post.author.username }} </p>
         <h2>{{ post.title }}</h2>
-        <p>Автор: {{ post.autor.username }} </p>
 
         {% if post.topic %}
-            <p><strong>Тема:</strong> {{ post.topic }} </p>
+            <p> {{ post.topic }} </p>
         {% endif %}
 
         <p>{{ post.content }}</p>
-
-        {% if post.images.all %}
-            <p><strong>Фото:</strong></p>
-            {% for image in post.images.all %}
-                <p>
-                    <a href="{{ image.original.url }}" target="_blank" rel="noopener noreferrer">
-                        <img src="{{ image.compressed.url }}" alt="{{ post.title }}" style="max-width: 300px; max-height: auto;">
-                    </a>
-                </p>
-            {% endfor %}
-        {% endif %}
 
         {% if post.tags.all %}
             <p>
@@ -29,7 +18,6 @@
             </p>
         {% endif %} 
         {% if post.links.all %}
-            <p><strong>Посилання:</strong></p>
             <ul>
                 {% for link in post.links.all %}
                     <li>
@@ -37,6 +25,15 @@
                     </li>
                 {% endfor %}
             </ul>
+        {% endif %}
+        {% if post.images.all %}
+            {% for image in post.images.all %}
+                <p>
+                    <a href="{{ image.original.url }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{ image.compressed.url }}" alt="{{ post.title }}" style="max-width: 300px; max-height: auto;">
+                    </a>
+                </p>
+            {% endfor %}
         {% endif %}
     </article>
     <hr>

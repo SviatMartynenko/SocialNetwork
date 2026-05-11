@@ -80,7 +80,7 @@
 }
 
 .images-input{
-    display: flex;
+    display: none;
 }
 
 .create-post-form .bottom-menu{
@@ -116,12 +116,11 @@
     font-family: var(--FontRegular);
 }
 
-.links-list{
+.create-post-form .links-list{
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+    flex-direction: row;    
     gap: 1vw;
+    align-items: center;
     width: auto;
 }
 
@@ -138,5 +137,5 @@
 }
 
 .add-link{
-    flex-shrink: 0;
+
 }
