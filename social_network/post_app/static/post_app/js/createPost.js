@@ -10,13 +10,13 @@ const previewContainer = document.querySelector('.loaded-images');
 let plusImgDiv = document.createElement('div');
 plusImgDiv.classList.add('plus-img-div');
 
-const plus = document.createElement('img');
+let plus = document.createElement('img');
+plus.classList.add('img-cover');
 plus.src = '/static/post_app/images/plus.svg';
-plus.classList.add('img-cover')
 
-plusImgDiv.appendChild(plus);
-
+plusImgDiv.appendChild(plus); 
 tagsField.appendChild(plusImgDiv);
+
 
 
 createPostBtn.addEventListener("click", () => {
@@ -32,7 +32,7 @@ function getCSRFToken(){
     return document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 }
 
-tagsField.appendChild(plus)
+
 
 tagsLabels.forEach(label => {
     label.addEventListener(

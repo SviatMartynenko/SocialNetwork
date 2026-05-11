@@ -94,10 +94,6 @@
     justify-content: right;
 }
 
-.create-post-form .plus-img-div{
-    width: 1.9vh;
-    height: 1.9vh;
-}
 .publish-button{
     border-radius: 1234px;
     background-color: rgba(84, 60, 82, 1);
@@ -170,6 +166,10 @@
 #id_tags div{
     height: fit-content;
     width: fit-content;
+}
+#id_tags .plus-img-div{
+    width: 1.9vh;
+    height: 1.9vh;
 }
 
 #id_tags label{
