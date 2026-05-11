@@ -8,9 +8,14 @@
         {{ form_create_post.as_div }}
         <p class="create-post-link">Посилання</p>
             <div class="links-list" id="links-list">
-                <input type="url" name="links" placeholder="https://www.instagram.com/world.it.academy">
-                <span class="add-link" id="add-link">+</span>
+                <div class = 'first-link'>
+                    <input type="url" name="links" placeholder="https://www.instagram.com/world.it.academy">
+                    <div class="add-link" id="add-link">
+                        <img class = "plus-link" src="{% static 'post_app/images/plus.svg' %}" alt="">
+                    </div>
+                </div>
             </div>
+            <div class= "loaded-images"></div>
         <div class = "bottom-menu">
             <img class = "img-cover" id = 'add-img' src="{% static 'post_app/images/add_image.svg' %}" alt="">
             <button class = "publish-button" type="submit">
@@ -20,5 +25,6 @@
                 </div> 
             </button>
         </div>
+        
     </form>
 </div>

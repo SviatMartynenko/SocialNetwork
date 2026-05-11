@@ -1,40 +1,48 @@
+{% load static %}
 {% for post in posts %}
     <article class="post">
-        <p>{{ post.author.username }} </p>
-        <h2>{{ post.title }}</h2>
+        <div class="post-author-div">
+            <div class="author-image">
+                <img class="" src="{% static 'post_app/images/post_avatar.svg'  %}" alt="">
+            </div>
+            <p class="author-name">{{ post.author.username }} </p>
+        </div>
+        <hr>
+        <div class="post-content-div">
+            <h2 class="post-title">{{ post.title }}</h2>
+            
+            {% if post.topic %}
+                <p class="post-topic"> {{ post.topic }} </p>
+            {% endif %}
 
-        {% if post.topic %}
-            <p> {{ post.topic }} </p>
-        {% endif %}
-
-        <p>{{ post.content }}</p>
-
-        {% if post.tags.all %}
-            <p>
-                <strong>Теги:</strong>
-                {% for tag in post.tag.all %}
-                    {{ tag.name }}
-                {% endfor %}
-            </p>
-        {% endif %} 
-        {% if post.links.all %}
-            <ul>
-                {% for link in post.links.all %}
-                    <li>
-                        <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.url }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        {% if post.images.all %}
-            {% for image in post.images.all %}
-                <p>
-                    <a href="{{ image.original.url }}" target="_blank" rel="noopener noreferrer">
-                        <img src="{{ image.compressed.url }}" alt="{{ post.title }}" style="max-width: 300px; max-height: auto;">
-                    </a>
+            <p class="post-content">{{ post.content }}</p>
+            {% if post.tags.all %}
+                <p class="post-tags">
+                    {% for tag in post.tags.all %}
+                        #{{ tag.name }}
+                    {% endfor %}
                 </p>
-            {% endfor %}
-        {% endif %}
+            {% endif %} 
+            
+            {% if post.links.all %}
+                <ul class="post-links">
+                    {% for link in post.links.all %}
+                            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.url }}</a>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        <div>
+        <div class="post-images-div">
+            {% if post.images.all %}
+                {% for image in post.images.all %}
+                    <p class="post-image">
+                        <a href="{{ image.original.url }}" target="_blank" rel="noopener noreferrer">
+                            <img src="{{ image.compressed.url }}" alt="{{ post.title }}" style="max-width: 300px; max-height: auto;">
+                        </a>
+                    </p>
+                {% endfor %}
+            {% endif %}
+        </div>
     </article>
     <hr>
 {% endfor %}

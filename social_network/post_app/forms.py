@@ -22,7 +22,8 @@ class PostForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
         required = False,
         queryset = PostTag.objects.all(),
-        widget = forms.CheckboxSelectMultiple
+        widget = forms.CheckboxSelectMultiple(),
+        label = ''
     )
 
     images = MultipleFileField(
@@ -50,6 +51,9 @@ class PostForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         self.fields['tags'].queryset = PostTag.objects.all()
+        self.fields['tags'].choices = [
+            (tag.id, f"# {tag.name}") for tag in PostTag.objects.all()
+        ]
 
         self.links_list = []
         self.images_list = []
