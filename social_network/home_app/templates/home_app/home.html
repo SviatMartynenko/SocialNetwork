@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block meta %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
+{% endblock %}
+
 {% block links %}  
     <link rel="stylesheet" href="{% static 'home_app/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'home_app/css/first_login.css' %}">
+    <link rel="stylesheet" href="{% static 'post_app/css/my_posts.css' %}">
+    <link rel="stylesheet" href="{% static 'post_app/css/create_post.css' %}">
+    <link rel="stylesheet" href="{% static 'post_app/css/show_post.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'post_app/css/add_tag.css' %}"> -->
 {% endblock %}
 
 {% block modals %}
     {% include 'home_app/particles/first_login.html' %}
+    {% include 'particles/create_post.html' %}
+    {% include 'particles/add_tag.html' %}
 {% endblock %}
 
 {% block side_block %}
@@ -106,8 +116,12 @@
 {% endblock %}
 
 {% block content %}
+    {% include 'particles/content_post.html' %}
 {% endblock %}
 
 {% block scripts %}
     <script src = "{% static 'home_app/js/first_login.js' %}"></script>
+    <script type = "module" src="{% static 'post_app/js/createPost.js' %}"></script>
+    <!-- <script type="module" src="{% static 'js/renderErrors.js' %}" ></script> -->
+    <script type="module" src="{% static 'post_app/js/postList.js' %} "></script>
 {% endblock %}

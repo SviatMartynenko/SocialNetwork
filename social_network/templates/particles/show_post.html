@@ -43,5 +43,30 @@
                 {% endfor %}
             {% endif %}
         </div>
+        
+    <div class="post-interaction">
+        <div class="heart-div">
+            <div class="heart-image">
+                <img class="" src="{% static 'post_app/images/heart.svg' %}" alt="">
+            </div>
+            <p>120 Вподобань</p>
+        </div>
+
+        <div class="like-div">
+            <div class="like-image">
+                <img class="" src="{% static 'post_app/images/like.svg'  %}" alt="">
+            </div>
+            <p>120 Вподобань</p>
+        </div>
+
+
+        <div class="views-div">
+            <div class="eye-view-image">
+                <img class="" src="{% static 'post_app/images/eye-view.svg' %}" alt="">
+            </div>
+            <p>890 Переглядів</p>
+        </div>   
+    </div>
+
     </article>
 {% endfor %}

@@ -139,3 +139,18 @@ class PostForm(forms.ModelForm):
         compressed_name = f'compressed_{image.name.rsplit('.', 1)[0]}.jpg'
         
         return ContentFile(buffer.getvalue(), name= compressed_name)
+
+class AddTagForm(forms.ModelForm):
+    class Meta:
+        model = PostTag
+        fields = ("name",)
+        labels = {
+            "name": "Назва"
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': '#',"class": "tag-name-input"})
+        }
+
+    def __init__(self, *args,**kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super().__init__(*args, **kwargs)

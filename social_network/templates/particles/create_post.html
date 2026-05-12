@@ -8,10 +8,13 @@
         {{ form_create_post.as_div }}
         <p class="create-post-link">Посилання</p>
             <div class="links-list" id="links-list">
-                <div class = 'first-link'>
+                <div class = 'link-row'>
                     <input type="url" name="links" placeholder="https://www.instagram.com/world.it.academy">
                     <div class="add-link" id="add-link">
                         <img class = "plus-link" src="{% static 'post_app/images/plus.svg' %}" alt="">
+                    </div>
+                    <div class="remove-link" id="remove-link">
+                        <img class = "cross-link" src="{% static 'post_app/images/cross.svg' %}" alt="">
                     </div>
                 </div>
             </div>

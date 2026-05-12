@@ -5,7 +5,7 @@
     max-height: 445px;
     background-color: rgba(255, 255, 255, 1);
     border-radius: clamp(0.1rem, 1.9vh, 1.25rem);
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;

@@ -1,18 +1,15 @@
-from django.shortcuts import render
-from django.views.generic.base import TemplateView
 from django.views.generic import FormView, ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.urls import reverse
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator
 
-from .forms import PostForm
+from .forms import PostForm, AddTagForm
 from .models import Post
 
 
-class PostListView(ListView, LoginRequiredMixin):
+class PostListView(ListView):
     # model = Post
     template_name = 'post_app/my_posts.html'
     # context_object_name = 'posts'
@@ -21,6 +18,7 @@ class PostListView(ListView, LoginRequiredMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form_create_post'] = PostForm()
+        context['form_add_tag'] = AddTagForm()
         context['posts'] = Post.objects.filter(author_id = self.request.user)[:self.paginate_by]
         return context
     def get_queryset(self):
@@ -40,10 +38,9 @@ class PostListView(ListView, LoginRequiredMixin):
         
         return super().get(request, *args, **kwargs)
     
-class PostCreateView(LoginRequiredMixin, FormView):
+class PostCreateView(FormView):
     form_class = PostForm
     success_url = reverse_lazy('my_posts')
-    login_url = reverse_lazy('auth')
     
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -54,7 +51,6 @@ class PostCreateView(LoginRequiredMixin, FormView):
         return kwargs
     def form_valid(self, form: PostForm):
         post = form.save(author= self.request.user)
-        print(post)
         return JsonResponse(
             {
                 'success': True,
@@ -64,6 +60,28 @@ class PostCreateView(LoginRequiredMixin, FormView):
             }
         )
     def form_invalid(self, form: PostForm):
+        return JsonResponse(
+            {
+                "success" : False,
+                'errors': form.errors.get_json_data()
+            },
+            status = 400
+        )
+
+class AddTagView(FormView):
+    form_class = AddTagForm
+
+    def form_valid(self, form: AddTagForm):
+        tag = form.save()
+        return JsonResponse(
+            {
+                'success': True,
+                'message': 'Тег створено успішно',
+                "id": tag.id,
+                "name": tag.name
+            }
+        )
+    def form_invalid(self, form: AddTagForm):
         return JsonResponse(
             {
                 "success" : False,

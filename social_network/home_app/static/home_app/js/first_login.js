@@ -2,15 +2,17 @@ function getCSRFtoken(){
     return document.querySelector("meta[name='csrf-token']").getAttribute('content');
 }
 
-const modalOverlay = document.querySelector(".modal-overlay")
+// const modalOverlay = document.querySelector(".modal-overlay")
 
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('tab') === 'first_login') {
         modalOverlay.style.display = "flex";
+        modalOverlay.querySelector('.first-login-container').style.display = "flex";
     }
     else{
        modalOverlay.style.display = "none"; 
+       modalOverlay.querySelector('.first-login-container').style.display = "none";
     }
 });
 

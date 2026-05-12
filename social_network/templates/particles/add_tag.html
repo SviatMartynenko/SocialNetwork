@@ -1,0 +1,16 @@
+{% load static %}
+<div class="add-tag-container">
+    <div class = "close-modal-tag">
+        <img id = "" class = "img-cover-tag" src="{% static 'images/cross.svg' %}" alt="">
+    </div>
+
+    <p class="add-tag">Додати хештег</p>
+
+    <form class = "add-tag-form" action="{% url 'add_tag' %}" method="post">
+        {{form_add_tag.as_div}}
+        <div class="add-tag-buttons">
+            <button type="submit" class="cancel-tag-button">Скасувати</button>
+            <button type="submit" class="save-tag-button">Зберегти</button>
+        </div>
+    </form>
+</div>

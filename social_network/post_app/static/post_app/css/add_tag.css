@@ -1,0 +1,84 @@
+.add-tag-container{
+    background-color: #ffffff;
+    width: 29.9vw;
+    padding: 2.34vh 3vw;
+    border-radius: 2vh;
+    display: none;
+    flex-direction: column;
+    position: relative;
+}
+
+.close-modal-tag{
+    margin-top: ;
+    display: flex;
+    justify-content: flex-end;
+    height: 1.9vh;
+}
+
+.add-tag{
+    margin: 2.34vh 0 2.34vh 0;
+    font-size: 3.3vh;
+    font-family: var(--FontMedium)
+}
+
+.add-tag-form{
+    display: flex;
+    flex-direction: column;
+    gap: 2.34px;
+    font-family: var(--FontRegular);
+}
+
+.add-tag-form div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.add-tag-form div label{
+    margin-bottom: 0.58vh;
+    font-size: 1.5vh;
+}
+
+.add-tag-form div input{
+    width: 100%;
+    padding: 1vh 1vw;
+    box-sizing: border-box;
+    border-radius: 1vh;
+    border: 0.18vh #81818D solid;
+}
+
+.add-tag-form .add-tag-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 2.34vh;
+    gap: 1vh;
+}
+
+.cancel-tag-button, .save-tag-button{
+    font-size: 1.5vh;
+    font-family: var(--FontMedium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancel-tag-button{
+    border-radius: 1234px;
+    background-color: #ffffff;
+    color: rgba(84, 60, 82, 1);
+    padding: 0.9vh 1.5vw;
+    border: rgba(84, 60, 82, 1) solid 0.1vw;
+}
+
+.save-tag-button{
+    border-radius: 1234px;
+    background-color: rgba(84, 60, 82, 1);
+    color: rgba(255, 255, 255, 1);
+    padding: 1vh 1.5vw;
+    border: none
+}
+
+
+
+
