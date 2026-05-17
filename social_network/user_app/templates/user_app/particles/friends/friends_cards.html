@@ -1,0 +1,8 @@
+{% for person in users %}
+    <div>
+        <h3>{{person.email}}</h3>
+    </div>
+
+{% empty %}
+    <p>Порожньо</p>
+{% endfor %}

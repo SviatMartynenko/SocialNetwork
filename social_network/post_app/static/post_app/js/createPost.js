@@ -4,6 +4,7 @@ const cross = document.getElementById('close-modal');
 const selectImage = document.getElementById('id_images');
 const tagsField = document.getElementById('id_tags');
 const previewContainer = document.querySelector('.loaded-images');
+const closeTagModal = document.getElementById('closeTagModal');
 let selectedFiles = [];
 
 
@@ -18,14 +19,18 @@ plus.id = "add-tag"
 plusImgDiv.appendChild(plus); 
 tagsField.appendChild(plusImgDiv);
 
-document.addEventListener("DOMContentLoaded", function() {
-    const imagesInput = document.getElementById('id_images');
-    if (imagesInput) {
-        imagesInput.removeAttribute('name');
+closeTagModal.addEventListener(
+    "click",
+    function(){
+        this.closest('.add-tag-container').style.display = 'none';
+        document.querySelector(".create-post-container").style.display = "flex";
     }
-});
+);
 
 createPostBtn.addEventListener("click", () => {
+   const preparedTextContent = document.getElementById('postContent').value;
+    document.getElementById('contentField').value = preparedTextContent;
+    console.log(preparedTextContent);
     modalOverlay.style.display = "flex";
     document.querySelector('body').style.overflowY = 'hidden';
 });
@@ -47,9 +52,11 @@ document.getElementById('id_tags').querySelectorAll('label').forEach(
             function (){
                 if (label.querySelector('input').checked){
                     label.style.backgroundColor = 'rgba(84, 60, 82, 1)';
+                    label.style.color = 'rgba(233, 229, 238, 1)';
                 }
                 else{
                     label.style.backgroundColor = 'rgba(233, 229, 238, 1)';
+                    label.style.color = 'rgba(84, 60, 82, 1)';
                 }
             }
         );
@@ -103,21 +110,19 @@ selectImage.addEventListener(
         
         files.forEach(file => {
 
-            const fileId = Date.now() + Math.random();
-            selectedFiles.push({ id: fileId, file: file });
-
             const reader = new FileReader();
 
-            reader.onload = function(e) {
+            reader.onload = function(event) {
                 const div = document.createElement('div');
                 div.className = 'image-card'; 
+                div.setAttribute('data-filename', file.name); 
                 div.style.position = 'relative';
 
                 div.innerHTML = `
                     <div class = "trash-image-container">
                         <img class = "img-cover" src = "/static/post_app/images/delete-image.svg">
                     </div>
-                    <img src="${e.target.result}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 15px;">
+                    <img src="${event.target.result}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 15px;">
                     `;
                 previewContainer.appendChild(div);
             };
@@ -126,13 +131,22 @@ selectImage.addEventListener(
         });
     });
 
-previewContainer.addEventListener('click', function(e) {
-    const deleteImageBtn = e.target.closest('.trash-image-container');
+previewContainer.addEventListener('click', function(event) {
+    const deleteImageBtn = event.target.closest('.trash-image-container');
     if (deleteImageBtn) {
         const card = deleteImageBtn.closest('.image-card');
-        const idToRemove = parseFloat(card.dataset.id);
 
-        selectedFiles = selectedFiles.filter(item => item.id.toString() !== idToRemove.toString());
+        const fileNameToRemove = card.getAttribute('data-filename');
+        
+        const fileInput = document.getElementById('id_images');
+            const dt = new DataTransfer();
+            
+            Array.from(fileInput.files).forEach((file) => {
+                if (file.name !== fileNameToRemove) {
+                    dt.items.add(file);
+                }
+            });
+            fileInput.files = dt.files;
         
         card.remove();
     }
@@ -144,10 +158,6 @@ document.querySelector('.create-post-form').addEventListener(
         event.preventDefault()
         const form = event.target;
         const formData = new FormData(form);
-
-        selectedFiles.forEach(fileObj => {
-            formData.append('images', fileObj.file); 
-        });
 
         fetch(form.action, {
             method: 'POST',

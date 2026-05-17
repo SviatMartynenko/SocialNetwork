@@ -1,5 +1,4 @@
 .navigation{
-    display: flex;
     position: fixed;
     width: 88vw; 
     max-width: 1280px;
@@ -11,10 +10,14 @@
 .menu{
     display: flex;
     align-items: center;
-    gap: clamp(0.1rem, 1.5vw, 1.375rem);
+    justify-content: space-between;
+    flex-direction: row;
     max-height: 40px;
-    height: 3.9vh;
+    height: 3.9vh;  
+    width: 53.4vw;
+    max-width: 775px;
 }
+
 .nav-item-text{
     font-size: clamp(0.1rem, 1.5vh, 1rem);
     font-weight: 500;
@@ -43,4 +46,11 @@
     max-width: 20px;
     height: 1.9vh;
     max-height: 20px;
+}
+.nav-items-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 45.5vw;
+    max-width: 656px;
 }

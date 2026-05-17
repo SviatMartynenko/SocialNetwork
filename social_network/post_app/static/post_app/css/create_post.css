@@ -172,6 +172,12 @@
 
 #id_tags label{
     background-color: rgba(233, 229, 238, 1);
+    display: flex;
+    padding: 0.5vh;
+    border-radius: 0.5vh;
+    font-family: var(--FontRegular);
+    font-size: 1.3vh;
+    color: rgba(84, 60, 82, 1);
 }
 
 fieldset{

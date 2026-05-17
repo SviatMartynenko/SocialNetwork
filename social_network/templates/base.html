@@ -27,43 +27,47 @@
                 </a>
                 {% if '/auth/' not in request.path %}
                     <div class="menu">
-                        <a class = "nav-item" href="{% url 'home' %}">
-                            <div class= "nav-img-container">
-                                <img class = "img-cover" src= "{% static 'images/logo/home-logo.svg' %}" alt="">
-                            </div>
-                            <span class="nav-item-text">Головна</span>
-                        </a>
-                        <a class = "nav-item" href="{% url 'my_posts' %}">
-                            <div class= "nav-img-container">
-                                <img class = "img-cover" src= "{% static 'images/logo/post-logo.svg' %}"" alt="">
-                            </div>
-                            <span class="nav-item-text">Мої публікації</span>
-                        </a>
-                        <a class = "nav-item" href="{% url 'friends' %}">
-                            <div class= "nav-img-container">
-                                <img class = "img-cover" src="{% static 'images/logo/people-logo.svg' %}" alt="">
-                            </div>
-                            <span class="nav-item-text">Друзі</span>
-                        </a>
-                        <a class = "nav-item" href="">
-                            <div class= "nav-img-container">
-                                <img class = "img-cover" src="{% static 'images/logo/chat-logo.svg' %}" alt="">
-                            </div>
-                            <span class="nav-item-text">Чати</span>
-                        </a>
-                        <a class = "nav-item" href="{% url 'settings' %}">
-                            <div class= "nav-img-container">
-                                <img class = "img-cover" src="{% static 'images/logo/settings-logo.svg' %}" alt="">
-                            </div>
-                            <span class="nav-item-text">Налаштування</span>
-                        </a>
+                        <div class = "nav-items-container">
+                            <a class = "nav-item" href="{% url 'home' %}">
+                                <div class= "nav-img-container">
+                                    <img class = "img-cover" src= "{% static 'images/logo/home-logo.svg' %}" alt="">
+                                </div>
+                                <span class="nav-item-text">Головна</span>
+                            </a>
+                            <a class = "nav-item" href="{% url 'my_posts' %}">
+                                <div class= "nav-img-container">
+                                    <img class = "img-cover" src= "{% static 'images/logo/post-logo.svg' %}"" alt="">
+                                </div>
+                                <span class="nav-item-text">Мої публікації</span>
+                            </a>
+                            <a class = "nav-item" href="{% url 'friends' %}">
+                                <div class= "nav-img-container">
+                                    <img class = "img-cover" src="{% static 'images/logo/people-logo.svg' %}" alt="">
+                                </div>
+                                <span class="nav-item-text">Друзі</span>
+                            </a>
+                            <a class = "nav-item" href="">
+                                <div class= "nav-img-container">
+                                    <img class = "img-cover" src="{% static 'images/logo/chat-logo.svg' %}" alt="">
+                                </div>
+                                <span class="nav-item-text">Чати</span>
+                            </a>
+                            <a class = "nav-item" href="{% url 'settings' %}">
+                                <div class= "nav-img-container">
+                                    <img class = "img-cover" src="{% static 'images/logo/settings-logo.svg' %}" alt="">
+                                </div>
+                                <span class="nav-item-text">Налаштування</span>
+                            </a>
+                        </div>
+                        
                         <a href="#" class="logout">
                             <img class = "img-cover" src="{% static 'images/logo/logout_button.svg' %}" alt="">
+                            <form id = "logout-form" action="{% url 'logout' %}" method= "post">
+                                {% csrf_token %}
+                            </form>
                         </a>
-                        <form id = "logout-form" action="{% url 'logout' %}" method= "post">
-                            {% csrf_token %}
-                        </form>
                     </div>
+                    
                 {% endif %}   
             </nav>
         </header>

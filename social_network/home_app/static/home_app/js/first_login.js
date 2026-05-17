@@ -2,7 +2,9 @@ function getCSRFtoken(){
     return document.querySelector("meta[name='csrf-token']").getAttribute('content');
 }
 
-// const modalOverlay = document.querySelector(".modal-overlay")
+const modalOverlay = document.querySelector(".modal-overlay");
+modalOverlay.querySelector('.create-post-container').style.display = 'none';
+modalOverlay.querySelector('.add-tag-container').style.display = 'none';
 
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -13,6 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
     else{
        modalOverlay.style.display = "none"; 
        modalOverlay.querySelector('.first-login-container').style.display = "none";
+       modalOverlay.querySelector('.create-post-container').style.display = 'flex';
     }
 });
 

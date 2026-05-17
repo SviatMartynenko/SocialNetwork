@@ -24,10 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home_app.urls')),
     path('post/', include('post_app.urls')),
-    path('auth/', include('user_app.urls')),
-    path('friends/', include('friends_app.urls')),
+    path('user/', include('user_app.urls')),
     path('settings/', include('settings_app.urls')),
-    path('logout/', LogoutView.as_view(next_page='/auth'), name='logout')
+    path('logout/', LogoutView.as_view(next_page='/user/auth'), name='logout')
 ]
 
 if DEBUG:

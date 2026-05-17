@@ -12,7 +12,15 @@
         <p class= "side-block-item">Рекомендації</p>
         <p class= "side-block-item">Всі друзі</p>
     </div>
+    {% include "user_app/particles/friends/friends_nav.html" %}
 {% endblock %}
 
-{% block content %}
+{% block content %} 
+    
+    {% include "user_app/particles/friends/friends_main.html" %}
+    {% include "user_app/particles/friends/friends_section.html" %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'user_app/js/friends_sections.js' %}"></script>
 {% endblock %}
