@@ -19,8 +19,9 @@ class PostListView(ListView):
         context = super().get_context_data(**kwargs)
         context['form_create_post'] = PostForm()
         context['form_add_tag'] = AddTagForm()
-        context['posts'] = Post.objects.filter(author_id = self.request.user)[:self.paginate_by]
+        context['posts'] = Post.objects.filter(author_id = self.request.user).order_by('-id')
         return context
+    
     def get_queryset(self):
         return Post.objects.filter(author_id = self.request.user)
     def get(self, request, *args, **kwargs):

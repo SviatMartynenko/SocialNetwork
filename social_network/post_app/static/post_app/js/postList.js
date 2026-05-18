@@ -24,4 +24,7 @@ const observer = new IntersectionObserver(async (entries) => {
         isLoading = false
     }
 }, {rootMargin: '200px'})
-observer.observe(loaderLine)
+
+if (loaderLine) {
+    observer.observe(loaderLine);
+}

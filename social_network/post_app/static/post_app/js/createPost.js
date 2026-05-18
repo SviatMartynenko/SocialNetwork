@@ -50,14 +50,15 @@ document.getElementById('id_tags').querySelectorAll('label').forEach(
         label.addEventListener(
             'click', 
             function (){
-                if (label.querySelector('input').checked){
-                    label.style.backgroundColor = 'rgba(84, 60, 82, 1)';
-                    label.style.color = 'rgba(233, 229, 238, 1)';
-                }
-                else{
-                    label.style.backgroundColor = 'rgba(233, 229, 238, 1)';
-                    label.style.color = 'rgba(84, 60, 82, 1)';
-                }
+                const input = label.querySelector('input');
+                if (input.checked){
+                        label.style.backgroundColor = 'rgba(84, 60, 82, 1)';
+                        label.style.color = 'rgba(233, 229, 238, 1)';
+                    }
+                    else{
+                        label.style.backgroundColor = 'rgba(233, 229, 238, 1)';
+                        label.style.color = 'rgba(84, 60, 82, 1)';
+                    }
             }
         );
 });
@@ -221,9 +222,11 @@ document.querySelector('.add-tag-container').addEventListener(
                 function (){
                     if (label.querySelector('input').checked){
                         label.style.backgroundColor = 'rgba(84, 60, 82, 1)';
+                        label.style.color = 'rgba(233, 229, 238, 1)';
                     }
                     else{
                         label.style.backgroundColor = 'rgba(233, 229, 238, 1)';
+                        label.style.color = 'rgba(84, 60, 82, 1)';
                     }
                 }
             );

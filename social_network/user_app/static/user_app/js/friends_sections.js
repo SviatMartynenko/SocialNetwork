@@ -16,8 +16,9 @@ let hasNextPage = false;
 let isLoading = false;
 
 async function loadSectionPage(section, page) {
+  console.log('loaded');
   isLoading = true;
-  const response = await fetch(`/auth/friends/${section}/?${page}`, {
+  const response = await fetch(`/user/friends/${section}/?${page}`, {
     headers: { "X-Requested-With": "XMLHttpRequest" },
   });
   const data = await response.json();
@@ -33,7 +34,7 @@ async function openSection(section) {
   sectionTitle.textContent = sectionTitles[section];
   sectionList.innerHTML = "";
   mainBlock.style.display = "none";
-  sectionBlock.style.display = "block";
+  sectionBlock.style.display = "flex";
   await loadSectionPage(section, currentPage);
 }
 
@@ -42,7 +43,7 @@ function openMain() {
   sectionList.innerHTML = "";
   currentSection = "";
   hasNextPage = false;
-  mainBlock.style.display = "block";
+  mainBlock.style.display = "flex";
 }
 
 const observer = new IntersectionObserver(

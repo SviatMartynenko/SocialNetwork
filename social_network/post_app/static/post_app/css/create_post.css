@@ -150,12 +150,13 @@
 }
 
 .create-post-form #id_tags{
+    height: fit-content;
     width: 47.5vw;
-    height: 6.4vh;
-    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.6vw;
+    display: flex;
+    align-items: center
 }
 #id_tags input{
     display: none;
@@ -171,13 +172,18 @@
 }
 
 #id_tags label{
-    background-color: rgba(233, 229, 238, 1);
     display: flex;
     padding: 0.5vh;
     border-radius: 0.5vh;
     font-family: var(--FontRegular);
     font-size: 1.3vh;
+    background-color: rgba(233, 229, 238, 1);
     color: rgba(84, 60, 82, 1);
+}
+
+#id_tags .checked_tag{
+    background-color: rgba(84, 60, 82, 1);
+    color: rgba(233, 229, 238, 1);
 }
 
 fieldset{

@@ -1,0 +1,45 @@
+.friends-main{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7vh;
+}
+
+.section{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1.5vh 1.3vw;
+    border-radius: 0.9vh;
+    border: rgba(205, 206, 210, 1) solid 0.1vw;
+    gap: 1.5vh;
+}
+
+.section-title-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.section-look-all{
+    font-weight: 500;
+    color: #543C52;
+    font-size: clamp(0.1rem, 1.5vh, 1rem);
+    font-family: var(--FontMedium);
+    background-color: transparent;
+    border: none;
+}
+
+.section-title{
+    font-weight: 500;
+    color: #070A1C;
+    font-size: clamp(0.1rem, 1.5vh, 1rem);
+    font-family: var(--FontMedium);
+}
+
+.section-users{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;    
+    width: 61vw;
+    gap: 0.5vw;
+}

@@ -32,7 +32,9 @@ class HomePageView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form_create_post'] = PostForm()
+        context['form_add_tag'] = AddTagForm()
         context["first_login_form"] = FirstLoginForm()
+        context['posts'] = Post.objects.all().order_by('-id')
         return context
     
     def get_queryset(self):
@@ -48,7 +50,7 @@ class HomePageView(ListView):
                 return JsonResponse({'success': False})
             return JsonResponse({
                 'success': True,
-                'html': render_to_string('post_app/particles/show_post.html', {'posts': page_obj.object_list})
+                'html': render_to_string('particles/show_post.html', {'posts': page_obj.object_list})
             })
         
         return super().get(request, *args, **kwargs)

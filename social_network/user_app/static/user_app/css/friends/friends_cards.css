@@ -1,0 +1,18 @@
+/* .friend-card-div{
+    width: 20vw;
+    height: 25.7vh;
+    display: flex;
+    flex-direction: row;
+    background-color: blue;
+} */
+
+.friend-card{
+    border-radius: 0.9vh;
+    border: rgba(205, 206, 210, 1) solid 0.1vw;
+    width: 20vw;
+    height: 25.7vh;
+    display: flex;
+    flex-direction: column;
+    
+}
+

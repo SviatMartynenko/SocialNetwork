@@ -20,5 +20,5 @@ def get_friends_recommendations(current_user):
     sent_busy_ids = list(current_user.sent_friendships.values_list("to_user_id", flat=True))
     received_busy_ids = list(current_user.received_friendships.values_list("from_user_id", flat=True))
     busy_ids = sent_busy_ids + received_busy_ids + [current_user.id]
-    recommendation_users = User.objects.exclude(id__in=busy_ids).order_by("-id")
+    recommendation_users = User.objects.exclude(id__in=busy_ids).exclude(username = '').order_by("-id")
     return recommendation_users
