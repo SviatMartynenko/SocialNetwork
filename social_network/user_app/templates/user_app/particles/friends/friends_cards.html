@@ -2,13 +2,17 @@
 {% for person in users %}
     <div class="friend-card">
         <div class="user-card-div">
-            <img src="{% static 'home_app/images/person_2.svg' %}" alt="">
-            <h3>@{{ person.username }}</h3>
+            <div class="user-avatar-container">
+                <img class = "img-cover" src="{% static 'home_app/images/person_2.svg' %}" alt="">
+            </div>
+            
+            <p class= "user-name">{{ person.first_name }}</p>
+            <p class= "user-username">@{{ person.username }}</p>
         </div>
         
         <div class="buttons-card-div">
-            <button>Підтвердити</button>
-            <button>Видалити</button>
+            <span class= "action-btn"></span>
+            <span class = "reject-btn">Видалити</span>
         </div>
     </div>
 {% empty %}

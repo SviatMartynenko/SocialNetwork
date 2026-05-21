@@ -1,11 +1,3 @@
-/* .friend-card-div{
-    width: 20vw;
-    height: 25.7vh;
-    display: flex;
-    flex-direction: row;
-    background-color: blue;
-} */
-
 .friend-card{
     border-radius: 0.9vh;
     border: rgba(205, 206, 210, 1) solid 0.1vw;
@@ -13,6 +5,65 @@
     height: 25.7vh;
     display: flex;
     flex-direction: column;
-    
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.1rem, 1.5vh, 1rem);
 }
 
+.user-card-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.1rem, 0.9vh, 0.625rem);
+}
+
+.user-avatar-container{
+    width: 9.3vh;
+    height: 9.3vh;
+    max-width: 96px;
+    max-height: 96px;
+}
+.user-name{
+    color: rgba(7, 10, 28, 1);
+    font-weight: 700;
+    font-size: clamp(0.1rem, 2.3vh, 1.5rem);
+    font-family: var(--FontBold);
+}
+
+.user-username{
+    color: rgba(7, 10, 28, 1);
+    font-weight: 500;
+    font-size: clamp(0.1rem, 1.5vh, 1rem);
+    font-family: var(--FontMedium);
+}
+.buttons-card-div{
+    display: flex;
+    gap: clamp(0.1rem, 1.1vw, 1rem);
+}
+.action-btn{
+    line-height: 1.9vh;
+    height: 3.9vh;
+    background-color: rgba(84, 60, 82, 1);
+    border: 0.1vh rgba(84, 60, 82, 1) solid;
+    border-radius: 1234px;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 500;
+    font-size: clamp(0.1rem, 1.3vh, 0.875rem);
+    font-family: var(--FontMedium);
+    padding: 0.9vh 1.1vw;
+}
+
+.reject-btn{
+    line-height: 1.9vh;
+    height: 3.9vh;
+    background-color: rgba(255, 255, 255, 1);
+    border: 0.1vh rgba(84, 60, 82, 1) solid;
+    border-radius: 1234px;
+    color: rgba(84, 60, 82, 1);
+    font-weight: 500;
+    font-size: clamp(0.1rem, 1.3vh, 0.875rem);
+    font-family: var(--FontMedium);
+    padding: 0.9vh 1.1vw;
+}

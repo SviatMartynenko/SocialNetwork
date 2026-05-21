@@ -2,15 +2,18 @@
     position: fixed;
     display: flex;
     flex-direction: column;
-    
     gap: clamp(0.1rem, 0.7vh,  0.5rem);
 }
 
 .content{
+    position: relative;
     width: 64vw;
     display: flex;
     flex-direction: column;
+    max-width: 923px;
 }
 .side-block-spacer{
     width: 24vw;
+    max-width: 350px;
+    position: relative;
 }

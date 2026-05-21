@@ -1,18 +1,8 @@
-.main-nav #back-main{
-    font-size: 1.56vh;
+.selected-item{
+    border-bottom: 0.3vh solid rgba(84, 60, 82, 1);
+    font-family: var(--FontBold);
     font-weight: 700;
     color: rgba(7, 10, 28, 1);
-    font-size: clamp(0.1rem, 1.5vh, 1rem);
-    border-bottom: 2px solid rgba(84, 60, 82, 1);
-    font-family: var(--FontBold);
-    padding-bottom: clamp(0.1rem, 0.7vh, 0.5rem);
-}
-
-.side-block-item{
-    font-weight: 500;
-    color: rgba(129, 129, 141, 1);
-    font-size: clamp(0.1rem, 1.5vh, 1rem);
-    font-family: var(--FontMedium);
     padding-bottom: clamp(0.1rem, 0.7vh, 0.5rem);
 }
 

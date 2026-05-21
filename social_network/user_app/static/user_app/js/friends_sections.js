@@ -3,8 +3,9 @@ const sectionBlock = document.getElementById("section");
 const sectionTitle = document.getElementById("sectionTitle");
 const sectionList = document.getElementById("sectionList");
 const sectionSentinel = document.getElementById("loadSentinel");
-const backMainButtons = document.querySelectorAll(".back-main");
+const backMainButton = document.getElementById("back-main");
 const sectionButtons = document.querySelectorAll("[data-section-link]");
+const mainNavButtons = document.querySelector('.main-nav').querySelectorAll('span');
 const sectionTitles = {
   requests: "Запити",
   recommendations: "Рекомендації",
@@ -16,7 +17,6 @@ let hasNextPage = false;
 let isLoading = false;
 
 async function loadSectionPage(section, page) {
-  console.log('loaded');
   isLoading = true;
   const response = await fetch(`/user/friends/${section}/?${page}`, {
     headers: { "X-Requested-With": "XMLHttpRequest" },
@@ -35,6 +35,7 @@ async function openSection(section) {
   sectionList.innerHTML = "";
   mainBlock.style.display = "none";
   sectionBlock.style.display = "flex";
+
   await loadSectionPage(section, currentPage);
 }
 
@@ -58,14 +59,55 @@ const observer = new IntersectionObserver(
 
 observer.observe(sectionSentinel);
 
-backMainButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    openMain();
+backMainButton.addEventListener("click", () => {
+  openMain();
+  updateActionButtonText();
+  navButtonClick(backMainButton);
   });
-});
+
 
 sectionButtons.forEach((button) => {
   button.addEventListener("click", async () => {
     await openSection(button.dataset.sectionLink);
+    updateActionButtonText();
+    navButtonClick(button);
   });
 });
+
+function navButtonClick(button){
+    button.classList.add('selected-item');
+    const otherButtons = Array.from(mainNavButtons).filter(span => span !== button);
+
+    otherButtons.forEach(button => {
+      if (button && button.classList) {
+        button.classList.remove('selected-item');
+      }
+    });
+  };
+
+function setActionButtonText(buttons, text){
+    buttons.forEach(button => {
+      button.textContent = text;
+    });
+}
+
+function updateActionButtonText(){
+  const activeSectionTitles = document.querySelectorAll('.section-title');
+  activeSectionTitles.forEach((title) => {
+    console.log(title)
+    const closestSection = title.closest('.section');
+    const buttonsInSection = closestSection.querySelectorAll('.action-btn');
+    if (title.textContent.toLowerCase() == "Запити".toLowerCase()){
+      setActionButtonText(buttonsInSection, "Підтвердити");
+    }
+    else if (title.textContent.toLowerCase() == "Рекомендації".toLowerCase()){
+      setActionButtonText(buttonsInSection, "Додати");
+    }
+    else if (title.textContent.toLowerCase() == "Всі Друзі".toLowerCase()){
+      setActionButtonText(buttonsInSection, "Повідомлення");
+    }
+});
+}
+
+updateActionButtonText();
+
