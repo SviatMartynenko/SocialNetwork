@@ -1,4 +1,4 @@
-from django.views.generic.base import TemplateView, View
+from django.views.generic import TemplateView, View, ListView
 from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.http import JsonResponse, HttpResponse
@@ -7,11 +7,12 @@ from django.urls import reverse
 from django.core.mail import send_mail
 from social_network.settings import EMAIL_HOST_USER
 import random
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator
 from .services.friend_queries import *
+from .services.friend_actions import *  
+from post_app.models import Post
 
 
 class AuthTemplateView(TemplateView):
@@ -119,9 +120,8 @@ class ConfirmEmailView(View):
             )
 
 
-class FriendsView(LoginRequiredMixin, TemplateView):
+class FriendsView(TemplateView):
     template_name = "user_app/friends.html"
-    login_url = reverse_lazy("auth")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -133,7 +133,7 @@ class FriendsView(LoginRequiredMixin, TemplateView):
         }
         return context
     
-class FriendSectionView(LoginRequiredMixin, View):
+class FriendSectionView(View):
     def get(self, request, section, *args, **kwargs):
         if section == "requests":
             users = get_friendship_requests(request.user)
@@ -150,3 +150,60 @@ class FriendSectionView(LoginRequiredMixin, View):
         
         return JsonResponse({"html": html, "has_next_page": page_obj.has_next()})
                     
+class FriendActionView(View):
+
+    def post(self, request, other_user_id, action, *args, **kwargs):
+        other_user = User.objects.get(id=other_user_id)
+        current_user = request.user
+
+        if action == "add":
+            return JsonResponse(add_friend_request(current_user, other_user))
+        
+        if action == "dismiss":
+            return JsonResponse(dismiss_recommendation(current_user, other_user))
+        
+        if action == "delete":
+            return JsonResponse(delete_friendship(current_user, other_user))
+        
+        if action == "accept":
+            action_result = accept_friend_request(current_user, other_user)
+            action_result["friend_html"] = render_to_string(
+                "user_app/particles/friends/friends_cards.html",
+                {"users": [action_result["friend"]], "section": "friends"},
+                request=request
+            )
+            del action_result["friend"]
+            return JsonResponse(action_result)
+
+class FriendListView(ListView):
+    # model = Post
+    template_name = 'user_app/friend_profile.html'
+    # context_object_name = 'posts'
+    paginate_by = 5
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        person_id = self.request.GET.get("person_id")
+        context['posts'] = Post.objects.filter(author_id = person_id).order_by('-id')
+        return context
+    
+    def get_queryset(self):
+        person_id = self.request.GET.get("person_id")
+        if not person_id:
+            print(person_id) 
+        return Post.objects.filter(author_id = person_id)
+    
+    def get(self, request, *args, **kwargs):
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            queryset = self.get_queryset()        
+            paginator = Paginator(queryset, self.paginate_by)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+            if int(page_number) > paginator.num_pages:
+                return JsonResponse({'success': False})
+            return JsonResponse({
+                'success': True,
+                'html': render_to_string("particles/show_post.html", {'posts': page_obj.object_list})
+            })
+        
+        return super().get(request, *args, **kwargs)

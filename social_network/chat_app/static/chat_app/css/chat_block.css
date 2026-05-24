@@ -1,0 +1,6 @@
+.chat-alert-container{
+    max-width: 350px;
+    width: 24.3vw;
+    height: 81vh;
+    gap: clamp(0.1rem, 0.7vh, 0.5rem);
+}

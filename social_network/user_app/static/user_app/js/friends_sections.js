@@ -35,7 +35,6 @@ async function openSection(section) {
   sectionList.innerHTML = "";
   mainBlock.style.display = "none";
   sectionBlock.style.display = "flex";
-
   await loadSectionPage(section, currentPage);
 }
 
@@ -61,7 +60,6 @@ observer.observe(sectionSentinel);
 
 backMainButton.addEventListener("click", () => {
   openMain();
-  updateActionButtonText();
   navButtonClick(backMainButton);
   });
 
@@ -69,7 +67,6 @@ backMainButton.addEventListener("click", () => {
 sectionButtons.forEach((button) => {
   button.addEventListener("click", async () => {
     await openSection(button.dataset.sectionLink);
-    updateActionButtonText();
     navButtonClick(button);
   });
 });
@@ -85,29 +82,6 @@ function navButtonClick(button){
     });
   };
 
-function setActionButtonText(buttons, text){
-    buttons.forEach(button => {
-      button.textContent = text;
-    });
-}
 
-function updateActionButtonText(){
-  const activeSectionTitles = document.querySelectorAll('.section-title');
-  activeSectionTitles.forEach((title) => {
-    console.log(title)
-    const closestSection = title.closest('.section');
-    const buttonsInSection = closestSection.querySelectorAll('.action-btn');
-    if (title.textContent.toLowerCase() == "Запити".toLowerCase()){
-      setActionButtonText(buttonsInSection, "Підтвердити");
-    }
-    else if (title.textContent.toLowerCase() == "Рекомендації".toLowerCase()){
-      setActionButtonText(buttonsInSection, "Додати");
-    }
-    else if (title.textContent.toLowerCase() == "Всі Друзі".toLowerCase()){
-      setActionButtonText(buttonsInSection, "Повідомлення");
-    }
-});
-}
 
-updateActionButtonText();
 

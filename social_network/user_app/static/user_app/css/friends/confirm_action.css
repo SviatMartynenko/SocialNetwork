@@ -1,0 +1,60 @@
+.conf-action-container{
+    padding: 0;
+    margin: 0;
+    width: 33.88vw;
+    height: 25.1vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5vh;
+    padding: 4.3vh 0 4.3vh 0;
+    border-radius: 2vh;
+    background-color: #ffffff;
+}
+
+.conf-action{
+    font-size: 3.3vh;
+    font-family: var(--FontMedium);
+}
+
+.conf-action-question{
+    font-size: 1.56vh;
+    font-family: var(--FontRegular);
+}
+
+.conf-action-button1{
+    border-radius: 1234px;
+    background-color: #ffffff;
+    color: rgba(84, 60, 82, 1);
+    padding: 0.9vh 1.5vw;
+    border: rgba(84, 60, 82, 1) solid 0.1vw;
+    font-family: var(--FontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vh;
+    padding: 1vh 1.5vw;
+}
+
+.conf-action-button2{
+    border-radius: 1234px;
+    background-color: rgba(84, 60, 82, 1);
+    color: rgba(255, 255, 255, 1);
+    padding: 1vh 1.5vw;
+    border: none;
+    font-family: var(--FontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vh;
+    padding: 1vh 1.5vw;
+} 
+
+.conf-action-buttons{
+    width: 27.77vw;
+    height: 3.9vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1.56vh;
+}

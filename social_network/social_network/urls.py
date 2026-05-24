@@ -26,7 +26,8 @@ urlpatterns = [
     path('post/', include('post_app.urls')),
     path('user/', include('user_app.urls')),
     path('settings/', include('settings_app.urls')),
-    path('logout/', LogoutView.as_view(next_page='/user/auth'), name='logout')
+    path('logout/', LogoutView.as_view(next_page='/user/auth'), name='logout'),
+    path('chat/', include('chat_app.urls'))
 ]
 
 if DEBUG:

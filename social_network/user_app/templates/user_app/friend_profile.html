@@ -11,16 +11,17 @@
 {% endblock %}
 
 {% block side_block %}
-    {% include "user_app/particles/friends/friends_nav.html" %}
-    {% include "user_app/particles/friends/confirm_action.html" %}
+    {% include "particles/user_profile.html" %}
+    {% block buttons %}
+
+    {% endblock %}
 {% endblock %}
 
 {% block content %} 
-    {% include "user_app/particles/friends/friends_main.html" %}
-    {% include "user_app/particles/friends/friends_section.html" %}
+    {% include 'particles/content_post.html' %}
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'user_app/js/friends_sections.js' %}"></script>
-    <script src="{% static 'user_app/js/friend_actions.js' %}"></script>
+    <script type="module" src="{% static 'post_app/js/postList.js' %} "></script>
+    <script src="{% static 'user_app/js/friends_actions.js' %}"></script>
 {% endblock %}

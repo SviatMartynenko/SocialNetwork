@@ -1,6 +1,6 @@
 {% load static %}
 {% for person in users %}
-    <div class="friend-card">
+    <div class="friend-card" data-id = "{{person.id}}" data-url="{% url 'friend_profile' %}">
         <div class="user-card-div">
             <div class="user-avatar-container">
                 <img class = "img-cover" src="{% static 'home_app/images/person_2.svg' %}" alt="">
@@ -11,11 +11,18 @@
         </div>
         
         <div class="buttons-card-div">
-            <span class= "action-btn"></span>
-            <span class = "reject-btn">Видалити</span>
+            {% if section == "requests" %}
+                <button class="action-btn" data-url="{% url 'friend_action' person.id 'accept' %}">Підтвердити</button>
+                <button class="action-btn" data-url="{% url 'friend_action' person.id 'delete' %}">Відхилити</button>
+            {% elif section == "recommendations" %}
+                <button class="action-btn" data-url="{% url 'friend_action' person.id 'add' %}">Додати</button>
+                <button class="action-btn" data-url="{% url 'friend_action' person.id 'dismiss' %}">Видалити</button>
+            {% else %}
+                <button class="action-btn" >Повідомлення</button>
+                <button class="action-btn" data-url="{% url 'friend_action' person.id 'delete' %}">Видалити</button>
+            {% endif %}
         </div>
     </div>
-{% empty %}
-    <p>Порожньо</p>
+
 {% endfor %}
 

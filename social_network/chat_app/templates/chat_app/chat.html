@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Чат {% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'chat_app/css/chat.css' %}">
+    <link rel="stylesheet" href="{% static 'chat_app/css/chat_block.css' %}">
+{% endblock %}
+
+{% block side_block %}
+     <div class="chat-profile-container">
+            <button class="chat-profile-button">
+                <img class = "plus-img" src="{% static 'chat_app/images/plus.svg' %}" alt="">
+                <span class="create-chat">Створити груповий чат</span>
+            </button>
+
+        <div class="chat-profile">
+            <div class="chat-contacts-div">
+                <img class = "contacts-img" src="{% static 'chat_app/images/contacts.svg' %}" alt="">
+                <span class="chat-contacts">Контакти</span>
+            </div>
+            <!-- <div> -->
+                <!-- <img class="" src="{% static 'chat_app/images/loupe.svg' %}" alt=""> -->
+            <input type="text" placeholder="Пошук">
+            <!-- </div> -->
+            
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="chat-content">
+        <div class="chat-container">
+            <span class="text1-container">Почніть нове спілкування</span>
+            <span class="text2-container">Оберіть контакт зі списку ліворуч <br> або створіть групу, щоб почати спілкування</span>
+        </div>
+    
+        {% include 'chat_app/particles/chats_block.html' %}
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'chat_app/js/chat.js' %}"></script>
+{% endblock %}

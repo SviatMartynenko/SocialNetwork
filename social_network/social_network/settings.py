@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'home_app',
     'post_app',
     'user_app',
-    'settings_app'
+    'settings_app',
+    'chat_app'
 ]
 
 LOGIN_URL = 'auth'
