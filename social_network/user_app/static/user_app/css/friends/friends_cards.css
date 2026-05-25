@@ -46,8 +46,7 @@
     justify-content: center;
     gap: clamp(0.1rem, 1.1vw, 1rem);
 }
-.action-btn{
-    line-height: clamp(0.1rem, 1.9vh, 1.25rem);
+.accept{
     height: 3.9vh;
     max-height: 40px;
     background-color: rgba(84, 60, 82, 1);
@@ -60,11 +59,10 @@
     padding: clamp(0.1rem, 0.9vh,0.625rem) clamp(0.1rem, 1.1vw,1rem);
 }
 
-.reject-btn{
-    line-height: clamp(0.1rem, 1.9vh, 1.25rem);
+.reject{
     height: 3.9vh;
     max-height: 40px;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: transparent;
     border: 0.1vh rgba(84, 60, 82, 1) solid;
     border-radius: 1234px;
     color: rgba(84, 60, 82, 1);

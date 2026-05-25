@@ -3,9 +3,12 @@
     border: solid rgba(205, 206, 210, 1) 0.1vw;
     border-radius: 0.9vh;
     font-family: var(--FontRegular);
-    margin-top: 0.7vh
 }
-
+.post-list{
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.1rem, 0.7vh, 0.5rem);
+}
 .post-content-div{
     max-width: 44.3vw;
     display: flex;

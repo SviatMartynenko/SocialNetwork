@@ -1,10 +1,19 @@
 const csrfToken = document.querySelector("meta[name='csrf-token']").content;
+// const modal = document.querySelector('.modal-overlay');
+// const cancelButton = document.querySelector('.conf-action-button1');
+// const confirmButton = document.querySelector('.conf-action-button2');
+let titles;
+let friendsTitle;
+let sectionDiv;
+let friendsList;
+let currentFriendCard;
 
-const titles = document.querySelectorAll(".section-title");
-const friendsTitle = Array.from(titles).find(el => el.textContent.trim() === "Всі друзі");
-const sectionDiv = friendsTitle.closest(".section");
-const friendsList = sectionDiv.querySelector(".section-users");
-
+if(!window.location.pathname.includes('/profile')){
+  titles = document.querySelectorAll(".section-title");
+  friendsTitle = Array.from(titles).find(el => el.textContent.trim() === "Всі друзі");
+  sectionDiv = friendsTitle.closest(".section");
+  friendsList = sectionDiv.querySelector(".section-users");
+}
 
 async function handleFriendAction(actionButton) {
   const response = await fetch(actionButton.dataset.url, {
@@ -13,7 +22,7 @@ async function handleFriendAction(actionButton) {
   });
   const data = await response.json();
 
-  if (data.friend_html) {
+  if (data.friend_html && !window.location.pathname.includes('/profile')) {
     addFriendToMain(data.friend_html);
   }
   
@@ -21,18 +30,9 @@ async function handleFriendAction(actionButton) {
     actionButton.textContent = data.label;
   }
   
-  if (data.remove) {
+  if (data.remove && !window.location.pathname.includes('/profile')) {
     actionButton.closest(".friend-card").remove();
   }
-}
-
-async function openFriendPage(friendCard){
-  const personId = friendCard.dataset.id; 
-  const response = await fetch(`${friendCard.dataset.url}?person_id=${personId}`, {
-    method: "GET",
-    headers: { "X-Requested-With": "XMLHttpRequest" }
-  });
-  const data = await response.json();
 }
 
 function addFriendToMain(friendHtml) {
@@ -49,7 +49,8 @@ function connectFriendActionButtons(parent = document) {
   actionButtons.forEach((actionButton) => {
     if (!actionButton.dataset.eventConnected) {
       actionButton.dataset.eventConnected = true;
-      actionButton.addEventListener("click", async () => {
+      actionButton.addEventListener("click", async (event) => {
+        event.stopPropagation(); 
         await handleFriendAction(actionButton);
       });
     }
@@ -61,8 +62,9 @@ function connectFriendCards(parent = document) {
   friendCards.forEach((friendCard) => {
     if (!friendCard.dataset.eventConnected) {
       friendCard.dataset.eventConnected = true;
+      const personId = friendCard.dataset.id; 
       friendCard.addEventListener("click", async () => {
-        await openFriendPage(friendCard);
+        window.location.replace(`${friendCard.dataset.url}?person_id=${personId}`);
       });
     }
   });

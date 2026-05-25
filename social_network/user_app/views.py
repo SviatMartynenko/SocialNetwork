@@ -176,21 +176,24 @@ class FriendActionView(View):
             return JsonResponse(action_result)
 
 class FriendListView(ListView):
-    # model = Post
-    template_name = 'user_app/friend_profile.html'
-    # context_object_name = 'posts'
+    template_name = 'user_app/person_page.html'
+   
     paginate_by = 5
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         person_id = self.request.GET.get("person_id")
+        current_user = self.request.user
+        other_user = User.objects.get(id = person_id)
         context['posts'] = Post.objects.filter(author_id = person_id).order_by('-id')
+        context['person'] = other_user
+        context['status'] = get_friendship_status(current_user, other_user)
         return context
     
     def get_queryset(self):
         person_id = self.request.GET.get("person_id")
         if not person_id:
-            print(person_id) 
+            return self.get_queryset()
         return Post.objects.filter(author_id = person_id)
     
     def get(self, request, *args, **kwargs):

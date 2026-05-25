@@ -12,14 +12,14 @@
         
         <div class="buttons-card-div">
             {% if section == "requests" %}
-                <button class="action-btn" data-url="{% url 'friend_action' person.id 'accept' %}">Підтвердити</button>
-                <button class="action-btn" data-url="{% url 'friend_action' person.id 'delete' %}">Відхилити</button>
+                <button class="action-btn accept" data-url="{% url 'friend_action' person.id 'accept' %}">Підтвердити</button>
+                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'delete' %}">Відхилити</button>
             {% elif section == "recommendations" %}
-                <button class="action-btn" data-url="{% url 'friend_action' person.id 'add' %}">Додати</button>
-                <button class="action-btn" data-url="{% url 'friend_action' person.id 'dismiss' %}">Видалити</button>
+                <button class="action-btn accept" data-url="{% url 'friend_action' person.id 'add' %}">Додати</button>
+                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'dismiss' %}">Видалити</button>
             {% else %}
-                <button class="action-btn" >Повідомлення</button>
-                <button class="action-btn" data-url="{% url 'friend_action' person.id 'delete' %}">Видалити</button>
+                <button class="action-btn accept" >Повідомлення</button>
+                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'delete' %}">Видалити</button>
             {% endif %}
         </div>
     </div>

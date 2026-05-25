@@ -10,9 +10,12 @@
     <link rel="stylesheet" href="{% static 'user_app/css/friends/confirm_action.css' %}">
 {% endblock %}
 
+{% block modals %}
+    {% include "user_app/particles/friends/confirm_action.html" %}
+{% endblock %}
+
 {% block side_block %}
     {% include "user_app/particles/friends/friends_nav.html" %}
-    {% include "user_app/particles/friends/confirm_action.html" %}
 {% endblock %}
 
 {% block content %} 

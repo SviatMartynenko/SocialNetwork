@@ -1,6 +1,10 @@
 navItems = document.querySelectorAll(".nav-item")
 navItems.forEach(item => {
-    if (item.href == window.location.href) {
+    const urlPath = new URL(item.href, "http://localhost").pathname;
+    const currentPath = window.location.pathname; 
+    console.log(currentPath)
+    console.log(urlPath)
+    if (currentPath.includes(urlPath)) {
         item.classList.add('active-nav-item');
     }
 });

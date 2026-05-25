@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block links %}  
+    <link rel="stylesheet" href="{% static 'post_app/css/my_posts.css' %}">
+    <link rel="stylesheet" href="{% static 'post_app/css/show_post.css' %}">
+    <link rel="stylesheet" href="{% static 'user_app/css/friends/friends_cards.css' %}">
+    <link rel="stylesheet" href="{% static 'user_app/css/friends/confirm_action.css' %}">
+{% endblock %}
+{% block modals %}
+    {% include "user_app/particles/friends/confirm_action.html" %}
+{% endblock %}
+
+{% block side_block %}
+    {% include "user_app/particles/friends/person_profile.html" %}
+{% endblock %}
+
+{% block content %} 
+    {% include 'particles/content_post.html' %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'user_app/js/personPostList.js' %} "></script>
+    <script src="{% static 'user_app/js/person_page.js' %}"></script>
+    <script src="{% static 'user_app/js/friend_actions.js' %}"></script>
+{% endblock %}
