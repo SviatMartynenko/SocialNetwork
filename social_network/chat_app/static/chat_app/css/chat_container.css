@@ -1,0 +1,49 @@
+.message-profile{
+    width: 100%;
+    max-width: 351px;
+    height: 6vh;
+    max-height: 62px;
+    display: flex;
+    flex-direction: row;
+    gap: clamp(0.1rem, 0.8vw, 0.75rem);
+    padding-left: clamp(0.1rem, 1.5vh, 1rem);
+    padding-right: clamp(0.1rem, 1.5vh, 1rem);
+    padding-top: clamp(0.1rem, 0.7vh, 0.5rem);
+    padding-bottom: clamp(0.1rem, 0.7vh, 0.5rem);
+}
+.profile-name{
+    font-weight: 500;
+    color: rgba(7, 10, 28, 1);
+    font-size: clamp(0.1rem, 1.5vh, 1rem);
+    font-family: var(--FontMedium);
+}
+
+.message-info{
+    flex-grow: 1;
+    height: 4.2vh;
+    max-height: 44px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+.message-header{
+    height: 1.7vh;
+    max-height: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.message-time{
+    color: rgba(129, 129, 141, 1);
+    font-size: clamp(0.1rem, 1.1vh, 0.75rem);
+    font-family: var(--FontRegular);
+}
+.message-text{
+    color: rgba(7, 10, 28, 1);
+    font-size: clamp(0.1rem, 1.3vh, 0.875rem);
+    font-family: var(--FontRegular);
+}
+.new-message{
+    background-color: rgba(233, 229, 238, 1);
+}

@@ -5,7 +5,6 @@
     width: 24vw;
     max-width: 350px;
     padding: clamp(0.1rem, 1.5vh, 1rem) 0;
-    max-height: 271px;
     gap: clamp(0.1rem, 1.5vh, 1rem);
     border: solid rgba(205, 206, 210, 1) 0.1vw;
     border-radius: 0.6vw;

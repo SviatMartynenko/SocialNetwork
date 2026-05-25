@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
+from django.views.generic import RedirectView
 from django.conf.urls.static import static
 from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path('', RedirectView.as_view(url='/user/auth', permanent=False)),
     path('home/', include('home_app.urls')),
     path('post/', include('post_app.urls')),
     path('user/', include('user_app.urls')),

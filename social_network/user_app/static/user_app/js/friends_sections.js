@@ -25,6 +25,7 @@ async function loadSectionPage(section, page) {
   sectionList.insertAdjacentHTML("beforeend", data.html);
   hasNextPage = data.has_next_page;
   isLoading = false;
+  window.connectFriendActionButtons(sectionList);
 }
 
 async function openSection(section) {

@@ -1,9 +1,62 @@
 {% load static %}
 <div class="chat-alert-container">
         <div class= "messages">
-
+            <div class="chat-alert-container-header">
+                <div class= "header-title">
+                    <div class= "header-img-container">
+                        <img class = "img-cover" src="{% static 'home_app/images/chat.svg' %}" alt="">
+                    </div>
+                    <span class= "header-title-text">Повідомлення</span>
+                </div>
+                <a href="" class = "header-href">Дивитись всі</a>
+            </div>
+            <div class="chat-list">
+                <div class="message-profile new-message">
+                    <div class= "profile-img-wrapper">
+                        <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+                    </div>
+                    <div class = "message-info">
+                        <div class= "message-header">
+                            <p class= "profile-name">Mona Lisa</p>
+                            <p class = "message-time">09:41</p> 
+                        </div>
+                        <p class = "message-text">Привіт! Як справи ?</p>
+                    </div>
+                </div>
+                {% include 'chat_app/particles/chat_container.html' %}
+                {% include 'chat_app/particles/chat_container.html' %}
+                {% include 'chat_app/particles/chat_container.html' %}
+                {% include 'chat_app/particles/chat_container.html' %}
+            </div>
         </div>
         <div class = "group-chats">
-            
+            <div class="chat-alert-container-header">
+                <div class= "header-title">
+                    <div class= "header-img-container">
+                        <img class = "img-cover" src="{% static 'home_app/images/chat.svg' %}" alt="">
+                    </div>
+                    <span class= "header-title-text">Групові чати</span>
+                </div>
+                <a href="" class = "header-href">Дивитись всі</a>
+            </div>
+            <div class="chat-list">
+                <div class="message-profile new-message">
+                    <div class= "profile-img-wrapper">
+                        <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+                    </div>
+                    <div class = "message-info">
+                        <div class= "message-header">
+                            <p class= "profile-name">Mona Lisa</p>
+                            <p class = "message-time">09:41</p> 
+                        </div>
+                        <p class = "message-text">Привіт! Як справи ?</p>
+                    </div>
+                </div>
+                {% include 'chat_app/particles/chat_container.html' %}
+                {% include 'chat_app/particles/chat_container.html' %}
+                {% include 'chat_app/particles/chat_container.html' %}
+                {% include 'chat_app/particles/chat_container.html' %}
+                {% include 'chat_app/particles/chat_container.html' %}
+            </div>
         </div>
     </div>

@@ -1,0 +1,15 @@
+.chat-profiles {  
+   width: 100%;
+   height: 65vh;
+   background-color: blue;
+   display: flex;
+   flex-direction: column;
+}
+.chat-person-profile{
+   width: 100%;
+}
+
+
+
+
+
