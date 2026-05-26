@@ -10,17 +10,21 @@
 .chat-profile{
     display: flex;
     flex-direction: column;
-    padding: 1.1vw 1.5vh;
+    padding: 1.1vw 0 0 1.5vh ;
     gap: 2.3vh;
+    flex-grow: 1;
+    height: calc(81.44vh - 3.9vh - 1.5vh) !important;
     height: 79.20vh;
     border-radius: 1vh;
     background-color: #ffffff;
     border: rgba(205, 206, 210, 1) solid 0.1vw;
-    overflow-y: scroll;
+    box-sizing: border-box;
 }
 
 .chat-profile-button{
+    max-height: 3.9vh;
     height: 3.9vh;
+    flex-shrink: 0 !important;
     margin-bottom: 0.8vh;
     border-radius: 1234px;
     background-color: rgba(84, 60, 82, 1);
@@ -47,7 +51,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.4vh
+    gap: 0.4vh;
 }
 
 .contacts-img{
@@ -105,7 +109,6 @@ input {
     width: 100%; 
 }
 
-
 .search-icon {
     position: absolute;
     top: 50%;
@@ -115,7 +118,6 @@ input {
     margin-left: 1.56vh;
 }
 
-
 .search-wrapper input {
     width: 100%;            
     padding-left: 4.5vh;
@@ -124,3 +126,12 @@ input {
     font-family: var(--FontRegular);       
 }
 
+
+
+.chat-contacts-div {
+    padding-right: 1.5vh !important;
+}
+
+.search-wrapper {
+    padding-right: 1.5vh !important;
+}

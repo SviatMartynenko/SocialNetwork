@@ -1,15 +1,44 @@
-.chat-profiles {  
+.chat-profiles {
+   /* max-width: 350px; */
    width: 100%;
-   height: 65vh;
-   background-color: blue;
+   flex-grow: 1;
    display: flex;
    flex-direction: column;
+   gap: 1.56vh;
+   overflow-y: auto !important;
 }
+
 .chat-person-profile{
+   display: flex;
+   flex-direction: row;
+   gap: 0.8vw;
+}
+
+.chat-person-img{
    width: 100%;
+   height: 4.5vh;
+}
+
+.chat-person-name{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   font-family: var(--FontMedium);
+   font-size: 1.56vh;
 }
 
 
+.chat-profiles::-webkit-scrollbar {
+   width: 8px;
+   height: 648px;
+}
 
+.chat-profiles::-webkit-scrollbar-thumb {
+   background-color: #543C52;
+   border-radius: 1vh;
+}
 
-
+.chat-profiles::-webkit-scrollbar-track {
+   background: #E9E5EE;
+   border-radius: 1vh;
+}
