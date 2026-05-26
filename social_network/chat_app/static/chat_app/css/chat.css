@@ -10,7 +10,7 @@
 .chat-profile{
     display: flex;
     flex-direction: column;
-    padding: 1.1vw 0 0 1.5vh ;
+    padding: 1.56vh 0 0 1.5vh ;
     gap: 2.3vh;
     flex-grow: 1;
     height: calc(81.44vh - 3.9vh - 1.5vh) !important;
