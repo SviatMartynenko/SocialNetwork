@@ -1,6 +1,6 @@
 {% load static %}
 {% for person in users %}
-    <div class="friend-card" data-id = "{{person.id}}" data-url="{% url 'friend_profile' %}">
+    <div class="friend-card" ">
         <div class="user-card-div">
             <div class="user-avatar-container">
                 <img class = "img-cover" src="{% static 'home_app/images/person_2.svg' %}" alt="">
@@ -12,13 +12,13 @@
         
         <div class="buttons-card-div">
             {% if section == "requests" %}
-                <button class="action-btn accept" data-url="{% url 'friend_action' person.id 'accept' %}">Підтвердити</button>
+                <button class="action-btn accept" data-id = "{{person.id}}" data-redirect = "{% url 'friend_profile' %}">Підтвердити</button>
                 <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'delete' %}">Відхилити</button>
             {% elif section == "recommendations" %}
-                <button class="action-btn accept" data-url="{% url 'friend_action' person.id 'add' %}">Додати</button>
+                <button class="action-btn accept" data-id = "{{person.id}}" data-redirect="{% url 'friend_profile' %}">Додати</button>
                 <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'dismiss' %}">Видалити</button>
             {% else %}
-                <button class="action-btn accept" >Повідомлення</button>
+                <button class="action-btn accept" data-redirect = "{% url 'chat' %}">Повідомлення</button>
                 <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'delete' %}">Видалити</button>
             {% endif %}
         </div>

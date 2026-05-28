@@ -30,17 +30,17 @@
     </div>
     <div class="buttons-card-div">
             {% if status == "request_received" %}
-                <button class="action-btn accept" data-url="{% url 'friend_action' person.id 'accept' %}">Підтвердити</button>
-                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'delete' %}">Відхилити</button>
+                <button class="action-btn accept" data-url="{% url 'friend_action' person.id 'accept' %}" data-redirect = "{% url 'friends' %}">Підтвердити</button>
+                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'delete' %}" data-redirect = "{% url 'friends' %}">Відхилити</button>
             {% elif status == "request_sent" %}
                 <button class="action-btn accept" >Очікування</button>
-                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'delete' %}">Видалити</button>
+                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'delete' %}" data-redirect = "{% url 'friends' %}">Видалити</button>
             {% elif status == "accepted" %}
-                <button class="action-btn accept" >Повідомлення</button>
-                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'delete' %}">Видалити</button>
+                <button class="action-btn accept" data-redirect = "{% url 'chat' %}">Повідомлення</button>
+                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'delete' %}" data-redirect = "{% url 'friends' %}">Видалити</button>
             {% else %}
                 <button class="action-btn accept" data-url="{% url 'friend_action' person.id 'add' %}">Додати</button>
-                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'dismiss' %}">Видалити</button>
+                <button class="action-btn reject" data-url="{% url 'friend_action' person.id 'dismiss' %}" data-redirect = "{% url 'friends' %}">Видалити</button>
             {% endif %}
         </div>
 </div>
