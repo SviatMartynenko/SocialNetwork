@@ -27,31 +27,9 @@
                 <input type="text" placeholder="Пошук">
             </div>
             <div class="chat-profiles">
-                <div class="chat-person-profile">
-                    <div class= "person-img-wrapper">
-                        <img class = "chat-person-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
-                    </div>
-                    <div class = "chat-person-name">
-                        <p class = "person-name">Jane Cooper</p>
-                    </div>
-                </div>
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
-                {% include 'chat_app/particles/chat_profiles.html' %}
+                {% for friend in friends %}
+                    {% include 'chat_app/particles/chat_profiles.html' with friend=friend %}
+                {% endfor %}
             </div>
         </div>
     </div>
