@@ -29,6 +29,8 @@
             <div class="chat-profiles">
                 {% for friend in friends %}
                     {% include 'chat_app/particles/chat_profiles.html' with friend=friend %}
+                {% empty %}
+                    <span class="contacts-text">У вас поки немає контактів</span>
                 {% endfor %}
             </div>
         </div>
