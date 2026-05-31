@@ -39,11 +39,7 @@
 
 {% block content %}
     <div class="chat-content">
-        <div class="chat-container">
-            <span class="text1-container">Почніть нове спілкування</span>
-            <span class="text2-container">Оберіть контакт зі списку ліворуч <br> або створіть групу, щоб почати спілкування</span>
-        </div>
-    
+        {% include 'chat_app/particles/chat_main.html' %}
         {% include 'chat_app/particles/chats_block.html' %}
     </div>
 

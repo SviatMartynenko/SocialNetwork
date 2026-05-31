@@ -1,5 +1,5 @@
 {% load static %}
-<div class="chat-person-profile">
+<div class="chat-person-profile" data-chat-user="{{ friend.id }}" data-chat-username="{{ friend.email }}">
     <div class= "person-img-wrapper">
         <img class = "chat-person-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
     </div>
