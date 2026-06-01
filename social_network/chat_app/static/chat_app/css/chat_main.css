@@ -1,6 +1,7 @@
 .chat-main{
     width: 39.16vw;
     height: 100%;
+    max-width: 564px;
     background-color: #ffffff;
     border-radius: clamp(0.1rem, 0.9vh, 0.625rem);
     border: 0.1vw rgba(205, 206, 210, 1) solid;
@@ -31,4 +32,54 @@
 #chatWindow{
     display: none;
     flex-direction: column;
+    height: 95%;
+    width: 100%;
+}
+
+.message-form{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 4.1vh;
+    max-width: 564px;
+    padding-left: 1.56vh;
+    padding-right: 1.56vh;
+    gap: 1.6vw;
+}
+
+.message-input{
+    flex: 1;
+    height: 100%;
+    border-radius: clamp(0.1rem, 0.9vh, 0.625rem);
+    border: 0.1vw rgba(205, 206, 210, 1) solid;
+
+}
+
+.message-input::placeholder{
+    font-size: 1.56vh;
+    padding: 1vh 0 1vh 1vw;
+}
+
+.message-send-button{
+    width: 3.9vh;
+    height: 100%;
+    background: none;
+    border: none;
+}
+
+.chat-messages{
+    flex: 1;
+    padding-left: 1.56vh;
+    padding-right: 1.56vh;
+}
+
+.message-img-div{
+    display: flex;
+    flex-direction: row;
+    gap: 1.1vw;
+}
+
+.img-send{
+    width: 100%;
+    height: 100%;
 }

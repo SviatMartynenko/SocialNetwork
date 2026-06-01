@@ -24,6 +24,10 @@ async function openChatWithUser(userId, username) {
     }
 }
 
+function createMessage(){
+
+}
+
 function connectWebsocket(chatId) {
     console.log("Підключаємося до чату")
     chatSocket = new WebSocket(`ws://${window.location.host}/chat/${chatId}/`);

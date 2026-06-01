@@ -1,10 +1,13 @@
 {% load static %}
 <div id="chatWindow" class="chat-window">
-    <!-- <div id="messages" class="messages"></div> -->
+    <div id="messages" class="chat-messages"></div>
     <form id="messageForm" class="message-form">
-        <input id="messageInput" type="text" placeholder="Повідомлення">
-        <button>
-            <img src="{% static 'chat_app/images/send-message.svg' %}" alt="">
-        </button>
+        <input id="messageInput" class="message-input" type="text" placeholder="Повідомлення">
+        <div class="message-img-div">
+            <img class="img-post" src="{% static 'chat_app/images/chat-post.svg' %}" alt="">
+            <button class="message-send-button">
+                <img class="img-send" src="{% static 'chat_app/images/send-message.svg' %}" alt="">
+            </button>
+        </div>
     </form>
 </div>  
