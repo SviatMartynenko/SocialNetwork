@@ -1,11 +1,7 @@
-<section>
-    <h1 id="chatTitle">Почніть нове спілкування</h1>
-    <p id="chatStatus">Оберіть контакт зі списку ліворуч</p>
-    <div id="chatWindow">
-        <div id="messages"></div>
-        <form id="messageForm">
-            <input id="messageInput" type="text" placeholder="Повідомлення">
-            <button>Надіслати</button>
-        </form>
+<section class = "chat-main">
+    <div class="chat-text-div">
+        <p class = "chat-main-text1" id="chatTitle">Почніть нове спілкування</p>
+        <p class = "chat-main-text2" id="chatStatus">Оберіть контакт зі списку ліворуч <br> або створіть групу, щоб почати спілкування</p> 
     </div>
+    {% include 'chat_app/particles/chat_messages.html' %}
 </section>

@@ -1,0 +1,34 @@
+.chat-main{
+    width: 39.16vw;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: clamp(0.1rem, 0.9vh, 0.625rem);
+    border: 0.1vw rgba(205, 206, 210, 1) solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-text-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2.34vh;
+}
+
+.chat-main-text1{
+    font-size: 2.34vh;
+    font-family: var(--FontMedium);
+}
+
+.chat-main-text2{
+    font-size: 1.56vh;
+    font-family: var(--FontRegular);
+}
+
+#chatWindow{
+    display: none;
+    flex-direction: column;
+}

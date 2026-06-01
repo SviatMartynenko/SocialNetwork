@@ -45,6 +45,7 @@ chatButtons.forEach((button) => {
             button.dataset.chatUser,
             button.dataset.chatUsername,
         );
+        chatWindow.style.display = 'flex';
     });
 });
 

@@ -1,7 +1,7 @@
 .chat-profile-container {
     max-width: 351px;
     width: 24.3vw;
-    height: 81.44vh;
+    min-height: 88vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -13,7 +13,6 @@
     padding: 1.56vh 0 0 1.5vh ;
     gap: 2.3vh;
     flex-grow: 1;
-    height: calc(81.44vh - 3.9vh - 1.5vh);
     height: 79.20vh;
     border-radius: 1vh;
     background-color: #ffffff;
@@ -96,6 +95,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    height: 88vh;
     gap: clamp(0.1rem, 0.2vw, 0.2rem);
 }
 

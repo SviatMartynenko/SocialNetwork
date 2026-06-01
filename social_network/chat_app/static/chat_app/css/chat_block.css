@@ -3,7 +3,7 @@
     flex-direction: column;
     max-width: 350px;
     width: 24.3vw;
-    height: 81.44vh;
+    height: 100%;
     gap: clamp(0.1rem, 0.7vh, 0.5rem);
 }
 .group-chats, .messages{
@@ -19,12 +19,12 @@
 }
 
 .group-chats{
-    height: 42.6vh;
-    max-height: 435px;
+    min-height: 42.6vh;
+    flex: 1 1 auto;
 }
 .messages{
-    height: 37.9vh;
-    max-height: 389px;
+    min-height: 37.9vh;
+    flex: 1 1 auto;
 }
 
 .chat-alert-container-header{
