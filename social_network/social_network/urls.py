@@ -23,7 +23,7 @@ from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('', RedirectView.as_view(url='/user/auth', permanent=False)),
+    path('', RedirectView.as_view(url='/user/auth', permanent=False)),
     path('home/', include('home_app.urls')),
     path('post/', include('post_app.urls')),
     path('user/', include('user_app.urls')),

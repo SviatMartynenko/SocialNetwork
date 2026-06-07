@@ -4,7 +4,7 @@
     height: 6vh;
     max-height: 62px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: clamp(0.1rem, 0.8vw, 0.75rem);
     padding-left: clamp(0.1rem, 1.5vh, 1rem);
     padding-right: clamp(0.1rem, 1.5vh, 1rem);
@@ -20,7 +20,7 @@
 
 .message-info{
     flex-grow: 1;
-    height: 4.2vh;
+    height: 4.5vh;
     max-height: 44px;
     justify-content: space-between;
     display: flex;
@@ -47,3 +47,18 @@
 .new-message{
     background-color: rgba(233, 229, 238, 1);
 }
+
+.chat-user-button{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background: none;
+    border: none;
+    gap: 1.17vh;
+}
+
+.person-profile{
+    font-size: 1.56vh;
+    font-family: var(--FontMedium);
+}
+

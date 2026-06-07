@@ -13,6 +13,7 @@ from django.core.paginator import Paginator
 from .services.friend_queries import *
 from .services.friend_actions import *  
 from post_app.models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class AuthTemplateView(TemplateView):
@@ -120,7 +121,9 @@ class ConfirmEmailView(View):
             )
 
 
-class FriendsView(TemplateView):
+class FriendsView(LoginRequiredMixin, TemplateView):
+
+    login_url = reverse_lazy('auth')
     template_name = "user_app/friends.html"
 
     def get_context_data(self, **kwargs):
@@ -175,7 +178,8 @@ class FriendActionView(View):
             del action_result["friend"]
             return JsonResponse(action_result)
 
-class FriendListView(ListView):
+class FriendListView(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('auth')
     template_name = 'user_app/person_page.html'
    
     paginate_by = 5

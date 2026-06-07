@@ -8,13 +8,14 @@ channels==4.3.2
 constantly==23.10.4
 cryptography==48.0.0
 daphne==4.2.1
-Django==6.0.4
+Django==4.2.30
 hyperlink==21.0.0
 idna==3.18
 Incremental==24.11.0
 msgpack==1.1.2
 packaging==26.2
 pillow==12.2.0
+psycopg2-binary==2.9.12
 py-ubjson==0.16.1
 pycparser==3.0
 pyOpenSSL==26.2.0

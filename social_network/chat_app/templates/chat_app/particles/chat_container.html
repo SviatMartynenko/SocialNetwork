@@ -1,13 +1,21 @@
 {% load static %}
 <div class="message-profile">
-    <div class= "profile-img-wrapper">
-        <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
-    </div>
-    <div class = "message-info">
-        <div class= "message-header">
-            <p class= "profile-name">Mona Lisa</p>
-            <p class = "message-time">09:41</p> 
-        </div>
-        <p class = "message-text">Привіт! Як справи ?</p>
-    </div>
+    {% for chat in personal_chats %}
+        {% for person in chat.users.all %}
+            {% if person.id != request.user.id %}
+                <div class="message-info">
+                    <button type="button" class="chat-user-button" data-chat-user="{{ person.id }}" data-chat-username="{{ person.email }}">
+                        <div class = "profile-img-wrapper">
+                            <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+                        </div>
+                        <div class="person-profile">
+                            {{  person.username }}
+                        </div>
+                    </button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% empty %}
+        <p>Чатів поки немає</p>
+    {% endfor %} 
 </div>

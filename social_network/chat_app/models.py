@@ -17,3 +17,21 @@ class Chat(models.Model):
         if self.name:
             return self.name
         return f'Chat {self.id}'
+
+# Описуємо модель одного повідомлення в чаті.
+class Message(models.Model):
+    # Зберігаємо текст повідомлення.
+    text = models.TextField()
+    # Зберігаємо чат, у якому написали повідомлення.
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name="messages")
+    # Зберігаємо автора повідомлення.
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sent_messages")
+    # Зберігаємо користувачів, які прочитали повідомлення.
+    readers = models.ManyToManyField(User, blank=True, related_name="read_messages")
+    # Зберігаємо дату й час створення повідомлення.
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # Повертаємо короткий текст повідомлення для адмінки.
+    def __str__(self):
+        # Показуємо перші 30 символів повідомлення.
+        return self.text[:30]
