@@ -2,11 +2,13 @@ let chatSocket = null;
 const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 const chatTitle = document.querySelector("#chatTitle");
 const chatStatus = document.querySelector("#chatStatus");
-const chatButtons = document.querySelectorAll(".chat-person-profile");
+const profileButtons = document.querySelectorAll(".chat-person-profile");
+const chatButtons = document.querySelectorAll(".chat-user-button");
 const chatWindow = document.getElementById("chatWindow");
 const messages = document.getElementById("messages");
 const messageForm= document.getElementById("messageForm");
 const messageInput= document.getElementById("messageInput");
+const messageProfiles = document.querySelector(".message-profile");
 
 function padDateNumber(number) {
   return String(number).padStart(2, "0");
@@ -117,8 +119,13 @@ function connectWebsocket(chatId) {
         let data = JSON.parse(event.data);
         console.log(data);
         if (data.action == "chat_message") {
+            const userUsername= chatWindow.dataset.userUsername;
+
             const messageElement = document.createElement("div");
             messageElement.classList.add("message");
+            if(data.sender === userUsername){
+                messageElement.classList.add("sender");
+            }
 
             const messageBody = document.createElement("div");
             messageBody.classList.add("message-body");
@@ -140,7 +147,7 @@ function connectWebsocket(chatId) {
             
             messageSender.textContent = `${data.sender}`;   
             messageMetaTime.textContent = `${formatMessageTime(data.created_at)}`;
-            messageContent.textContent = `${data.message_text}`
+            messageContent.textContent = `${data.message_text}`;
 
             messageBody.appendChild(messageSender);
             messageBody.appendChild(messageContent);
@@ -149,12 +156,27 @@ function connectWebsocket(chatId) {
             messageMeta.appendChild(messageMetaStatus);
             messageElement.appendChild(messageMeta);
             messages.appendChild(messageElement);
+            
+            const userMessagesBlock = messageProfiles.querySelector(`[data-chat-id = "${chatId}"]`);
+            if(userMessagesBlock){
+                userMessagesBlock.querySelector(".last-message-text").textContent = `${data.message_text}`;
+                userMessagesBlock.querySelector(".created-at").textContent = `${formatMessageTime(data.created_at)}`;
+            }
+            
         }
         window.updateDateSeparators()
     };
 }
 
 chatButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+        await openChatWithUser(
+            button.dataset.chatUser,
+            button.dataset.chatUsername,
+        );
+    });
+});
+profileButtons.forEach((button) => {
     button.addEventListener("click", async () => {
         await openChatWithUser(
             button.dataset.chatUser,

@@ -2,18 +2,26 @@
 <div class="message-profile">
     {% for chat in personal_chats %}
         {% for person in chat.users.all %}
-            {% if person.id != request.user.id %}
-                <div class="message-info">
-                    <button type="button" class="chat-user-button" data-chat-user="{{ person.id }}" data-chat-username="{{ person.email }}">
-                        <div class = "profile-img-wrapper">
-                            <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
-                        </div>
-                        <div class="person-profile">
-                            {{  person.username }}
-                        </div>
-                    </button>
-                </div>
-            {% endif %}
+            {% for message in last_user_messages %}
+                {% if person.id != request.user.id and person in friends and message.chat_id == chat.id %}
+                    <div class="message-info">
+                        <button type="button" class="chat-user-button" data-chat-user="{{ person.id }}" data-chat-username="{{ person.username }}" data-chat-id="{{ chat.id }}">
+                            <div class = "profile-img-wrapper">
+                                <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+                            </div>
+                            <div class="person-profile">
+                                <div class = "last-message-header">
+                                    {{ person.username }}
+                                    <span class="created-at">{{ message.created_at }}</span>
+                                </div>
+                                <p class="last-message-text">
+                                    {{ message.text }}
+                                </p>
+                            </div>
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
     {% empty %}
         <p>Чатів поки немає</p>

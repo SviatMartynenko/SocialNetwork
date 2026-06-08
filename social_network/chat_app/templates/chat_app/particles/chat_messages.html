@@ -1,5 +1,5 @@
 {% load static %}
-<div id="chatWindow" class="chat-window">
+<div id="chatWindow" class="chat-window" data-user-username = "{{ user.username }}">
     <div id="messages" class="chat-messages"></div>
     <form id="messageForm" class="message-form">
         <input id="messageInput" class="message-input" type="text" placeholder="Повідомлення">

@@ -1,0 +1,143 @@
+.group-modal {
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.group-modal[hidden] {
+    display: none;
+}
+
+.group-modal__box {
+    width: 34vw;
+    height: 75.9vh;
+    max-width: 490px;
+    background: #ffffff;
+    border-radius: 1vh;
+    box-sizing: border-box;
+    position: relative;
+    padding: 2.34vh 3vw;
+    display: flex;
+    flex-direction: column;
+    /* gap: 2.34vh; */
+}
+
+.group-modal__close {
+    position: absolute;     
+    top: 2.34vh;            
+    right: 3vw;
+    width: 16px;
+    height: 16px;
+}
+
+.group-modal input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 2.34vh;
+}
+
+.group-friends {
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+}
+
+.group-friend {
+    height: 6.05vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #dddddd;
+}
+
+.group-user-checkbox {
+    order: 2; 
+    border-color: #543C52;
+}
+
+.group-friend:last-child {
+    border-bottom: none;
+}
+
+.friend-username {
+    order: 1; 
+    font-family: var(--FontRegular);
+    font-size: 16px;
+}
+
+.group-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.11vw; 
+}
+
+.new-group{
+    display: flex;
+    justify-content: center;
+    margin-top: 2.34vh;
+    font-size: 3.32vh;
+    font-family: var(--FontRegular);  
+}
+
+.search-users{
+    height: 4.1vh;
+    box-sizing: border-box;
+    display: block; 
+    margin-top: 2.34vh;
+}
+
+.group-search-wrapper {
+    position: relative;
+    width: 100%; 
+}
+
+.group-search-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    margin-left: 1.56vh;
+}
+
+.group-search-wrapper input {
+    width: 100%;            
+    padding-left: 4.5vh;
+    border: rgba(205, 206, 210, 1) solid 0.1vw;
+    border-radius: 1vh; 
+    font-family: var(--FontRegular);       
+}
+
+.user-count{
+    font-family: var(--FontMedium);  
+    font-size: 1.5vh;
+    color: #81818D;
+}
+
+.group-cencel-btn{
+    border-radius: 1234px;
+    background-color: #ffffff;
+    color: rgba(84, 60, 82, 1);
+    border: rgba(84, 60, 82, 1) solid 0.1vw;
+    font-family: var(--FontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vh;
+    padding: 1vh 1.1vw;
+}
+
+.group-next-btn{
+    border-radius: 1234px;
+    background-color: rgba(84, 60, 82, 1);
+    color: rgba(255, 255, 255, 1);
+    border: none;
+    font-family: var(--FontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vh;
+    padding: 1vh 1.1vw;
+} 

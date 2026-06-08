@@ -8,9 +8,12 @@ let observer = null;
 
 function renderMessage(data) {
 
+  const userUsername= chatWindow.dataset.userUsername;
   const messageElement = document.createElement("div");
   messageElement.classList.add("message");
-
+  if(data.sender === userUsername){
+    messageElement.classList.add("sender");
+  }
   messageElement.dataset.messageDate = window.formatMessageDate(data.created_at);
   // Записуємо автора і текст.
 

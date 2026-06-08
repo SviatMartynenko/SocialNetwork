@@ -158,3 +158,8 @@
     background-color: rgba(233, 229, 238, 1);
     padding: 0.3vh 0.4vw;
 }
+
+.message.sender{
+    background-color: rgba(205, 206, 210, 1);
+    margin-left: auto;
+}

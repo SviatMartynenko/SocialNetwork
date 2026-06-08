@@ -30,21 +30,18 @@ const selectedUsersList = document.querySelector("#selected-users-list");
 const groupUserCheckboxes = document.querySelectorAll(".group-user-checkbox");
 // Знаходимо список груп у правому блоці сторінки.
 const groupList = document.querySelector("#group-list");
+const modalOverlay = document.querySelector(".modal-overlay");
 
 function openGroupModal() {
-  groupModal.hidden = false;
-  groupStepUsers.hidden = false;
-  groupStepName.hidden = true;
+    modalOverlay.style.display = "flex";
+    groupModal.hidden = false;
+    groupStepUsers.hidden = false;
+    groupStepName.hidden = true;
 }
 
 function closeGroupModal() {
-  groupModal.hidden = true;
-  groupNameInput.value = "";
-  selectedUsersList.innerHTML = "";
-  groupUserCheckboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-  });
-  updateSelectedCount();
+    modalOverlay.style.display = "none";
+    groupModal.hidden = true;
 }
 
 function updateSelectedCount() {
@@ -125,3 +122,4 @@ createGroupButton.addEventListener("click", createGroup);
 groupUserCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", updateSelectedCount);
 });
+

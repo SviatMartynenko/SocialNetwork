@@ -1,17 +1,19 @@
 {% load static %}
 <div class="message-profile">
-    {% for chat in group_chats %}
-        <div class = "profile-img-wrapper">
-            <!-- <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt=""> -->
-        </div>
-        <div class="message-info">
-            <button type="button" class="chat-group-button" data-chat-id="{{ chat.id }}" data-chat-title="{{ chat.name }}">
-                {{ chat.name }}
-            </button>
-        </div>
-    {% empty %}
-        <p id="group-empty">Порожньо</p>
-    {% endfor %}
+    <div id="group-list">
+        {% for chat in group_chats %}
+            <div class = "profile-img-wrapper">
+                <!-- <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt=""> -->
+            </div>
+            <div class="message-info">
+                <button type="button" class="chat-group-button" data-chat-id="{{ chat.id }}" data-chat-title="{{ chat.name }}">
+                    {{ chat.name }}
+                </button>
+            </div>
+        {% empty %}
+            <p id="group-empty">Порожньо</p>
+        {% endfor %}
+    </div>
 </div>
 
 

@@ -1,0 +1,38 @@
+{% load static %}
+<div id="group-modal" class="group-modal" hidden>
+    <div class="group-modal__box">
+        <div id="group-step-users">
+            <img src="{% static 'images/cross.svg' %}" id="close-group-modal" class="group-modal__close" alt="">
+            <h2 class="new-group">Нова група</h2>
+            <div class="group-search-wrapper">
+                <img class="group-search-icon" src="{% static 'chat_app/images/loupe.svg' %}" alt="">
+                <input class="search-users" type="text" placeholder="Пошук">
+            </div>
+            <p class="user-count">Вибрано: <span id="selected-count">0</span></p>
+            <div class="group-friends">
+                {% for friend in friends %}
+                    <label class="group-friend">
+                        <input class="group-user-checkbox" type="checkbox" value="{{ friend.id }}" data-user-name="{{ friend.email }}">
+                        <span class="friend-username">{{ friend.username }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+            <div class="group-modal__actions">
+                <button class="group-cencel-btn" id="cancel-group-modal" type="button">Скасувати</button>
+                <button class="group-next-btn" id="next-group-step" type="button">Далі</button>
+            </div>
+        </div>
+        <div id="group-step-name" hidden> 
+            <img src="{% static 'images/cross.svg' %}" id="close-group-name-modal" class="group-modal__close" alt="">
+            <h2>Нова група</h2>
+            <label for="group-name">Назва</label>
+            <input id="group-name" type="text" placeholder="Введіть назву">
+            <h3>Учасники</h3>
+            <div id="selected-users-list"></div>
+            <div class="group-modal__actions">
+                <button id="back-group-step" type="button">Назад</button>
+                <button id="create-group" type="button">Створити групу</button>
+            </div>
+        </div>
+    </div>
+</div>
