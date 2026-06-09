@@ -1,0 +1,6 @@
+{% for friend in friends %}
+    <label class="group-friend">
+        <input class="group-user-checkbox" type="checkbox" value="{{ friend.id }}" data-user-name="{{ friend.username }}">
+        <span class="friend-username">{{ friend.username }}</span>
+    </label>
+{% endfor %}

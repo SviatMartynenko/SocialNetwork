@@ -55,9 +55,23 @@ function renderSelectedUsers() {
   selectedUsersList.innerHTML = "";
   groupUserCheckboxes.forEach((checkbox) => {
     if (checkbox.checked) {
+      const userRow = document.createElement("div");
+      userRow.classList.add("participant-row");
+
+      const img1 = document.createElement("img");
+      img1.src = "/static/home_app/images/person_4.svg";
+
       const user = document.createElement("p");
       user.textContent = checkbox.dataset.userName;
-      selectedUsersList.appendChild(user);
+
+      const img2 = document.createElement("img");
+      img2.src = "/static/chat_app/images/delete-group-member.svg";
+      
+      userRow.appendChild(img1);
+      userRow.appendChild(user);
+      userRow.appendChild(img2);
+
+      selectedUsersList.appendChild(userRow);
     }
   });
 }
@@ -115,6 +129,7 @@ async function createGroup() {
 openGroupModalButton.addEventListener("click", openGroupModal);
 closeGroupModalButton.addEventListener("click", closeGroupModal);
 closeGroupNameModalButton.addEventListener("click", closeGroupModal);
+cancelGroupModalButton.addEventListener("click", closeGroupModal);
 nextGroupStepButton.addEventListener("click", showNameStep);
 backGroupStepButton.addEventListener("click", showUsersStep);
 createGroupButton.addEventListener("click", createGroup);

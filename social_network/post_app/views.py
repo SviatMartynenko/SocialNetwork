@@ -90,3 +90,4 @@ class AddTagView(FormView):
             },
             status = 400
         )
+

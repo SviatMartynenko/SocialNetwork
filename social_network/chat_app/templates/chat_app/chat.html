@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'chat_app/css/chat_profiles.css' %}">
     <link rel="stylesheet" href="{% static 'chat_app/css/chat_main.css' %}">
     <link rel="stylesheet" href="{% static 'chat_app/css/group_modal.css' %}">
+    <link rel="stylesheet" href="{% static 'chat_app/css/group_modal2.css' %}">
 {% endblock %}
 
 {% block modals %}
@@ -30,15 +31,12 @@
             </div>
             <div class="search-wrapper"> 
                 <img class="search-icon" src="{% static 'chat_app/images/loupe.svg' %}" alt="">
-                <input type="text" placeholder="Пошук">
+                <input id = "FilterUserChat" type="text" placeholder="Пошук">
             </div>
             <div class="chat-profiles">
-                {% for friend in friends %}
-                    {% include 'chat_app/particles/chat_profiles.html' with friend=friend %}
-                {% empty %}
-                    <span class="contacts-text">У вас поки немає контактів</span>
-                {% endfor %}
+                {% include 'chat_app/particles/chat_profiles.html' with friend=friend %}
             </div>
+            
         </div>
     </div>
 {% endblock %}

@@ -9,6 +9,42 @@ const messages = document.getElementById("messages");
 const messageForm= document.getElementById("messageForm");
 const messageInput= document.getElementById("messageInput");
 const messageProfiles = document.querySelector(".message-profile");
+const filterUserChat = document.getElementById("FilterUserChat");
+const sideBlockList = document.querySelector(".chat-profiles");
+const searchUsers = document.querySelector(".search-users");
+const groupFriends = document.querySelector(".group-friends");
+
+filterUserChat.addEventListener('input', async (event) => {
+    const queryValue = event.target.value;
+    const response = await fetch(`/chat/filter_chats/?value=${queryValue}`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'method': "GET"
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            sideBlockList.innerHTML = data.html_1;
+        }
+});
+
+searchUsers.addEventListener('input', async (event) => {
+    const queryValue = event.target.value;
+    const response = await fetch(`/chat/filter_chats/?value=${queryValue}`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'method': "GET"
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            groupFriends.innerHTML = data.html_2;
+        }
+});
 
 function padDateNumber(number) {
   return String(number).padStart(2, "0");
@@ -176,6 +212,7 @@ chatButtons.forEach((button) => {
         );
     });
 });
+
 profileButtons.forEach((button) => {
     button.addEventListener("click", async () => {
         await openChatWithUser(

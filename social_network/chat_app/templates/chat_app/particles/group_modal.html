@@ -12,7 +12,7 @@
             <div class="group-friends">
                 {% for friend in friends %}
                     <label class="group-friend">
-                        <input class="group-user-checkbox" type="checkbox" value="{{ friend.id }}" data-user-name="{{ friend.email }}">
+                        <input class="group-user-checkbox" type="checkbox" value="{{ friend.id }}" data-user-name="{{ friend.username }}">
                         <span class="friend-username">{{ friend.username }}</span>
                     </label>
                 {% endfor %}
@@ -24,14 +24,17 @@
         </div>
         <div id="group-step-name" hidden> 
             <img src="{% static 'images/cross.svg' %}" id="close-group-name-modal" class="group-modal__close" alt="">
-            <h2>Нова група</h2>
-            <label for="group-name">Назва</label>
-            <input id="group-name" type="text" placeholder="Введіть назву">
-            <h3>Учасники</h3>
-            <div id="selected-users-list"></div>
+            <h2 class="new-group">Нова група</h2>
+            <div class="group-name-div">
+                <p for="group-name" class="group-name">Назва</p>
+                <input id="group-name" class="group-name-input" type="text" placeholder="Введіть назву">
+            </div>
+            <p class="participants">Учасники</p>
+            <div class="list-participants" id="selected-users-list">
+            </div>
             <div class="group-modal__actions">
-                <button id="back-group-step" type="button">Назад</button>
-                <button id="create-group" type="button">Створити групу</button>
+                <button class="back-group-step" id="back-group-step" type="button">Назад</button>
+                <button class="create-group" id="create-group" type="button">Створити групу</button>
             </div>
         </div>
     </div>

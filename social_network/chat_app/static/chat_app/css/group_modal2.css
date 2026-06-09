@@ -1,0 +1,89 @@
+.group-name-div{
+    margin-top: 2.34vh; 
+    height: 6.44vh;
+    flex-direction: column;
+}
+
+.group-step-name{
+    height: 100%;
+}
+
+.group-name-input{
+    height: 4.1vh;
+    border: rgba(205, 206, 210, 1) solid 0.1vw;
+    border-radius: 1vh; 
+    font-family: var(--FontRegular);
+    padding: 1vh 0 1vh 1.56vh;
+}
+
+.group-name{
+    font-size: 1.56vh;
+    font-family: var(--FontRegular);
+    margin-bottom: 0.7vh;
+}
+
+.participants{
+    margin-top: 2.34vh;
+    font-family: var(--FontRegular);
+    font-size: 1.56vh;
+}
+
+.participant-row {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+}
+
+.list-participants{
+    height: 40.6vh;
+    margin-top: 1.56vh;
+    font-size: 1.56vh;
+    font-family: var(--FontMedium);
+    display: flex;
+    flex-direction: column;
+}
+
+.list-participants p{
+    height: 4.5vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.list-participants img {
+    display: flex;
+    height: 4.5vh;
+}
+
+.list-participants img[src*="delete-group-member"], .list-participants img[src*="person_4"]{
+    display: flex;
+    flex-direction: row;
+}
+
+.back-group-step{
+    border-radius: 1234px;
+    background-color: #ffffff;
+    color: rgba(84, 60, 82, 1);
+    border: rgba(84, 60, 82, 1) solid 0.1vw;
+    font-family: var(--FontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vh;
+    padding: 1vh 1.1vw;
+}
+
+.create-group{
+    border-radius: 1234px;
+    background-color: rgba(84, 60, 82, 1);
+    color: rgba(255, 255, 255, 1);
+    border: none;
+    font-family: var(--FontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vh;
+    padding: 1vh 1.1vw;
+}
+
+/* 347 237 */

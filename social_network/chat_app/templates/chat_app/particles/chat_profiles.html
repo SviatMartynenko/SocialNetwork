@@ -1,9 +1,11 @@
 {% load static %}
-<div class="chat-person-profile" data-chat-user="{{ friend.id }}" data-chat-username="{{ friend.username }}">
-    <div class= "person-img-wrapper">
-        <img class = "chat-person-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+{% for friend in friends %}
+    <div class="chat-person-profile" data-chat-user="{{ friend.id }}" data-chat-username="{{ friend.username }}">
+        <div class= "person-img-wrapper">
+            <img class = "chat-person-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+        </div>
+        <div class = "chat-person-name">
+            <p class = "person-name">{{ friend.username }}</p>
+        </div>
     </div>
-    <div class = "chat-person-name">
-        <p class = "person-name">{{ friend.username }}</p>
-    </div>
-</div>
+{% endfor %}
