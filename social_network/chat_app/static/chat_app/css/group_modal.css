@@ -1,7 +1,10 @@
 .group-modal {
+    position: fixed;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .group-modal[hidden] {
@@ -12,7 +15,7 @@
     width: 34vw;
     height: 75.87vh;
     max-width: 490px;
-    /* max-height: 777px; */
+    max-height: 777px;
     background: #ffffff;
     border-radius: 1vh;
     box-sizing: border-box;
@@ -20,12 +23,15 @@
     padding: 2.34vh 3vw 0 3vw;
     display: flex;
     flex-direction: column;
-    /* gap: 2.34vh; */
+    overflow: hidden;
 }
 
 
 .group-step-users{
-    height: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .group-modal__close {
@@ -54,6 +60,11 @@
     justify-content: space-between;
     border-top: 1px solid #dddddd;
     border-bottom: 1px solid #dddddd;
+    gap: 0.83vw;
+}
+
+.group-username-img{
+    height: 4.5vh;
 }
 
 .group-user-checkbox {
@@ -69,13 +80,14 @@
     order: 1; 
     font-family: var(--FontMedium);
     font-size: 1.56vh;
+    margin-right: auto;
 }
 
 .group-modal__actions {
     display: flex;
     justify-content: flex-end;
     gap: 1.11vw;
-    margin-top: 2.34vh; 
+    margin-top: 2vh; 
 }
 
 .new-group{

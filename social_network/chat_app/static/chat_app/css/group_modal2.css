@@ -31,7 +31,7 @@
 .participant-row {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-between; */
+    align-items: center; 
 }
 
 .list-participants{
@@ -41,6 +41,7 @@
     font-family: var(--FontMedium);
     display: flex;
     flex-direction: column;
+    gap: 1vh;
 }
 
 .list-participants p{
@@ -48,6 +49,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    
 }
 
 .list-participants img {
@@ -58,6 +60,16 @@
 .list-participants img[src*="delete-group-member"], .list-participants img[src*="person_4"]{
     display: flex;
     flex-direction: row;
+}
+
+.list-participants img[src*="person_4"]{
+    margin-right: 0.83vw;
+}
+
+.list-participants img[src*="delete-group-member"]{        
+    height: 2vh;
+    margin-left: auto; 
+    align-items: center;   
 }
 
 .back-group-step{
@@ -85,5 +97,3 @@
     font-size: 1.5vh;
     padding: 1vh 1.1vw;
 }
-
-/* 347 237 */
