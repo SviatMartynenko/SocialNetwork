@@ -6,7 +6,7 @@
                 <!-- <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt=""> -->
             </div>
             <div class="message-info">
-                    <button type="button" class="chat-group-button" data-chat-title="{{ chat.name }}" data-chat-id="{{ chat.id }}">
+                    <button type="button" class="chat-group-button" data-chat-title="{{ chat.name }}" data-chat-id="{{ chat.id }}" data-members-amount="{{ chat.users.count }}">
                         <div class = "profile-img-wrapper">
                             <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
                         </div>

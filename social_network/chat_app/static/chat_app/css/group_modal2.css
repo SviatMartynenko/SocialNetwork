@@ -35,7 +35,8 @@
 }
 
 .list-participants{
-    height: 40.6vh;
+    flex: 1;
+    min-height: 0;
     margin-top: 1.56vh;
     font-size: 1.56vh;
     font-family: var(--FontMedium);
@@ -96,4 +97,36 @@
     align-items: center;
     font-size: 1.5vh;
     padding: 1vh 1.1vw;
+}
+
+.group-photo-div{
+    margin-top: 2.34vh;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 2.34vh;
+}
+
+.group-photo-actions{
+    display: flex;
+    flex-direction: row;
+    gap: 1.66vw;
+}
+
+.group-img{
+    height: 4.5vh;
+}
+
+.add-group-img, .select-group-img{
+    height: 1.6vh;
+}
+
+.add-group-photo, .select-group-photo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.56vh;
+    font-family: var(--FontMedium);
+    color: #543C52;
+    gap: 0.55vw;
 }

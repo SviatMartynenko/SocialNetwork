@@ -32,6 +32,13 @@ const groupUserCheckboxes = document.querySelectorAll(".group-user-checkbox");
 const groupList = document.querySelector("#group-list");
 const modalOverlay = document.querySelector(".modal-overlay");
 
+const groupSettingsModal = document.querySelector("#group-settings-modal");
+
+
+function openSettingsModal() {
+  
+}
+
 function openGroupModal() {
     modalOverlay.style.display = "flex";
     groupModal.hidden = false;

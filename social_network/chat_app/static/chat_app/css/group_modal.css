@@ -48,7 +48,8 @@
 }
 
 .group-friends {
-    height: 42.18vh;
+    flex: 1;
+    min-height: 0;
     margin-top: 2.34vh;
     overflow-y: auto;
 }

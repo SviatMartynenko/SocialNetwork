@@ -13,6 +13,22 @@ const filterUserChat = document.getElementById("FilterUserChat");
 const sideBlockList = document.querySelector(".chat-profiles");
 const searchUsers = document.querySelector(".search-users");
 const groupFriends = document.querySelector(".group-friends");
+const chatHeader = document.querySelector(".chat-header-div");
+const chatTextDiv = document.querySelector(".chat-text-div");
+const months = [
+    { value: 1, name: "Січня" },
+    { value: 2, name: "Лютого" },
+    { value: 3, name: "Березня" },
+    { value: 4, name: "Квітня" },
+    { value: 5, name: "Травня" },
+    { value: 6, name: "Червня" },
+    { value: 7, name: "Липня" },
+    { value: 8, name: "Серпня" },
+    { value: 9, name: "Вересня" },
+    { value: 10, name: "Жовтня" },
+    { value: 11, name: "Листопада" },
+    { value: 12, name: "Грудня" }
+];
 
 filterUserChat.addEventListener('input', async (event) => {
     const queryValue = event.target.value;
@@ -66,7 +82,8 @@ window.formatMessageTime = formatMessageTime;
 
 function formatMessageDate(createdAt) {
   const date = getMessageDate(createdAt);
-  return `${padDateNumber(date.getDate())}:${padDateNumber(date.getMonth()+ 1)}:${padDateNumber(date.getFullYear())}`;
+  const month = months.find(item => item.value === (date.getMonth()+ 1))?.name
+  return `${padDateNumber(date.getDate())} ${month} ${padDateNumber(date.getFullYear())}`;
 }
 
 window.formatMessageDate = formatMessageDate;
@@ -101,8 +118,39 @@ function updateDateSeparators() {
 
 window.updateDateSeparators = updateDateSeparators;
 
-async function openChatById(chatId, title) {
-    chatTitle.textContent = `Чат з ${title}`;
+async function openChatById(chatId, title, members = 0) {
+
+    chatTextDiv.classList.add("hide");
+    chatHeader.classList.add("show")
+
+    let group_members = ""
+    if (members > 0){
+        group_members = `${members} учасників`;
+    }
+
+    chatHeader.innerHTML = `
+    <div class = "chat-header-left">
+        <div class = "chat-header-back-btn">
+            <img class = "img-cover chat-header-back-btn-img">
+        </div>
+        <div class= "chat-header-meta">
+            <div class = "chat-header-meta-img-container">
+                <img class = "chat-header-meta-img img-cover">
+            </div>
+            <div class = "chat-header-text">
+                <p class = "chat-name"></p>
+                <p class = "chat-status">${group_members}</p>
+            </div>
+        </div>
+    </div>
+    <div class = "chat-header-action-btn">
+        <img class = "img-cover chat-header-action-btn-img">
+    </div>
+    `;
+    chatHeader.querySelector(".chat-header-back-btn-img").src = chatHeader.dataset.back;
+    chatHeader.querySelector(".chat-header-action-btn-img").src = chatHeader.dataset.action;
+    chatHeader.querySelector(".chat-header-meta-img").src = chatHeader.dataset.defaultAvatar;
+    chatHeader.querySelector(".chat-name").textContent = title;
     chatWindow.classList.add("is-open");
     chatStatus.hidden = true;
     messages.innerHTML = "";
@@ -132,7 +180,7 @@ function bindGroupChatButtons() {
 
         button.dataset.groupButtons = "true";
         button.addEventListener("click", () => {
-            openChatById(button.dataset.chatId, button.dataset.chatTitle); 
+            openChatById(button.dataset.chatId, button.dataset.chatTitle, button.dataset.membersAmount); 
         });
     });
 }
@@ -230,3 +278,4 @@ messageForm.addEventListener("submit", (event) => {
         messageInput.value = "";
     }
 });
+

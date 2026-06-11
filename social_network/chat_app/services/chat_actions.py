@@ -30,7 +30,7 @@ def get_or_create_chat(request, user_id):
     if chat is None:
         chat = Chat.objects.create(is_group=False)
         chat.users.add(current_user, other_user)
-
+    
     return {'success': True, 'chat_id': chat.id}
 
 

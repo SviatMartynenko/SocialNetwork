@@ -30,6 +30,19 @@
                 <p for="group-name" class="group-name">Назва</p>
                 <input id="group-name" class="group-name-input" type="text" placeholder="Введіть назву">
             </div>
+            <div class="group-photo-div">
+                <img class="group-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+                <div class="group-photo-actions">
+                    <div class="add-group-photo">
+                        <img class="add-group-img" src="{% static 'chat_app/images/add-group-photo.svg' %}" alt="">
+                        <span>Додайте фото</span>
+                    </div>
+                    <div class="select-group-photo">
+                        <img class="select-group-img" src="{% static 'chat_app/images/choose-group-photo.svg' %}" alt="">
+                        <span>Оберіть фото</span>
+                    </div>
+                </div>
+            </div>
             <p class="participants">Учасники</p>
             <div class="list-participants" id="selected-users-list">
             </div>
