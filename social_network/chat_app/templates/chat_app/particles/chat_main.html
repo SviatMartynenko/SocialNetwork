@@ -1,12 +1,12 @@
 {% load static %}
-
 <section class = "chat-main">
     <div class="chat-header-div" data-default-avatar= "{% static 'home_app/images/person_4.svg' %}" data-back= "{% static 'chat_app/images/goback-arrow.svg' %}" data-action= "{% static 'chat_app/images/three-menu.svg' %}">
     </div>
+    {% include 'chat_app/particles/group_settings.html' %}
     <div class="chat-text-div">
         <p class = "chat-main-text1" id="chatTitle">Почніть нове спілкування</p>
         <p class = "chat-main-text2" id="chatStatus">Оберіть контакт зі списку ліворуч <br> або створіть групу, щоб почати спілкування</p> 
     </div>
     {% include 'chat_app/particles/chat_messages.html' %}
-    {% include 'chat_app/particles/group_settings.html' %}
+    <!-- {% include 'chat_app/particles/group_settings.html' %} -->
 </section>

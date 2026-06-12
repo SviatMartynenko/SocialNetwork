@@ -1,19 +1,20 @@
 {% load static %}
-<div id="group-settings-modal" class="group-settings" hidden>
+<div id="group-settings-modal" class="group-settings">
     <div class="group-settings__box">
         <div id="group-settinds-admin">
-            <img src="{% static 'chat_app/images/three-menu.svg' %}" id="close-settings-modal" alt="">
+            <img class="three-menu-back" src="{% static 'chat_app/images/three-menu.svg' %}" id="close-settings-modal" alt="">
 
-            <div>
-                <img src="" alt="">
+            <div class="group-img-div">
+                <img class="group-img" src="{% static 'chat_app/images/choose-group-photo-black.svg' %}" alt="">
                 <span>Медіа</span>
             </div>
-            <div>
-                <img src="" alt="">
+            <div class="group-edit-div">
+                <img class="group-pen-img" src="{% static 'chat_app/images/pen.svg' %}" alt="">
                 <span>Редагувати групу</span>
             </div>
-            <div>
-                <img src="" alt="">
+            <hr>
+            <div class="group-delete-div">
+                <img class="group-img" src="{% static 'chat_app/images/delete-group-member.svg' %}" alt="">
                 <span>Видалити чат</span>
             </div>
         </div>

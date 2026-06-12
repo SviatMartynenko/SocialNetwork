@@ -1,0 +1,72 @@
+.group-settings{
+    /* position: fixed; */
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.group-settings__box{
+    width: 23.8vw;
+    height: 17.18vh;
+    background-color: #E9E5EE;
+    max-width: 343px;
+    max-height: 176px;
+    border-radius: 1vh;
+    box-sizing: border-box;
+    position: relative;
+    padding: 1.56vh 1.11vw;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.group-settinds-admin{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.three-menu-back{
+    height: 1.66vh;
+    display: flex;
+    position: absolute;
+    right: 1.11vw;
+}
+
+.group-img-div{
+    display: flex;
+    margin-top: 3.22vh;
+    gap: 0.7vw;
+    flex-direction: row;
+    align-items: center;
+    font-family: var(--FontMedium);
+    font-size: 1.56vh;
+}
+
+.group-edit-div, .group-delete-div{
+    display: flex;
+    margin-top: 1.56vh;
+    gap: 0.7vw;
+    flex-direction: row;
+    align-items: center;
+    font-family: var(--FontMedium);
+    font-size: 1.56vh;
+}
+
+hr{
+    margin-top: 1.56vh;
+    border: none;              
+    height: 1px;                
+    background-color: #CDCED2;
+}
+
+.group-img{
+    height: 1.66vh;
+}
+.group-pen-img{
+    height: 1.5vh;
+}
+
+
