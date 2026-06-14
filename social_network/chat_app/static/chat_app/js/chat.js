@@ -121,11 +121,12 @@ window.updateDateSeparators = updateDateSeparators;
 async function openChatById(chatId, title, members = 0) {
 
     chatTextDiv.classList.add("hide");
-    chatHeader.classList.add("show")
+    chatHeader.classList.add("show");
+    chatHeader.dataset.chatId = chatId;
 
-    let group_members = ""
+    let groupStatus = ""
     if (members > 0){
-        group_members = `${members} учасників`;
+        groupStatus = `${members} учасників`;
     }
 
     chatHeader.innerHTML = `
@@ -139,7 +140,7 @@ async function openChatById(chatId, title, members = 0) {
             </div>
             <div class = "chat-header-text">
                 <p class = "chat-name"></p>
-                <p class = "chat-status">${group_members}</p>
+                <p class = "chat-status">${groupStatus}</p>
             </div>
         </div>
     </div>
@@ -181,6 +182,7 @@ function bindGroupChatButtons() {
         button.dataset.groupButtons = "true";
         button.addEventListener("click", () => {
             openChatById(button.dataset.chatId, button.dataset.chatTitle, button.dataset.membersAmount); 
+
         });
     });
 }

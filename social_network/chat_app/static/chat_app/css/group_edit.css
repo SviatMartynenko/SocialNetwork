@@ -1,0 +1,143 @@
+.group-edit-modal {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 34vw;
+    height: 65.3vh;
+    max-width: 490px;
+    max-height: 669px;
+    padding: 2.34vh 3vw 0 3vw;
+    background: #ffffff;
+    border-radius: 1vh;
+}
+
+.group-edit-modal__close {
+    display: flex;
+    right: 3vw;
+    width: 16px;
+    height: 16px;
+}
+
+.group-edit-name-input{
+    height: 4.1vh;
+    border: rgba(205, 206, 210, 1) solid 0.1vw;
+    border-radius: 1vh; 
+    font-family: var(--FontRegular);
+    padding: 1vh 0 1vh 1.56vh;
+}
+
+.group-edit-name{
+    font-size: 1.56vh;
+    font-family: var(--FontRegular);
+    margin-bottom: 0.7vh;
+}
+
+.edit-participants{
+    margin-top: 2.34vh;
+    font-family: var(--FontRegular);
+    font-size: 1.56vh;
+}
+
+.participant-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+}
+
+.list-edit-participants{
+    flex: 1;
+    min-height: 0;
+    margin-top: 1.56vh;
+    font-size: 1.56vh;
+    font-family: var(--FontMedium);
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.list-edit-participants p{
+    height: 4.5vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+}
+
+.list-edit-participants img {
+    display: flex;
+    height: 4.5vh;
+}
+
+.list-edit-participants img[src*="delete-group-member"], .list-participants img[src*="person_4"]{
+    display: flex;
+    flex-direction: row;
+}
+
+.list-edit-participants img[src*="person_4"]{
+    margin-right: 0.83vw;
+}
+
+.list-edit-participants img[src*="delete-group-member"]{        
+    height: 2vh;
+    margin-left: auto; 
+    align-items: center;   
+}
+
+.back-group-edit-step{
+    border-radius: 1234px;
+    background-color: #ffffff;
+    color: rgba(84, 60, 82, 1);
+    border: rgba(84, 60, 82, 1) solid 0.1vw;
+    font-family: var(--FontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vh;
+    padding: 1vh 1.1vw;
+}
+
+.create-group-edit{
+    border-radius: 1234px;
+    background-color: rgba(84, 60, 82, 1);
+    color: rgba(255, 255, 255, 1);
+    border: none;
+    font-family: var(--FontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vh;
+    padding: 1vh 1.1vw;
+}
+
+.group-edit-photo-div{
+    margin-top: 2.34vh;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 2.34vh;
+}
+
+.group-photo-actions{
+    display: flex;
+    flex-direction: row;
+    gap: 1.66vw;
+}
+
+.group-img{
+    height: 4.5vh;
+}
+
+.add-group-img, .select-group-img{
+    height: 1.6vh;
+}
+
+.add-group-photo, .select-group-photo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.56vh;
+    font-family: var(--FontMedium);
+    color: #543C52;
+    gap: 0.55vw;
+}

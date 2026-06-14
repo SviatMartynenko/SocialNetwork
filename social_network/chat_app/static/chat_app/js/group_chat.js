@@ -33,11 +33,37 @@ const groupList = document.querySelector("#group-list");
 const modalOverlay = document.querySelector(".modal-overlay");
 
 const groupSettingsModal = document.querySelector("#group-settings-modal");
+const closeSettingsModalButton = document.querySelector("#close-settings-modal");
+const openSettingsModalButton = document.querySelector(".chat-header-div")
+
+const groupEditModal = document.querySelector("#group-edit-modal");
+const openEditModalButton = document.querySelector("#open-group-edit-modal");
+const closeEditModalButton = document.querySelector("#close-group-edit-modal");
+
+
+function openEditModal() {
+    closeSettingsModal();
+    
+    modalOverlay.style.display = "flex";
+    groupEditModal.hidden = false;
+}
+
+function closeEditModal() {
+    modalOverlay.style.display = "none";
+    groupEditModal.hidden = true;
+}
 
 
 function openSettingsModal() {
-  
+    modalOverlay.style.display = "flex";
+    groupSettingsModal.hidden = false;
 }
+
+function closeSettingsModal() {
+    modalOverlay.style.display = "none";
+    groupSettingsModal.hidden = true;
+}
+
 
 function openGroupModal() {
     modalOverlay.style.display = "flex";
@@ -132,7 +158,10 @@ async function createGroup() {
     closeGroupModal();
   }
 }
-
+openEditModalButton.addEventListener("click", openEditModal);
+closeEditModalButton.addEventListener("click", closeEditModal);
+openSettingsModalButton.addEventListener("click", openSettingsModal);
+closeSettingsModalButton.addEventListener("click", closeSettingsModal);
 openGroupModalButton.addEventListener("click", openGroupModal);
 closeGroupModalButton.addEventListener("click", closeGroupModal);
 closeGroupNameModalButton.addEventListener("click", closeGroupModal);
@@ -140,6 +169,7 @@ cancelGroupModalButton.addEventListener("click", closeGroupModal);
 nextGroupStepButton.addEventListener("click", showNameStep);
 backGroupStepButton.addEventListener("click", showUsersStep);
 createGroupButton.addEventListener("click", createGroup);
+
 
 groupUserCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", updateSelectedCount);

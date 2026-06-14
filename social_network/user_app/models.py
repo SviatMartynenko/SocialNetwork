@@ -15,6 +15,9 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email' 
     REQUIRED_FIELDS = []
 
+    def __str__(self):
+        return f"{self.id}"
+
 
 class Friendship(models.Model):
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sent_friendships")

@@ -1,10 +1,14 @@
 .group-settings{
-    /* position: fixed; */
+    position: fixed;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+}
+
+.group-settings[hidden] {
+    display: none;
 }
 
 .group-settings__box{
@@ -23,6 +27,8 @@
 }
 
 .group-settinds-admin{
+    flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     

@@ -35,3 +35,8 @@ class Message(models.Model):
     def __str__(self):
         # Показуємо перші 30 символів повідомлення.
         return self.text[:30]
+    
+
+class MessageImage(models.Model):
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name="images")
+    image = models.ImageField(upload_to='images/chat_images/')

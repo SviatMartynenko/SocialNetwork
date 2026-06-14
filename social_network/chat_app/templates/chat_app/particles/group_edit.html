@@ -1,0 +1,29 @@
+{% load static %}
+<div id="group-edit-modal" class="group-edit-modal" hidden> 
+    <img src="{% static 'images/cross.svg' %}" id="close-group-edit-modal" class="group-edit-modal__close" alt="">
+    <h2 class="edit-group">Редагування групи</h2>
+    <div class="group-edit-div">
+        <p for="group-name" class="group-edit-name">Назва</p>
+        <input id="group-name" class="group-edit-name-input" type="text" placeholder="Введіть назву">
+    </div>
+    <div class="group-edit-photo-div">
+        <img class="group-edit-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+        <div class="group-edit-photo-actions">
+            <div class="add-group-edit-photo">
+                <img class="add-group-edit-img" src="{% static 'chat_app/images/add-group-photo.svg' %}" alt="">
+                <span>Додайте фото</span>
+            </div>
+            <div class="select-group-edit-photo">
+                <img class="select-group-edit-img" src="{% static 'chat_app/images/choose-group-photo.svg' %}" alt="">
+                <span>Оберіть фото</span>
+            </div>
+        </div>
+    </div>
+    <p class="edit-participants">Учасники</p>
+    <div class="list-edit-participants" id="selected-users-list">
+    </div>
+    <div class="group-edit-modal__actions">
+        <button class="back-group-edit-step" id="back-group-step" type="button">Назад</button>
+        <button class="create-group-edit" id="create-group" type="button">Зберегти зміни</button>
+    </div>
+</div>
