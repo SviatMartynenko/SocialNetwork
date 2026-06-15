@@ -37,15 +37,20 @@ function renderMessage(data) {
   
   messageSender.textContent = `${data.sender}`;   
   messageMetaTime.textContent = `${formatMessageTime(data.created_at)}`;
+
   messageContent.textContent = `${data.text}`
 
+  
   messageBody.appendChild(messageSender);
+  
   messageBody.appendChild(messageContent);
+  if (window.hasMessageImages(data)) {
+    messageBody.appendChild(window.renderMessageImages(data.images));
+  }
+  messageBody.appendChild(messageMeta);
   messageElement.appendChild(messageBody);
   messageMeta.appendChild(messageMetaTime);
   messageMeta.appendChild(messageMetaStatus);
-  messageElement.appendChild(messageMeta);
-  messages.appendChild(messageElement);
   // Повертаємо готовий блок.
   return messageElement;
 }

@@ -72,6 +72,7 @@ class MessageHistoryView(LoginRequiredMixin, View):
 
         # Новіші повідомлення йдуть першими, щоб page=1 була останньою історією.
         query = Message.objects.filter(chat_id=chat_id).select_related("sender").order_by("-created_at", "-id")
+        
         page_obj = Paginator(query, 10).get_page(request.GET.get("page", 1))
         # Розвертаємо сторінку назад, щоб у чаті повідомлення йшли зверху вниз за часом.
         messages = list(page_obj.object_list)[::-1]
@@ -83,7 +84,8 @@ class MessageHistoryView(LoginRequiredMixin, View):
                         "id": message.id, 
                         "text": message.text, 
                         "sender": message.sender.username,
-                        "created_at": timezone.localtime(message.created_at).isoformat()
+                        "created_at": timezone.localtime(message.created_at).isoformat(),
+                        "images": [image_obj.image.url for image_obj in message.images.all()]
                     } 
                     for message in messages
                 ],
@@ -148,11 +150,12 @@ class MessageImagesUploadView(LoginRequiredMixin, View):
             {
                 "type": "chat_message",
                 'text': message.text,
-                'sender': message.sender.email,
+                'sender': message.sender.username,
                 "created_at": timezone.localtime(message.created_at).isoformat(),
                 "images": image_urls
             }
         )
 
         return JsonResponse({'success': True})
-       
+
+  

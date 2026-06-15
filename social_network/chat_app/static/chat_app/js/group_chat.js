@@ -20,12 +20,17 @@ const nextGroupStepButton = document.querySelector("#next-group-step");
 const backGroupStepButton = document.querySelector("#back-group-step");
 // Знаходимо кнопку фінального створення групи.
 const createGroupButton = document.querySelector("#create-group");
+
+const backGroupEditStepButton = document.querySelector("#back-group-edit-step");
+const createGroupEditButton = document.querySelector("#create-edit-group");
+
 // Знаходимо поле назви групового чату.
 const groupNameInput = document.querySelector("#group-name");
 // Знаходимо лічильник вибраних друзів.
 const selectedCount = document.querySelector("#selected-count");
 // Знаходимо блок, куди показуємо вибраних учасників на другому кроці.
 const selectedUsersList = document.querySelector("#selected-users-list");
+const editSelectedUsersList = document.querySelector("#selected-users-list");
 // Знаходимо всі чекбокси друзів у модальному вікні.
 const groupUserCheckboxes = document.querySelectorAll(".group-user-checkbox");
 // Знаходимо список груп у правому блоці сторінки.
@@ -34,16 +39,69 @@ const modalOverlay = document.querySelector(".modal-overlay");
 
 const groupSettingsModal = document.querySelector("#group-settings-modal");
 const closeSettingsModalButton = document.querySelector("#close-settings-modal");
-const openSettingsModalButton = document.querySelector(".chat-header-div")
+const openSettingsModalButton = document.querySelector(".chat-header-action-btn");
 
 const groupEditModal = document.querySelector("#group-edit-modal");
 const openEditModalButton = document.querySelector("#open-group-edit-modal");
 const closeEditModalButton = document.querySelector("#close-group-edit-modal");
 
+const groupAddModal = document.querySelector("#group-add-modal");
+const openGroupAddModalButton = document.querySelector("#group-add-participants-modal");
+const cancelGroupAddModalButton = document.querySelector("#cancel-group-add-modal");
+const closeGroupAddModalButton = document.querySelector("#close-group-add-modal");
 
-function openEditModal() {
+
+function renderEditUsers(users){
+
+    const list = document.querySelector("#selected-users-list");
+
+    list.innerHTML = "";
+
+    users.forEach(user => {
+
+        const userRow = document.createElement("div");
+        userRow.classList.add("participant-row");
+
+
+        const img = document.createElement("img");
+        img.src = "/static/home_app/images/person_4.svg";
+
+
+        const name = document.createElement("p");
+        name.textContent = user.username;
+
+
+        const deleteImg = document.createElement("img");
+        deleteImg.src = "/static/chat_app/images/delete-group-member.svg";
+
+
+        userRow.appendChild(img);
+        userRow.appendChild(name);
+        userRow.appendChild(img2);
+
+
+        list.appendChild(userRow);
+    });
+}
+
+function openGroupAddModal() {
+    modalOverlay.style.display = "flex";
+    groupAddModal.hidden = false;
+    groupEditModal.hidden = true;
+}
+
+function closeGroupAddModal() {
+    modalOverlay.style.display = "none";
+    groupAddModal.hidden = true;
+}
+
+
+function openEditModal(group) {
     closeSettingsModal();
+    closeGroupAddModal();
     
+    renderEditUsers(group.users);
+
     modalOverlay.style.display = "flex";
     groupEditModal.hidden = false;
 }
@@ -57,6 +115,7 @@ function closeEditModal() {
 function openSettingsModal() {
     modalOverlay.style.display = "flex";
     groupSettingsModal.hidden = false;
+    groupEditModal.hidden = true;
 }
 
 function closeSettingsModal() {
@@ -157,10 +216,14 @@ async function createGroup() {
     addGroupButton(data.chat_id, data.name);
     closeGroupModal();
   }
-}
+};
+
+closeGroupAddModalButton.addEventListener("click", closeGroupAddModal);
+cancelGroupAddModalButton.addEventListener("click", openEditModal);
+openGroupAddModalButton.addEventListener("click", openGroupAddModal);
+backGroupEditStepButton.addEventListener("click", openSettingsModal);
 openEditModalButton.addEventListener("click", openEditModal);
 closeEditModalButton.addEventListener("click", closeEditModal);
-openSettingsModalButton.addEventListener("click", openSettingsModal);
 closeSettingsModalButton.addEventListener("click", closeSettingsModal);
 openGroupModalButton.addEventListener("click", openGroupModal);
 closeGroupModalButton.addEventListener("click", closeGroupModal);

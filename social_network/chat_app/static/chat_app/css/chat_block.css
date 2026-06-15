@@ -56,3 +56,17 @@
     gap: clamp(0.1rem, 0.5vw, 0.5rem);
     align-items: center;
 } 
+
+#group-list{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vh;
+    overflow-y: scroll;
+    height: 100%;
+    padding-left: clamp(0.1rem, 1.5vh, 1rem);
+    padding-right: clamp(0.1rem, 1.5vh, 1rem);
+}
+
+#group-list::-webkit-scrollbar{
+    display: none;
+}

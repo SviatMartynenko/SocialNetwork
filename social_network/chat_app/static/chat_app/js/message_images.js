@@ -45,9 +45,13 @@ function renderMessageImages(images) {
   imagesList.classList.add("message-images");
 
   images.forEach((imageUrl) => {
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("message-img-container");
     const image = document.createElement("img");
+    image.classList.add("img-cover");
     image.src = imageUrl;
-    imagesList.appendChild(image);
+    imageContainer.appendChild(image);
+    imagesList.appendChild(imageContainer);
   });
 
   return imagesList;

@@ -122,11 +122,11 @@
     gap: 1vh;
 }
 
-/* .participant-row {
+.participant-row {
     display: flex;
     flex-direction: row;
     align-items: center; 
-} */
+}
 
 .list-edit-participants p{
     height: 4.5vh;

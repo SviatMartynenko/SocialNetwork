@@ -1,4 +1,5 @@
 let chatSocket = null;
+const urlParams = new URLSearchParams(window.location.search);
 const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 const chatTitle = document.querySelector("#chatTitle");
 const chatStatus = document.querySelector("#chatStatus");
@@ -205,50 +206,7 @@ function connectWebsocket(chatId) {
         let data = JSON.parse(event.data);
         console.log(data);
         if (data.action == "chat_message") {
-            const userUsername= chatWindow.dataset.userUsername;
-
-            const messageElement = document.createElement("div");
-            messageElement.classList.add("message");
-            if(data.sender === userUsername){
-                messageElement.classList.add("sender");
-            }
-
-            const messageBody = document.createElement("div");
-            messageBody.classList.add("message-body");
-            
-            const messageSender = document.createElement("p");
-            messageSender.classList.add("message-sender");
-            
-            const messageContent = document.createElement("div");
-            messageContent.classList.add("message-content");
-
-            const messageMeta = document.createElement("div");
-            messageMeta.classList.add("message-meta");
-
-            const messageMetaTime = document.createElement("p");
-            messageMetaTime.classList.add("message-meta-time");
-
-            const messageMetaStatus = document.createElement("div");
-            messageMetaStatus.classList.add("message-meta-status");
-            
-            messageSender.textContent = `${data.sender}`;   
-            messageMetaTime.textContent = `${formatMessageTime(data.created_at)}`;
-            messageContent.textContent = `${data.message_text}`;
-
-            messageBody.appendChild(messageSender);
-            messageBody.appendChild(messageContent);
-            messageElement.appendChild(messageBody);
-            messageMeta.appendChild(messageMetaTime);
-            messageMeta.appendChild(messageMetaStatus);
-            messageElement.appendChild(messageMeta);
-            messages.appendChild(messageElement);
-            
-            const userMessagesBlock = messageProfiles.querySelector(`[data-chat-id = "${chatId}"]`);
-            if(userMessagesBlock){
-                userMessagesBlock.querySelector(".last-message-text").textContent = `${data.message_text}`;
-                userMessagesBlock.querySelector(".created-at").textContent = `${formatMessageTime(data.created_at)}`;
-            }
-            
+            messages.appendChild(window.renderMessage(data));
         }
         window.updateDateSeparators()
     };
@@ -272,12 +230,33 @@ profileButtons.forEach((button) => {
     });
 });
 
-messageForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const messageText = messageInput.value.trim();
-    if (messageText && chatSocket && chatSocket.readyState === WebSocket.OPEN) {
-        chatSocket.send(JSON.stringify({ messageText: messageText }));
-        messageInput.value = "";
+messageForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const messageText = messageInput.value.trim();
+  if (!messageText && !window.hasSelectedImages()) return;
+
+  if (window.hasSelectedImages()) {
+    const data = await window.sendMessageWithImages(messageText);
+    if (!data.success) return;
+    messageInput.value = "";
+    window.clearSelectedImages();
+    return;
+  }
+
+  chatSocket.send(JSON.stringify({ messageText: messageText }));
+  messageInput.value = "";
+});
+
+chatHeader.addEventListener("click", (event) => {
+    if (event.target.closest(".chat-header-action-btn")) {
+        openSettingsModal();
     }
 });
 
+
+if (urlParams.has('userId') && urlParams.has('username')) {
+    const userId = urlParams.get('userId').trim();
+    const username = urlParams.get('username').trim();
+    
+    wiopenChatWithUser(usertId, username);
+}

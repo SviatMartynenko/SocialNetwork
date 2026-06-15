@@ -40,9 +40,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 self.group_name,
                 {
                     'type': 'chat_message',
-                    'message_text': message_text,
+                    'text': message_text,
                     'sender': sender.username,
-                    'created_at': message["created_at"]
+                    'created_at': message["created_at"],
+                    "images": message['images']
                 }
             )
   
@@ -51,9 +52,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         await self.send(text_data=json.dumps({
             'action': 'chat_message',
-            'message_text': event['message_text'],
+            'text': event['text'],
             'sender': event['sender'],
-            'created_at': event["created_at"]
+            'created_at': event["created_at"],
+            'images': event.get("images", [])
             }))
         
     
@@ -61,8 +63,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
     def save_message(self, text):
         user = self.scope['user']
         message = Message.objects.create(chat_id=self.chat_id, sender=user, text=text)
+        image_urls = [img_obj.image.url for img_obj in message.images.all()]
         created_at = timezone.localtime(message.created_at)
-        return {"id": message.id, "text": message.text, "sender": user.username, "created_at": created_at.isoformat()}
+        return {"id": message.id, "text": message.text, "sender": user.username, "created_at": created_at.isoformat(), 'images': image_urls}
 
 class OnlineStatusConsumer(AsyncWebsocketConsumer):
     online_users = set()

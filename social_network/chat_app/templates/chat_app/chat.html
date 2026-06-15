@@ -13,12 +13,14 @@
     <link rel="stylesheet" href="{% static 'chat_app/css/group_modal2.css' %}">
     <link rel="stylesheet" href="{% static 'chat_app/css/group_settings_admin.css' %}">
     <link rel="stylesheet" href="{% static 'chat_app/css/group_edit.css' %}">
+    <link rel="stylesheet" href="{% static 'chat_app/css/group_add_participants.css' %}">
 {% endblock %}
 
 {% block modals %}
     {% include 'chat_app/particles/group_modal.html' %}
     {% include 'chat_app/particles/group_settings.html' %}
     {% include 'chat_app/particles/group_edit.html' %}
+    {% include 'chat_app/particles/group_add_participants.html' %}
 {% endblock %}
 
 {% block side_block %}
@@ -57,4 +59,5 @@
     <script src="{% static 'chat_app/js/chat_history.js' %}"></script>
     <script src="{% static 'chat_app/js/group_chat.js' %}"></script>
     <script src="{% static 'chat_app/js/online_status.js' %}"></script>
+    <script src="{% static 'chat_app/js/message_images.js' %}"></script>
 {% endblock %}

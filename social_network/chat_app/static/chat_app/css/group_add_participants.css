@@ -1,0 +1,140 @@
+.group-add-modal {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 34vw;
+    height: 75.87vh;
+    max-width: 490px;
+    max-height: 777px;
+    padding: 2.34vh 3vw 0 3vw;
+    background: #ffffff;
+    border-radius: 1vh;
+}
+
+.group-add-modal__close{
+    position: absolute;                 
+    right: 3vw;
+    width: 16px;
+    height: 16px;
+}
+
+.add-participants{
+    display: flex;
+    justify-content: center;
+    margin-top: 4.34vh;
+    font-size: 3.32vh;
+    font-family: var(--FontRegular);
+}
+
+.group-add-search-wrapper{
+    position: relative;
+    width: 100%; 
+}
+
+.group-add-search-icon{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    margin-left: 1.56vh;
+}
+
+.search-add-users{
+    height: 4.1vh;
+    box-sizing: border-box;
+    display: block; 
+    margin-top: 2.34vh;
+}
+
+.group-add-modal input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 2.34vh;
+}
+
+.group-add-search-wrapper input{
+    width: 100%;            
+    padding-left: 4.5vh;
+    border: rgba(205, 206, 210, 1) solid 0.1vw;
+    border-radius: 1vh; 
+    font-family: var(--FontRegular);
+}
+
+.add-user-count{
+    font-family: var(--FontMedium);  
+    font-size: 1.5vh;
+    color: #81818D;
+}
+
+.group-add-friends{
+    flex: 1;
+    min-height: 0;
+    margin-top: 2.34vh;
+    overflow-y: auto;
+}
+
+.group-add-friend{
+    height: 6.05vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    gap: 0.83vw;
+}
+
+.group-add-user-checkbox{
+    order: 2; 
+    border-color: #543C52;
+}
+
+.group-add-friend:first-child {
+    border-bottom: none;
+}
+
+.friend-add-username{
+    order: 1; 
+    font-family: var(--FontMedium);
+    font-size: 1.56vh;
+    margin-right: auto;
+}
+
+.group-add-username-img{
+    height: 4.5vh;
+}
+
+.group-add-modal__actions{
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.11vw;
+    margin-top: 2vh; 
+}
+
+.group-add-cencel-btn{
+    border-radius: 1234px;
+    background-color: #ffffff;
+    color: rgba(84, 60, 82, 1);
+    border: rgba(84, 60, 82, 1) solid 0.1vw;
+    font-family: var(--FontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vh;
+    padding: 1vh 1.1vw;
+}
+
+.group-add-next-btn{
+    border-radius: 1234px;
+    background-color: rgba(84, 60, 82, 1);
+    color: rgba(255, 255, 255, 1);
+    border: none;
+    font-family: var(--FontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vh;
+    padding: 1vh 1.1vw;
+}
