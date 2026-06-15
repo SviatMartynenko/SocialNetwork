@@ -1,10 +1,11 @@
 .group-edit-modal {
+    position: relative;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     width: 34vw;
-    height: 65.3vh;
+    height: 65.3vh;              
     max-width: 490px;
     max-height: 669px;
     padding: 2.34vh 3vw 0 3vw;
@@ -12,11 +13,31 @@
     border-radius: 1vh;
 }
 
-.group-edit-modal__close {
-    display: flex;
+.group-edit-modal__close{
+    position: absolute;                 
     right: 3vw;
     width: 16px;
     height: 16px;
+}
+
+.edit-group{
+    display: flex;
+    justify-content: center;
+    margin-top: 4.34vh;
+    font-size: 3.32vh;
+    font-family: var(--FontRegular); 
+}
+
+.group-name-edit-div{
+    margin-top: 2.34vh; 
+    height: 6.44vh;
+    flex-direction: column;
+}
+
+.group-edit-modal input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 2.34vh;
 }
 
 .group-edit-name-input{
@@ -33,16 +54,61 @@
     margin-bottom: 0.7vh;
 }
 
-.edit-participants{
+.group-edit-photo-div{
     margin-top: 2.34vh;
-    font-family: var(--FontRegular);
-    font-size: 1.56vh;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 2.34vh;
 }
 
-.participant-row {
+.group-edit-img{
+    height: 4.5vh;
+}
+
+.group-edit-photo-actions{
     display: flex;
     flex-direction: row;
-    align-items: center; 
+    gap: 1.66vw;
+}
+
+.add-group-edit-photo, .select-group-edit-photo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.56vh;
+    font-family: var(--FontMedium);
+    color: #543C52;
+    gap: 0.55vw;
+}
+
+.add-group-edit-img, .select-group-edit-img{
+    height: 1.6vh;
+}
+
+.group-participants-main-div{
+    padding: 1.56vh 1.1vw;
+}
+
+.group-edit-participants{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2.34vh;
+    font-size: 1.56vh;
+    font-family: var(--FontRegular);
+}
+
+.group-add-participants{
+    display: flex;
+    flex-direction: row;
+    gap: 0.55vw;
+    color: #543C52;
+    font-family: var(--FontMedium);
+}
+
+.add-part-img{
+    height: 1.6vh;
 }
 
 .list-edit-participants{
@@ -55,6 +121,12 @@
     flex-direction: column;
     gap: 1vh;
 }
+
+/* .participant-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+} */
 
 .list-edit-participants p{
     height: 4.5vh;
@@ -84,6 +156,13 @@
     align-items: center;   
 }
 
+.group-edit-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.11vw;
+    margin-top: 2vh; 
+}
+
 .back-group-edit-step{
     border-radius: 1234px;
     background-color: #ffffff;
@@ -108,36 +187,4 @@
     align-items: center;
     font-size: 1.5vh;
     padding: 1vh 1.1vw;
-}
-
-.group-edit-photo-div{
-    margin-top: 2.34vh;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    gap: 2.34vh;
-}
-
-.group-photo-actions{
-    display: flex;
-    flex-direction: row;
-    gap: 1.66vw;
-}
-
-.group-img{
-    height: 4.5vh;
-}
-
-.add-group-img, .select-group-img{
-    height: 1.6vh;
-}
-
-.add-group-photo, .select-group-photo{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 1.56vh;
-    font-family: var(--FontMedium);
-    color: #543C52;
-    gap: 0.55vw;
 }

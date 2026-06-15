@@ -68,11 +68,14 @@ hr{
     background-color: #CDCED2;
 }
 
-.group-img{
+.group-media-img{
     height: 1.66vh;
 }
 .group-pen-img{
     height: 1.5vh;
 }
 
+.group-delete-img{
+    height: 1.8vh;
+}
 
