@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'post_app/css/create_post.css' %}">
     <link rel="stylesheet" href="{% static 'post_app/css/show_post.css' %}">
     <link rel="stylesheet" href="{% static 'post_app/css/add_tag.css' %}">
+    <link rel="stylesheet" href="{% static 'chat_app/css/chat_container.css' %}">
     <!-- <link rel="stylesheet" href="{% static 'post_app/css/add_tag.css' %}"> -->
 {% endblock %}
 
@@ -72,46 +73,9 @@
                 </div>
                 <p>Повідомлення</p>
             </div>
-            <a class = "title-ref" href="">Дивитись всі</a>
+            <a class = "title-ref" href="{% url 'chat' %}">Дивитись всі</a>
         </div>
-        <div class = "messages-container">
-            <div class="message-profile new-message">
-                <div class= "profile-img-wrapper">
-                    <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
-                </div>
-                <div class = "message-info">
-                    <div class= "message-header">
-                        <p class= "profile-name">Mona Lisa</p>
-                        <p class = "message-time">09:41</p> 
-                    </div>
-                    <p class = "message-text">Привіт! Як справи ?</p>
-                </div>
-            </div>
-            <div class="message-profile new-message">
-                <div class= "profile-img-wrapper">
-                    <img class = "img-cover" src="{% static 'home_app/images/person_5.svg' %}" alt="">
-                </div>
-                <div class = "message-info">
-                    <div class= "message-header">
-                        <p class= "profile-name">Ann Ti</p>
-                        <p class = "message-time">25.04.2025</p> 
-                    </div>
-                    <p class = "message-text">Привіт!</p>
-                </div>
-            </div>
-            <div class="message-profile">
-                <div class= "profile-img-wrapper">
-                    <img class = "img-cover" src="{% static 'home_app/images/person_6.svg' %}" alt="">
-                </div>
-                <div class = "message-info">
-                    <div class= "message-header">
-                        <p class= "profile-name">Ness Ty</p>
-                        <p class = "message-time">25.04.2025</p> 
-                    </div>
-                    <p class = "message-text">Привіт!</p>
-                </div>
-            </div>
-        </div>
+        {% include 'chat_app/particles/chat_container.html' %}
     </div>
     
 {% endblock %}

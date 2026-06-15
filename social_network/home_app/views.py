@@ -6,17 +6,22 @@ from django.http import JsonResponse, HttpResponse
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.utils import timezone
+from django.db.models import Max
 
 from post_app.models import Post
 from post_app.forms import PostForm, AddTagForm
+from chat_app.models import Chat, Message
 from .forms import FirstLoginForm
+from user_app.services.friend_queries import get_friends
 
 
-class HomePageView(ListView):
+class HomePageView(LoginRequiredMixin, ListView):
     model = Post
     template_name = "home_app/home.html"
     context_object_name = 'posts'
     paginate_by = 5
+    login_url = 'auth'
 
     def dispatch(self, request, *args, **kwargs):
         user = request.user
@@ -35,6 +40,30 @@ class HomePageView(ListView):
         context['form_add_tag'] = AddTagForm()
         context["first_login_form"] = FirstLoginForm()
         context['posts'] = Post.objects.all().order_by('-id')
+        context['friends'] = get_friends(self.request.user)
+        context['personal_chats'] = Chat.objects.filter(
+            users = self.request.user,
+            is_group = False
+        ).order_by('id').annotate(
+            last_message_at=Max('messages__created_at')
+        ).order_by('-last_message_at')[:3]
+
+        last_messages_data = []
+
+        for chat in context['personal_chats']:
+            last_massage = chat.messages.order_by('-created_at').first()
+            
+            if last_massage:
+                last_messages_data.append({
+                    'chat_id': chat.id,
+                    'message_id': last_massage.id,
+                    'text': last_massage.text[:20],
+                    'created_at': timezone.localtime(last_massage.created_at).strftime("%H:%M")
+                })
+
+        context['last_user_messages'] = last_messages_data
+
+
         return context
     
     def get_queryset(self):

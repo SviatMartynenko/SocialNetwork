@@ -13,14 +13,15 @@
     background-color: rgba(255, 255, 255, 1);
 }
 .side-block-header{
-    width: 22vw;
-    max-width: 318px;
+    padding-left: clamp(0.1rem, 1.5vh, 1rem);
+    padding-right: clamp(0.1rem, 1.5vh, 1rem);
+    width: 100%;
     height: 2.2vh;
     max-height: 23px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;       
 }
 .title-container{
     display: flex;
@@ -48,6 +49,7 @@
     font-family: var(--FontMedium);
     color: rgba(84, 60, 82, 1);
     text-decoration: none;
+    margin-left: auto;
 }
 .recommended-requests{
     width: 22vw;
