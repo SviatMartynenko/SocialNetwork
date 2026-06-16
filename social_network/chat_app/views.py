@@ -23,7 +23,7 @@ class ChatView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['friends'] = get_friends(self.request.user)
+        context['friends'] = get_friends(self.request.user).order_by('username')
         context['personal_chats'] = Chat.objects.filter(
             users = self.request.user,
             is_group = False

@@ -11,11 +11,23 @@
             <p class="user-count">Вибрано: <span id="selected-count">0</span></p>
             <div class="group-friends">
                 {% for friend in friends %}
+
+                    {% ifchanged friend.username.0|upper %}
+                        <div class="friends-letter">
+                            {{ friend.username.0|upper }}
+                        </div>
+                    {% endifchanged %}
+                    
                     <label class="group-friend">
                         <input class="group-user-checkbox" type="checkbox" value="{{ friend.id }}" data-user-name="{{ friend.username }}">
-                        <span class="friend-username">{{ friend.username }}</span>
+                    
+                        <span class="friend-username">
+                            {{ friend.username }}
+                        </span>
+                    
                         <img class="group-username-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
                     </label>
+                
                 {% endfor %}
             </div>
             <div class="group-modal__actions">

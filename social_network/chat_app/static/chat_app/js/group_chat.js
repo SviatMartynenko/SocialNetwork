@@ -50,40 +50,6 @@ const openGroupAddModalButton = document.querySelector("#group-add-participants-
 const cancelGroupAddModalButton = document.querySelector("#cancel-group-add-modal");
 const closeGroupAddModalButton = document.querySelector("#close-group-add-modal");
 
-
-function renderEditUsers(users){
-
-    const list = document.querySelector("#selected-users-list");
-
-    list.innerHTML = "";
-
-    users.forEach(user => {
-
-        const userRow = document.createElement("div");
-        userRow.classList.add("participant-row");
-
-
-        const img = document.createElement("img");
-        img.src = "/static/home_app/images/person_4.svg";
-
-
-        const name = document.createElement("p");
-        name.textContent = user.username;
-
-
-        const deleteImg = document.createElement("img");
-        deleteImg.src = "/static/chat_app/images/delete-group-member.svg";
-
-
-        userRow.appendChild(img);
-        userRow.appendChild(name);
-        userRow.appendChild(img2);
-
-
-        list.appendChild(userRow);
-    });
-}
-
 function openGroupAddModal() {
     modalOverlay.style.display = "flex";
     groupAddModal.hidden = false;
@@ -99,8 +65,6 @@ function closeGroupAddModal() {
 function openEditModal(group) {
     closeSettingsModal();
     closeGroupAddModal();
-    
-    renderEditUsers(group.users);
 
     modalOverlay.style.display = "flex";
     groupEditModal.hidden = false;

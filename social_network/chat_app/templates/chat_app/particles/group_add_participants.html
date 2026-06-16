@@ -8,14 +8,26 @@
     </div>
     <p class="add-user-count">Вибрано: <span id="selected-count">0</span></p>
     <div class="group-add-friends">
-        {% for friend in friends %}
-            <label class="group-add-friend">
-                <input class="group-add-user-checkbox" type="checkbox" value="{{ friend.id }}" data-user-name="{{ friend.username }}">
-                <span class="friend-add-username">{{ friend.username }}</span>
-                <img class="group-add-username-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
-            </label>
-        {% endfor %}
-    </div>
+    {% for friend in friends %}
+
+        {% ifchanged friend.username.0|upper %}
+            <div class="friends-letter">
+                {{ friend.username.0|upper }}
+            </div>
+        {% endifchanged %}
+
+        <label class="group-add-friend">
+            <input class="group-add-user-checkbox" type="checkbox" value="{{ friend.id }}" data-user-name="{{ friend.username }}">
+
+            <span class="friend-add-username">
+                {{ friend.username }}
+            </span>
+
+            <img class="group-add-username-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+        </label>
+
+    {% endfor %}
+</div>
     <div class="group-add-modal__actions">
         <button class="group-add-cencel-btn" id="cancel-group-add-modal" type="button">Скасувати</button>
         <button class="group-add-next-btn" id="next-group-step" type="button">Зберегти</button>

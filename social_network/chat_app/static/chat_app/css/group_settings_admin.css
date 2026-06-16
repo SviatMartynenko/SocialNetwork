@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem;
     overflow: hidden;
 }
 
@@ -12,11 +13,9 @@
 }
 
 .group-settings__box{
-    width: 23.8vw;
-    height: 17.18vh;
+    width: clamp(280px, 80vw, 343px);
+    max-height: min(80vh, 320px);
     background-color: #E9E5EE;
-    max-width: 343px;
-    max-height: 176px;
     border-radius: 1vh;
     box-sizing: border-box;
     position: relative;
@@ -31,7 +30,8 @@
     min-height: 0;
     display: flex;
     flex-direction: column;
-    
+    overflow-y: auto;
+    gap: 0.5rem;
 }
 
 .three-menu-back{

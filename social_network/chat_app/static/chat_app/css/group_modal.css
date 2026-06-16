@@ -160,3 +160,9 @@
     padding: 1vh 1.1vw;
 }
 
+.friends-letter {
+    font-size: 1.3vh;
+    margin: 12px 0 6px;
+    color: #000000;
+    font-family: var(--FontMedium);
+}
