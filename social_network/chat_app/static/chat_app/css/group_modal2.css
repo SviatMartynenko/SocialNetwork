@@ -84,6 +84,7 @@
     align-items: center;
     font-size: 1.5vh;
     padding: 1vh 1.1vw;
+    cursor: pointer;
 }
 
 .create-group{
@@ -97,6 +98,7 @@
     align-items: center;
     font-size: 1.5vh;
     padding: 1vh 1.1vw;
+    cursor: pointer;
 }
 
 .group-photo-div{

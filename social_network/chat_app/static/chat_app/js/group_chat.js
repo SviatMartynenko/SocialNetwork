@@ -62,7 +62,7 @@ function closeGroupAddModal() {
 }
 
 
-function openEditModal(group) {
+function openEditModal() {
     closeSettingsModal();
     closeGroupAddModal();
 
@@ -80,11 +80,13 @@ function openSettingsModal() {
     modalOverlay.style.display = "flex";
     groupSettingsModal.hidden = false;
     groupEditModal.hidden = true;
+    modalOverlay.style.backgroundColor = "transparent";
 }
 
 function closeSettingsModal() {
     modalOverlay.style.display = "none";
     groupSettingsModal.hidden = true;
+    modalOverlay.style.backgroundColor = "";
 }
 
 

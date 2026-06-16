@@ -11,6 +11,7 @@
     padding-top: clamp(0.1rem, 0.7vh, 0.5rem);
     padding-bottom: clamp(0.1rem, 0.7vh, 0.5rem);
 }
+
 .profile-name{
     font-weight: 500;
     color: rgba(7, 10, 28, 1);
@@ -26,6 +27,7 @@
     display: flex;
     flex-direction: column;
 }
+
 .message-header{
     height: 1.7vh;
     max-height: 18px;
@@ -50,6 +52,7 @@
 
 .chat-user-button, .chat-group-button {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     background: none;

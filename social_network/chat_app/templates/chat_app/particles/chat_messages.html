@@ -1,5 +1,5 @@
 {% load static %}
-<div id="chatWindow" class="chat-window" data-user-username = "{{ user.username }}">
+<div id="chatWindow" class="chat-window" data-user-username = "{{ user.username }}" data-chat-id = "{{ chat.id }}">
     <div id="messages" class="chat-messages"></div>
     <form id="messageForm" class="message-form">
         <input id="messageImages" type="file" accept="image/*" multiple hidden>

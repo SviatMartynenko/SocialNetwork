@@ -70,3 +70,8 @@
 #group-list::-webkit-scrollbar{
     display: none;
 }
+
+.chat-group-button.active-chat,
+.chat-user-button.active-chat {
+    background-color: #E9E5EE;
+}

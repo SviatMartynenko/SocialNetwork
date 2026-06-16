@@ -2,23 +2,27 @@
     position: fixed;
     inset: 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     padding: 1rem;
     overflow: hidden;
 }
+
 
 .group-settings[hidden] {
     display: none;
 }
 
 .group-settings__box{
+    position: absolute;
+    top: 12vh;
+    right: 31.5vw;
     width: clamp(280px, 80vw, 343px);
     max-height: min(80vh, 320px);
+    max-width: 343px;
     background-color: #E9E5EE;
     border-radius: 1vh;
     box-sizing: border-box;
-    position: relative;
     padding: 1.56vh 1.11vw;
     display: flex;
     flex-direction: column;
@@ -39,6 +43,7 @@
     display: flex;
     position: absolute;
     right: 1.11vw;
+    cursor: pointer;
 }
 
 .group-img-div{
@@ -49,6 +54,7 @@
     align-items: center;
     font-family: var(--FontMedium);
     font-size: 1.56vh;
+    cursor: pointer;
 }
 
 .group-edit-div, .group-delete-div{
@@ -59,6 +65,7 @@
     align-items: center;
     font-family: var(--FontMedium);
     font-size: 1.56vh;
+    cursor: pointer;
 }
 
 hr{

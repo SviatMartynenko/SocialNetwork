@@ -31,12 +31,12 @@ const months = [
     { value: 12, name: "Грудня" }
 ];
 
+
 filterUserChat.addEventListener('input', async (event) => {
     const queryValue = event.target.value;
     const response = await fetch(`/chat/filter_chats/?value=${queryValue}`, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
-                'method': "GET"
             }
         });
 
@@ -47,12 +47,55 @@ filterUserChat.addEventListener('input', async (event) => {
         }
 });
 
+async function getGroupMembers(chatId){
+    const response = await fetch(`/chat/group_members/${chatId}/`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            document.querySelector(".group-members").innerHTML = data.html;
+            const deleteGroupMemberButtons = document.querySelectorAll(".delete-group-member");
+            deleteGroupMemberButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    console.log(1)
+                    deleteGroupMember(button.dataset.chatId, button.dataset.memberId)
+                });
+            });
+        }
+}
+
+async function deleteGroupMember(chatId,userId){
+    const response = await fetch(`/chat/group_members/${chatId}/${userId}/`, {
+            method: "DELETE", 
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                "X-CSRFToken": csrfToken
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            document.querySelector(".group-members").innerHTML = data.html;
+            const deleteGroupMemberButtons = document.querySelectorAll(".delete-group-member");
+            deleteGroupMemberButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    console.log(1)
+                    deleteGroupMember(button.dataset.chatId, button.dataset.memberId)
+                });
+            });
+        }
+}
+
 searchUsers.addEventListener('input', async (event) => {
     const queryValue = event.target.value;
     const response = await fetch(`/chat/filter_chats/?value=${queryValue}`, {
             headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'method': "GET"
+                'X-Requested-With': 'XMLHttpRequest'
             }
         });
 
@@ -121,6 +164,21 @@ window.updateDateSeparators = updateDateSeparators;
 
 async function openChatById(chatId, title, members = 0) {
 
+    document.querySelectorAll('.chat-group-button, .chat-user-button').forEach(btn => {
+        btn.classList.remove('active-chat');
+    });
+
+    const activeGroupBtn = document.querySelector(`.chat-group-button[data-chat-id="${chatId}"]`);
+    const activeUserBtn = document.querySelector(`.chat-user-button[data-chat-id="${chatId}"]`);
+
+    if (activeGroupBtn) {
+        activeGroupBtn.classList.add('active-chat');
+    }
+
+    if (activeUserBtn) {
+        activeUserBtn.classList.add('active-chat');
+    }
+
     chatTextDiv.classList.add("hide");
     chatHeader.classList.add("show");
     chatHeader.dataset.chatId = chatId;
@@ -163,6 +221,16 @@ async function openChatById(chatId, title, members = 0) {
 }
 
 async function openChatWithUser(userId, username) {
+
+    document.querySelectorAll('.chat-group-button, .chat-user-button').forEach(btn => {
+    btn.classList.remove('active-chat');
+    });
+
+    const activeUserBtn = document.querySelector(`.chat-user-button[data-chat-user="${userId}"]`);
+    if (activeUserBtn) {
+        activeUserBtn.classList.add('active-chat');
+    }
+
     const response = await fetch(`/chat/chat_with/${userId}/`, {
         method: "POST",
         headers: { "X-CSRFToken": csrfToken },
@@ -183,7 +251,7 @@ function bindGroupChatButtons() {
         button.dataset.groupButtons = "true";
         button.addEventListener("click", () => {
             openChatById(button.dataset.chatId, button.dataset.chatTitle, button.dataset.membersAmount); 
-
+            getGroupMembers(button.dataset.chatId);
         });
     });
 }
@@ -202,6 +270,7 @@ function connectWebsocket(chatId) {
     chatSocket = new WebSocket(
         `${protocol}://${window.location.host}/chat/${chatId}/`,
     );
+    
     chatSocket.onmessage = function (event) {
         let data = JSON.parse(event.data);
         console.log(data);

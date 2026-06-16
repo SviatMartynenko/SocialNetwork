@@ -12,6 +12,7 @@ from django.utils import timezone
 from django.http import HttpRequest
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
+from django.shortcuts import get_object_or_404
 
 
 
@@ -158,4 +159,36 @@ class MessageImagesUploadView(LoginRequiredMixin, View):
 
         return JsonResponse({'success': True})
 
-  
+class GroupMembers(View):
+    def get_queryset(self):
+        return Chat.objects.all()
+    
+    def get(self, request, chat_id, *args, **kwargs):
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            queryset = self.get_queryset()     
+            
+            chat = chat = get_object_or_404(queryset, id=chat_id)
+            
+            members = chat.users.exclude(id = request.user.id)
+
+            return JsonResponse({
+                'success': True,
+                'html': render_to_string("chat_app/particles/group_members.html", {'members': members, "chat": chat}),
+            })
+
+    def delete(self, request, chat_id, user_id, *args, **kwargs):
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            queryset = self.get_queryset()     
+            
+            # chat = chat = get_object_or_404(queryset, id = chat_id)
+           
+            # user_to_remove = get_object_or_404(chat.users.all(), id = user_id)
+            # chat.users.remove(user_to_remove)
+
+            members = chat.users.exclude(id = request.user.id)
+
+            return JsonResponse({
+                'success': True,
+                'html': render_to_string("chat_app/particles/group_members.html", {'members': members, "chat": chat}),
+            })
+    
