@@ -1,3 +1,4 @@
+import json
 from django.views.generic import TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from user_app.services.friend_queries import get_friends
@@ -102,6 +103,65 @@ class CreateGroupView(LoginRequiredMixin, View):
         response_dict = create_group(request)
         return JsonResponse(response_dict)
 
+class EditGroupView(LoginRequiredMixin, View):
+    login_url = reverse_lazy('auth')
+
+    def put(self, request, chat_id):
+        if request.headers.get('X-Requested-With') != 'XMLHttpRequest':
+            return JsonResponse({'success': False}, status=400)
+
+        chat = get_object_or_404(Chat.objects.filter(id=chat_id), id=chat_id)
+        if not chat.is_group or not chat.users.filter(id=request.user.id).exists():
+            return JsonResponse({'success': False}, status=403)
+
+        try:
+            payload = json.loads(request.body.decode('utf-8') or '{}')
+        except json.JSONDecodeError:
+            return JsonResponse({'success': False}, status=400)
+
+        name = payload.get('name', '').strip()
+        removed_users = payload.get('removed_users', [])
+
+        if name:
+            chat.name = name
+            chat.save()
+
+        if isinstance(removed_users, list) and removed_users:
+            for user_id in removed_users:
+                try:
+                    user_id_int = int(user_id)
+                except (TypeError, ValueError):
+                    continue
+                if user_id_int == request.user.id:
+                    continue
+                if chat.users.count() <= 2:
+                    chat.delete()
+                    return JsonResponse({'success': True, 'chat_deleted': True})
+                if chat.users.filter(id=user_id_int).exists():
+                    chat.users.remove(user_id_int)
+
+        members = chat.users.exclude(id=request.user.id)
+        return JsonResponse({
+            'success': True,
+            'chat_name': chat.name,
+            'members_amount': chat.users.count(),
+            'html': render_to_string('chat_app/particles/group_members.html', {'members': members, 'chat': chat}),
+        })
+
+class DeleteGroupView(LoginRequiredMixin, View):
+    login_url = reverse_lazy('auth')
+
+    def delete(self, request, chat_id):
+        if request.headers.get('X-Requested-With') != 'XMLHttpRequest':
+            return JsonResponse({'success': False}, status=400)
+
+        chat = get_object_or_404(Chat.objects.filter(id=chat_id), id=chat_id)
+        if not chat.is_group or not chat.users.filter(id=request.user.id).exists():
+            return JsonResponse({'success': False}, status=403)
+
+        chat.delete()
+        return JsonResponse({'success': True})
+
 class FilterUserChats(View):
     def get_queryset(self):
         return get_friends(current_user = self.request.user)
@@ -183,6 +243,14 @@ class GroupMembers(View):
             chat = chat = get_object_or_404(queryset, id = chat_id)
            
             user_to_remove = get_object_or_404(chat.users.all(), id = user_id)
+
+            if chat.users.count() <= 2:
+                chat.delete()
+                return JsonResponse({
+                    'success': True,
+                    'chat_deleted': True,
+                })
+
             chat.users.remove(user_to_remove)
 
             members = chat.users.exclude(id = request.user.id)

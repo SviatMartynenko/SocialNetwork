@@ -25,9 +25,11 @@ const backGroupEditStepButton = document.querySelector("#back-group-edit-step");
 const createGroupEditButton = document.querySelector("#create-edit-group");
 
 // Знаходимо поле назви групового чату.
-const groupNameInput = document.querySelector("#group-name");
+const createGroupNameInput = document.querySelector("#group-name");
+const editGroupNameInput = document.querySelector("#group-edit-name");
 // Знаходимо лічильник вибраних друзів.
 const selectedCount = document.querySelector("#selected-count");
+const groupError = document.querySelector("#group-error");
 // Знаходимо блок, куди показуємо вибраних учасників на другому кроці.
 const selectedUsersList = document.querySelector("#selected-users-list");
 const editSelectedUsersList = document.querySelector("#selected-users-list");
@@ -39,11 +41,21 @@ const modalOverlay = document.querySelector(".modal-overlay");
 
 const groupSettingsModal = document.querySelector("#group-settings-modal");
 const closeSettingsModalButton = document.querySelector("#close-settings-modal");
-const openSettingsModalButton = document.querySelector(".chat-header-action-btn");
+const deleteGroupChatButton = document.querySelector(".group-delete-div");
 
 const groupEditModal = document.querySelector("#group-edit-modal");
 const openEditModalButton = document.querySelector("#open-group-edit-modal");
 const closeEditModalButton = document.querySelector("#close-group-edit-modal");
+
+function bindChatHeaderActionButton() {
+  const headerActionBtn = chatHeader.querySelector(".chat-header-action-btn");
+  if (!headerActionBtn || headerActionBtn.dataset.bound === "true") {
+    return;
+  }
+
+  headerActionBtn.addEventListener("click", openSettingsModal);
+  headerActionBtn.dataset.bound = "true";
+}
 
 const groupAddModal = document.querySelector("#group-add-modal");
 const openGroupAddModalButton = document.querySelector("#group-add-participants-modal");
@@ -62,9 +74,28 @@ function closeGroupAddModal() {
 }
 
 
+function getCurrentChatId() {
+    const header = document.querySelector(".chat-header-div");
+    return header ? header.dataset.chatId : null;
+}
+
 function openEditModal() {
+    if (chatHeader?.dataset.isGroup !== "true") {
+        return;
+    }
+
     closeSettingsModal();
     closeGroupAddModal();
+
+    const chatId = getCurrentChatId();
+    if (chatId && window.getGroupMembers) {
+        window.getGroupMembers(chatId);
+    }
+
+    const currentGroupName = chatHeader.dataset.chatTitle || chatHeader.querySelector(".chat-name")?.textContent.trim() || "";
+    if (editGroupNameInput) {
+        editGroupNameInput.value = currentGroupName;
+    }
 
     modalOverlay.style.display = "flex";
     groupEditModal.hidden = false;
@@ -73,6 +104,9 @@ function openEditModal() {
 function closeEditModal() {
     modalOverlay.style.display = "none";
     groupEditModal.hidden = true;
+    if (window.pendingRemovedGroupMembers) {
+        window.pendingRemovedGroupMembers.clear();
+    }
 }
 
 
@@ -91,6 +125,16 @@ function closeSettingsModal() {
 
 
 function openGroupModal() {
+    clearGroupError();
+    if (createGroupNameInput) {
+      createGroupNameInput.value = "";
+    }
+    groupUserCheckboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+    });
+    updateSelectedCount();
+    selectedUsersList.innerHTML = "";
+
     modalOverlay.style.display = "flex";
     groupModal.hidden = false;
     groupStepUsers.hidden = false;
@@ -100,6 +144,7 @@ function openGroupModal() {
 function closeGroupModal() {
     modalOverlay.style.display = "none";
     groupModal.hidden = true;
+    clearGroupError();
 }
 
 function updateSelectedCount() {
@@ -107,6 +152,46 @@ function updateSelectedCount() {
     ".group-user-checkbox:checked",
   ).length;
   selectedCount.textContent = count;
+  if (count >= 2) {
+    clearGroupError();
+  }
+}
+
+function showGroupError(message) {
+  if (!groupError) {
+    return;
+  }
+  groupError.textContent = message;
+  groupError.hidden = false;
+}
+
+function clearGroupError() {
+  if (!groupError) {
+    return;
+  }
+  groupError.textContent = "";
+  groupError.hidden = true;
+}
+
+function hasMinimumParticipants() {
+  const selectedCountValue = document.querySelectorAll(
+    ".group-user-checkbox:checked",
+  ).length;
+  if (selectedCountValue < 2) {
+    showGroupError("Виберіть принаймні 2 друзів для створення групи.");
+    return false;
+  }
+  return true;
+}
+
+function removeSelectedUser(userId) {
+  const checkbox = document.querySelector(`.group-user-checkbox[value="${userId}"]`);
+  if (!checkbox) {
+    return;
+  }
+  checkbox.checked = false;
+  updateSelectedCount();
+  renderSelectedUsers();
 }
 
 function renderSelectedUsers() {
@@ -124,6 +209,10 @@ function renderSelectedUsers() {
 
       const img2 = document.createElement("img");
       img2.src = "/static/chat_app/images/delete-group-member.svg";
+      img2.dataset.removeUserId = checkbox.value;
+      img2.addEventListener("click", () => {
+        removeSelectedUser(checkbox.value);
+      });
       
       userRow.appendChild(img1);
       userRow.appendChild(user);
@@ -156,14 +245,54 @@ function addGroupButton(chatId, groupName) {
   button.className = "chat-group-button";
   button.dataset.chatId = chatId;
   button.dataset.chatTitle = groupName;
-  button.textContent = groupName;
-  groupList.appendChild(button);
+  button.dataset.membersAmount = "0";
+  button.dataset.groupMembers = "";
+
+  const imgWrapper = document.createElement("div");
+  imgWrapper.className = "profile-img-wrapper";
+  const img = document.createElement("img");
+  img.className = "img-cover";
+  img.src = "/static/home_app/images/person_4.svg";
+  img.alt = "";
+  imgWrapper.appendChild(img);
+
+  const personProfile = document.createElement("div");
+  personProfile.className = "person-profile";
+
+  const lastMessageHeader = document.createElement("div");
+  lastMessageHeader.className = "last-message-header";
+  lastMessageHeader.textContent = groupName;
+
+  const lastMessageText = document.createElement("p");
+  lastMessageText.className = "last-message-text";
+  lastMessageText.textContent = "";
+
+  personProfile.appendChild(lastMessageHeader);
+  personProfile.appendChild(lastMessageText);
+
+  button.appendChild(imgWrapper);
+  button.appendChild(personProfile);
+
+  const messageInfo = document.createElement("div");
+  messageInfo.className = "message-info";
+  messageInfo.appendChild(button);
+
+  const groupItem = document.createElement("div");
+  groupItem.className = "group-item";
+  groupItem.dataset.chatId = chatId;
+  groupItem.appendChild(messageInfo);
+
+  groupList.appendChild(groupItem);
   window.bindGroupChatButtons();
 }
 
 async function createGroup() {
+  if (!hasMinimumParticipants()) {
+    return;
+  }
+
   const formData = new FormData();
-  formData.append("name", groupNameInput.value);
+  formData.append("name", createGroupNameInput.value);
   groupUserCheckboxes.forEach((checkbox) => {
     if (checkbox.checked) {
       formData.append("users", checkbox.value);
@@ -178,11 +307,78 @@ async function createGroup() {
 
   const data = await response.json();
 
-  if (data.success) {
-    addGroupButton(data.chat_id, data.name);
-    closeGroupModal();
+  if (!data.success) {
+    if (data.error === "group_minimum_participants") {
+      showGroupError("Виберіть принаймні 2 друзів для створення групи.");
+    }
+    return;
   }
+
+  addGroupButton(data.chat_id, data.name);
+  closeGroupModal();
 };
+
+async function saveGroupEdits(chatId) {
+  if (!chatId || !editGroupNameInput) {
+    return { success: false };
+  }
+
+  const removedIds = Array.from(window.pendingRemovedGroupMembers);
+  const payload = {
+    name: editGroupNameInput.value.trim(),
+    removed_users: removedIds,
+  };
+
+  const response = await fetch(`/chat/edit_group/${chatId}/`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrfToken,
+      "X-Requested-With": "XMLHttpRequest",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  if (!data.success) {
+    return data;
+  }
+
+  const groupButton = document.querySelector(`.chat-group-button[data-chat-id="${chatId}"]`);
+  if (groupButton) {
+    const titleElement = groupButton.querySelector(".last-message-header");
+    if (titleElement) {
+      titleElement.textContent = data.chat_name;
+    }
+    groupButton.dataset.chatTitle = data.chat_name;
+    if (typeof data.members_amount !== "undefined") {
+      groupButton.dataset.membersAmount = data.members_amount;
+    }
+  }
+
+  if (chatHeader && chatHeader.dataset.isGroup === "true") {
+    const chatNameElement = chatHeader.querySelector(".chat-name");
+    const chatStatusElement = chatHeader.querySelector(".chat-status");
+    if (chatNameElement) {
+      chatNameElement.textContent = data.chat_name;
+    }
+    chatHeader.dataset.chatTitle = data.chat_name;
+    if (chatStatusElement && typeof data.members_amount !== "undefined") {
+      chatStatusElement.textContent = `${data.members_amount} учасників`;
+    }
+  }
+
+  if (data.html) {
+    const membersContainer = document.querySelector(".group-members");
+    if (membersContainer) {
+      membersContainer.innerHTML = data.html;
+      attachGroupMemberRemovalButtons();
+    }
+  }
+
+  window.pendingRemovedGroupMembers.clear();
+  return data;
+}
 
 closeGroupAddModalButton.addEventListener("click", closeGroupAddModal);
 cancelGroupAddModalButton.addEventListener("click", openEditModal);
@@ -195,10 +391,89 @@ openGroupModalButton.addEventListener("click", openGroupModal);
 closeGroupModalButton.addEventListener("click", closeGroupModal);
 closeGroupNameModalButton.addEventListener("click", closeGroupModal);
 cancelGroupModalButton.addEventListener("click", closeGroupModal);
-nextGroupStepButton.addEventListener("click", showNameStep);
-backGroupStepButton.addEventListener("click", showUsersStep);
+nextGroupStepButton.addEventListener("click", () => {
+  if (hasMinimumParticipants()) {
+    showNameStep();
+  }
+});
+backGroupStepButton.addEventListener("click", () => {
+  clearGroupError();
+  showUsersStep();
+});
 createGroupButton.addEventListener("click", createGroup);
+createGroupEditButton.addEventListener("click", async () => {
+  const chatId = getCurrentChatId();
+  if (!chatId) {
+    return;
+  }
 
+  const data = await saveGroupEdits(chatId);
+  if (!data.success) {
+    return;
+  }
+
+  if (data.chat_deleted) {
+    const groupItem = document.querySelector(`.group-item[data-chat-id="${chatId}"]`);
+    if (groupItem) {
+      groupItem.remove();
+    }
+    closeSettingsModal();
+    closeGroupAddModal();
+    closeEditModal();
+    return;
+  }
+
+  closeEditModal();
+  closeSettingsModal();
+});
+
+if (deleteGroupChatButton) {
+  deleteGroupChatButton.addEventListener("click", async () => {
+    const chatId = getCurrentChatId();
+    if (!chatId) {
+      return;
+    }
+
+    const response = await fetch(`/chat/delete_group/${chatId}/`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRFToken": csrfToken,
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    });
+
+    const data = await response.json();
+    if (!data.success) {
+      return;
+    }
+
+    const groupItem = document.querySelector(`.group-item[data-chat-id="${chatId}"]`);
+    if (groupItem) {
+      groupItem.remove();
+    } else {
+      const groupButton = document.querySelector(`.chat-group-button[data-chat-id="${chatId}"]`);
+      if (groupButton) {
+        groupButton.closest('.message-info')?.remove();
+      }
+    }
+
+    closeSettingsModal();
+    closeEditModal();
+    closeGroupAddModal();
+
+    chatWindow.classList.remove("is-open");
+    chatTextDiv.classList.remove("hide");
+    chatHeader.classList.remove("show");
+    if (chatHeader) {
+      chatHeader.dataset.chatId = "";
+      chatHeader.dataset.isGroup = "false";
+      chatHeader.dataset.chatTitle = "";
+    }
+    if (chatStatus) {
+      chatStatus.hidden = false;
+    }
+  });
+}
 
 groupUserCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", updateSelectedCount);

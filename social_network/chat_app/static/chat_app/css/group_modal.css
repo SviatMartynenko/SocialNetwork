@@ -168,3 +168,10 @@
     color: #000000;
     font-family: var(--FontMedium);
 }
+
+.group-error {
+    color: red;
+    font-size: 1.3vh;
+    margin-top: 1vh;
+    font-family: var(--FontRegular);
+}

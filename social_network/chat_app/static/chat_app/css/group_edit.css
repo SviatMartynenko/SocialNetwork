@@ -1,14 +1,16 @@
 .group-edit-modal {
     position: relative;
+    /* display: none; */
+
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
     width: 34vw;
-    height: 65.3vh;              
+    height: auto;             
     max-width: 490px;
-    max-height: 669px;
-    padding: 2.34vh 3vw 0 3vw;
+    max-height: min(65vh);
+    padding: 2.34vh 3vw 2vh 3vw;
     background: #ffffff;
     border-radius: 1vh;
 }

@@ -47,6 +47,36 @@ filterUserChat.addEventListener('input', async (event) => {
         }
 });
 
+window.pendingRemovedGroupMembers = new Set();
+
+function attachGroupMemberRemovalButtons() {
+    const deleteGroupMemberButtons = document.querySelectorAll(".delete-group-member");
+    deleteGroupMemberButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            event.preventDefault();
+            togglePendingGroupMemberRemoval(button);
+        });
+    });
+}
+
+function togglePendingGroupMemberRemoval(button) {
+    const row = button.closest(".group-member-container");
+    if (!row) {
+        return;
+    }
+
+    const userId = button.dataset.memberId;
+    if (window.pendingRemovedGroupMembers.has(userId)) {
+        window.pendingRemovedGroupMembers.delete(userId);
+        row.classList.remove("pending-remove");
+        button.style.opacity = "1";
+    } else {
+        window.pendingRemovedGroupMembers.add(userId);
+        row.classList.add("pending-remove");
+        button.style.opacity = "0.35";
+    }
+}
+
 async function getGroupMembers(chatId){
     const response = await fetch(`/chat/group_members/${chatId}/`, {
             headers: {
@@ -57,14 +87,9 @@ async function getGroupMembers(chatId){
         const data = await response.json();
 
         if (data.success) {
+            window.pendingRemovedGroupMembers.clear();
             document.querySelector(".group-members").innerHTML = data.html;
-            const deleteGroupMemberButtons = document.querySelectorAll(".delete-group-member");
-            deleteGroupMemberButtons.forEach((button) => {
-                button.addEventListener("click", () => {
-                    console.log(1)
-                    deleteGroupMember(button.dataset.chatId, button.dataset.memberId)
-                });
-            });
+            attachGroupMemberRemovalButtons();
         }
 }
 
@@ -79,17 +104,44 @@ async function deleteGroupMember(chatId,userId){
 
         const data = await response.json();
 
-        if (data.success) {
-            document.querySelector(".group-members").innerHTML = data.html;
-            const deleteGroupMemberButtons = document.querySelectorAll(".delete-group-member");
-            deleteGroupMemberButtons.forEach((button) => {
-                button.addEventListener("click", () => {
-                    console.log(1)
-                    deleteGroupMember(button.dataset.chatId, button.dataset.memberId)
-                });
-            });
+        if (!data.success) {
+            return data;
         }
+
+        if (data.chat_deleted) {
+            const groupButton = document.querySelector(`.chat-group-button[data-chat-id="${chatId}"]`);
+            if (groupButton) {
+                groupButton.remove();
+            }
+            closeEditModal();
+            closeSettingsModal();
+            closeGroupAddModal();
+            closeGroupModal();
+            return data;
+        }
+
+        document.querySelector(".group-members").innerHTML = data.html;
+        attachGroupMemberRemovalButtons();
+        return data;
 }
+
+window.saveGroupMemberRemovals = async function(chatId) {
+    if (!chatId) {
+        return;
+    }
+
+    const removedIds = Array.from(window.pendingRemovedGroupMembers);
+    for (const userId of removedIds) {
+        const data = await deleteGroupMember(chatId, userId);
+        if (data && data.chat_deleted) {
+            break;
+        }
+    }
+    window.pendingRemovedGroupMembers.clear();
+    if (chatId && document.querySelector(".group-members")) {
+        await getGroupMembers(chatId);
+    }
+};
 
 searchUsers.addEventListener('input', async (event) => {
     const queryValue = event.target.value;
@@ -207,10 +259,22 @@ async function openChatById(chatId, title, members = 0) {
         <img class = "img-cover chat-header-action-btn-img">
     </div>
     `;
-    chatHeader.querySelector(".chat-header-back-btn-img").src = chatHeader.dataset.back;
+    chatHeader.dataset.chatTitle = title;
+    const headerBackImg = chatHeader.querySelector(".chat-header-back-btn-img");
+    const headerActionBtn = chatHeader.querySelector(".chat-header-action-btn");
     chatHeader.querySelector(".chat-header-action-btn-img").src = chatHeader.dataset.action;
     chatHeader.querySelector(".chat-header-meta-img").src = chatHeader.dataset.defaultAvatar;
     chatHeader.querySelector(".chat-name").textContent = title;
+
+    if (members > 0) {
+        headerActionBtn.hidden = false;
+        chatHeader.dataset.isGroup = "true";
+    } else {
+        headerActionBtn.hidden = true;
+        chatHeader.dataset.isGroup = "false";
+    }
+
+    headerBackImg.src = chatHeader.dataset.back;
     chatWindow.classList.add("is-open");
     chatStatus.hidden = true;
     messages.innerHTML = "";
@@ -317,7 +381,7 @@ messageForm.addEventListener("submit", async (event) => {
 });
 
 chatHeader.addEventListener("click", (event) => {
-    if (event.target.closest(".chat-header-action-btn")) {
+    if (event.target.closest(".chat-header-action-btn") && chatHeader.dataset.isGroup === "true") {
         openSettingsModal();
     }
 });

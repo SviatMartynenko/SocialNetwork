@@ -43,6 +43,9 @@ def create_group(request: HttpRequest):
     
     friend_ids = get_friends(request.user).filter(id__in=user_ids).values_list("id", flat=True)
 
+    if len(friend_ids) < 2:
+        return {"success": False, "error": "group_minimum_participants"}
+
     chat = Chat.objects.create(name=name, is_group=True, admin=request.user)
 
     chat.users.add(request.user)

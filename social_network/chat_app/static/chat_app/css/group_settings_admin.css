@@ -29,6 +29,11 @@
     overflow: hidden;
 }
 
+@media (min-width: 2000px) {
+    .group-settings__box{
+        right: 38.5vw;
+    }
+}
 .group-settinds-admin{
     flex: 1;
     min-height: 0;
