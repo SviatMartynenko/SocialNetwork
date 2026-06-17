@@ -180,10 +180,10 @@ class GroupMembers(View):
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             queryset = self.get_queryset()     
             
-            # chat = chat = get_object_or_404(queryset, id = chat_id)
+            chat = chat = get_object_or_404(queryset, id = chat_id)
            
-            # user_to_remove = get_object_or_404(chat.users.all(), id = user_id)
-            # chat.users.remove(user_to_remove)
+            user_to_remove = get_object_or_404(chat.users.all(), id = user_id)
+            chat.users.remove(user_to_remove)
 
             members = chat.users.exclude(id = request.user.id)
 

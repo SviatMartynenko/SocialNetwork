@@ -10,5 +10,5 @@ urlpatterns = [
     path(route = "filter_chats/", view = FilterUserChats.as_view(), name = "filter_chats"),
     path(route="upload_images/<int:chat_id>/", view=MessageImagesUploadView.as_view(), name='message_images_upload'),
     path(route = 'group_members/<int:chat_id>/', view = GroupMembers.as_view(), name = "group_members"),
-    path('chat/group_members/<int:chat_id>/<int:user_id>/', GroupMembers.as_view(), name='group_members_delete')
+    path('group_members/<int:chat_id>/<int:user_id>/', GroupMembers.as_view(), name='group_members_delete')
 ]
