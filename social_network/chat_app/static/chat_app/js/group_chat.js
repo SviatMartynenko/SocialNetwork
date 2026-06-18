@@ -392,9 +392,12 @@ async function createGroup() {
   if (!hasMinimumParticipants()) {
     return;
   }
-
+  const groupAvatarInput = document.getElementById('groupAvatarInput');
   const formData = new FormData();
   formData.append("name", createGroupNameInput.value);
+  if (groupAvatarInput.files.length > 0){
+    formData.append("avatar", groupAvatarInput.files[0]);
+  }
   groupUserCheckboxes.forEach((checkbox) => {
     if (checkbox.checked) {
       formData.append("users", checkbox.value);

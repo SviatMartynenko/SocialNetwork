@@ -37,7 +37,7 @@ def get_or_create_chat(request, user_id):
 def create_group(request: HttpRequest):
     name = request.POST.get("name", "").strip()
     user_ids  = request.POST.getlist("users")
-
+    avatar = request.FILES.get("avatar", "")
     if not name:
         return {"success": False, "error": "name required"}
     
@@ -46,7 +46,7 @@ def create_group(request: HttpRequest):
     if len(friend_ids) < 2:
         return {"success": False, "error": "group_minimum_participants"}
 
-    chat = Chat.objects.create(name=name, is_group=True, admin=request.user)
+    chat = Chat.objects.create(name=name, is_group=True, admin=request.user, avatar = avatar)
 
     chat.users.add(request.user)
 

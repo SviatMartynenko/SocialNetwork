@@ -314,8 +314,10 @@ function bindGroupChatButtons() {
 
         button.dataset.groupButtons = "true";
         button.addEventListener("click", () => {
+            const chatHeader = document.querySelector(".chat-header-div");
             openChatById(button.dataset.chatId, button.dataset.chatTitle, button.dataset.membersAmount); 
             getGroupMembers(button.dataset.chatId);
+            chatHeader.dataset.groupMembers = button.dataset.groupMembers ;
         });
     });
 }

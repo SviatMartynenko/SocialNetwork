@@ -28,40 +28,24 @@
         <div class="side-block-header">
             <div class= "title-container">
                 <div class="title-image-wrapper">
-                    <img class = "img-cover" src="{% static 'home_app/images/people.svg' %}" alt="">
+                    <img class = "img-cover img-cover-width" src="{% static 'home_app/images/people.svg' %}" alt="">
                 </div>
                 <p>Запити</p>
             </div>
-            <a class = "title-ref" href="">Дивитись всі</a>
+            <a class = "title-ref" href="{% url 'friends'%}">Дивитись всі</a>
         </div>
         <div class = "recommended-requests">
-            <div class="request-profile">
-                <div class= "profile-img-wrapper">
-                    <img class = "img-cover" src="{% static 'home_app/images/person_1.svg' %}" alt="">
+            {% for request_user in friendship_requests %}
+                <div class="request-profile">
+                    <div class= "profile-img-wrapper">
+                        <img class = "img-cover" src="{% static 'home_app/images/person_1.svg' %}" alt="">
+                    </div>
+                    <div class = "profile-info">
+                        <p class= "profile-name">{{request_user.first_name}}</p>
+                        <p class = "followers-amount">4.3к підписників</p>
+                    </div>
                 </div>
-                <div class = "profile-info">
-                    <p class= "profile-name">Yehor Aung</p>
-                    <p class = "followers-amount">4.3к підписників</p>
-                </div>
-            </div>
-            <div class="request-profile">
-                <div class= "profile-img-wrapper">
-                    <img class = "img-cover" src="{% static 'home_app/images/person_2.svg' %}" alt="">
-                </div>
-                <div class = "profile-info">
-                    <p class= "profile-name">Ann Ann</p>
-                    <p class = "followers-amount">1.6к підписників</p>
-                </div>
-            </div>
-            <div class="request-profile">
-                <div class= "profile-img-wrapper">
-                    <img class = "img-cover" src="{% static 'home_app/images/person_3.svg' %}" alt="">
-                </div>
-                <div class = "profile-info">
-                    <p class= "profile-name">Yeugen Jenua</p>
-                    <p class = "followers-amount">10.3к підписників</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 

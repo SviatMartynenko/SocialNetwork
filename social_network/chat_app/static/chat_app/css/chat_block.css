@@ -63,8 +63,6 @@
     gap: 0.3vh;
     overflow-y: scroll;
     height: 100%;
-    padding-left: clamp(0.1rem, 1.5vh, 1rem);
-    padding-right: clamp(0.1rem, 1.5vh, 1rem);
 }
 
 #group-list::-webkit-scrollbar{
@@ -74,4 +72,11 @@
 .chat-group-button.active-chat,
 .chat-user-button.active-chat {
     background-color: #E9E5EE;
+}
+.group-item{
+    flex-grow: 1;
+    max-height: 44px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
 }

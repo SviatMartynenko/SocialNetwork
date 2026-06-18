@@ -50,6 +50,19 @@ class ChatView(LoginRequiredMixin, TemplateView):
 
         context['last_user_messages'] = last_messages_data
 
+        for chat in context['group_chats']:
+            last_massage = chat.messages.order_by('-created_at').first()
+            
+            if last_massage:
+                last_messages_data.append({
+                    'chat_id': chat.id,
+                    'message_id': last_massage.id,
+                    'text': last_massage.text[:20],
+                    'created_at': timezone.localtime(last_massage.created_at).strftime("%H:%M")
+                })
+
+        context['last_group_messages'] = last_messages_data
+
         return context
     
 

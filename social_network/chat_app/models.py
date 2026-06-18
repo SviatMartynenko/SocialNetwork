@@ -40,3 +40,7 @@ class Message(models.Model):
 class MessageImage(models.Model):
     message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to='images/chat_images/')
+
+
+class ChatGroupImage(models.Model):
+    avatar = models.ImageField(upload_to='images/group_avatars/', blank=True)

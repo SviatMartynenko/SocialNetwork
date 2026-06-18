@@ -1,31 +1,35 @@
 {% load static %}
 <div id="group-list">
     {% for chat in group_chats %}
-        <div class="group-item" data-chat-id="{{ chat.id }}">
-            <div class="message-info">
-                <button type="button" 
-                    class="chat-group-button" 
-                    data-chat-title="{{ chat.name }}" 
-                    data-chat-id="{{ chat.id }}" 
-                    data-members-amount="{{ chat.users.count }}"
-                    data-group-members="{% for user in chat.users.all %}{{ user.id }},{% endfor %}">
-                    <div class = "profile-img-wrapper">
-                        <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+                <div class="group-item" data-chat-id="{{ chat.id }}">
+                        <button type="button" 
+                            class="chat-group-button" 
+                            data-chat-title="{{ chat.name }}" 
+                            data-chat-id="{{ chat.id }}" 
+                            data-members-amount="{{ chat.users.count }}"
+                            data-group-members="{% for user in chat.users.all %}{{ user.id }},{% endfor %}">
+                            <div class = "profile-img-wrapper">
+                                {% if chat.avatar %}
+                                    <img class="select-group-img" src="{{ chat.avatar.url }}" alt="{{ chat.name }}">
+                                {% else %}
+                                    <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="person-profile">
+                                <div class = "last-message-header">
+                                    {{ chat.name }}
+                                {% for message in last_group_messages %}
+                                    {% if message.chat_id == chat.id %}
+                                    <span class="created-at">{{ message.created_at }}</span>
+                                </div>
+                                <p class="last-message-text">
+                                    {{ message.text }}
+                                </p>
+                            </div>
+                                    {% endif %}
+                                {% endfor %}
+                        </button>
                     </div>
-                    <div class="person-profile">
-                        <div class = "last-message-header">
-                            {{ chat.name }}
-                            {% if message.chat_id == chat.id %}
-                                <span class="created-at">{{ message.created_at }}</span>
-                            {% endif %}
-                        </div>
-                        <p class="last-message-text">
-                            {{ message.text }}
-                        </p>
-                    </div>
-                </button>
-            </div>
-        </div>
     {% empty %}
         <p id="group-empty">Порожньо</p>
     {% endfor %}

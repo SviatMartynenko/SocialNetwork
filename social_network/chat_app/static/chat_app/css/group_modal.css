@@ -175,3 +175,7 @@
     margin-top: 1vh;
     font-family: var(--FontRegular);
 }
+
+#groupAvatarInput{
+    display: none;
+}

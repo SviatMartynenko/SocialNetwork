@@ -159,7 +159,7 @@
 }
 
 .message-meta-status{
-
+    
 }
 
 .message-date-separator{
@@ -201,7 +201,7 @@
 .chat-header-meta{
     display: flex;
     flex-direction: row;
-    height: 100%;
+    
     gap: 0.6vw;
     align-items: center;
 }
@@ -216,8 +216,9 @@
 .chat-header-text{
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 4.4vh;
     justify-content: space-between;
+    align-items: start;
 }
 
 .chat-name{
@@ -225,6 +226,7 @@
     font-family: var(--FontMedium);
     font-size: clamp(0.1rem, 2.3vh, 1.5rem);
     font-weight: 500;
+    
 }
 
 .chat-status{

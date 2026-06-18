@@ -13,7 +13,7 @@ from post_app.models import Post
 from post_app.forms import PostForm, AddTagForm
 from chat_app.models import Chat, Message
 from .forms import FirstLoginForm
-from user_app.services.friend_queries import get_friends
+from user_app.services.friend_queries import get_friends, get_friendship_requests
 
 
 class HomePageView(LoginRequiredMixin, ListView):
@@ -63,6 +63,7 @@ class HomePageView(LoginRequiredMixin, ListView):
 
         context['last_user_messages'] = last_messages_data
 
+        context["friendship_requests"] = get_friendship_requests(self.request.user)[:3]
 
         return context
     

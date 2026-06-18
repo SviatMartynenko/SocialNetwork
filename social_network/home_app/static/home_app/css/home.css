@@ -42,6 +42,9 @@
 .img-cover{
     height: 100%;
 }
+.img-cover-width{
+    width: 100%;
+}
 
 .title-ref{
     font-weight: 500;

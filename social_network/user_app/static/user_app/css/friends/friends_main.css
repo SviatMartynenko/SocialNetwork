@@ -39,7 +39,8 @@
 .section-users{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;    
-    width: 61vw;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 61vw;
     gap: 0.5vw;
 }

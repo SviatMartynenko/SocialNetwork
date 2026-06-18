@@ -1,8 +1,9 @@
 .friend-card{
     border-radius: 0.9vh;
     border: rgba(205, 206, 210, 1) solid 0.1vw;
-    width: 20vw;
+    width: calc((100% - 1vw) / 3);
     max-width: 289px;
+    min-width: 220px;
     height: 25.7vh;
     max-height: 263px;
     display: flex;
@@ -10,6 +11,25 @@
     justify-content: center;
     align-items: center;
     gap: clamp(0.1rem, 1.5vh, 1rem);
+}
+
+@media (max-width: 1200px) {
+    .friend-card {
+        min-width: 180px;
+    }
+}
+
+@media (max-width: 960px) {
+    .friend-card {
+        width: calc((100% - 1vw) / 2);
+    }
+}
+
+@media (max-width: 720px) {
+    .friend-card {
+        width: 100%;
+        min-width: auto;
+    }
 }
 
 .user-card-div{
