@@ -61,11 +61,40 @@ const groupAddModal = document.querySelector("#group-add-modal");
 const openGroupAddModalButton = document.querySelector("#group-add-participants-modal");
 const cancelGroupAddModalButton = document.querySelector("#cancel-group-add-modal");
 const closeGroupAddModalButton = document.querySelector("#close-group-add-modal");
+const groupAddSearchInput = document.querySelector("#group-add-search");
+const groupAddFriendsList = document.querySelector("#group-add-friends-list");
+const selectedAddCount = document.querySelector("#selected-add-count");
+const groupAddSaveButton = document.querySelector("#group-add-save-btn");
+
+async function loadGroupAddParticipants(chatId) {
+    if (!groupAddFriendsList) {
+        return;
+    }
+
+    const response = await fetch(`/chat/group_add_participants/${chatId}/`, {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    });
+
+    const data = await response.json();
+    if (!data.success) {
+        return;
+    }
+
+    groupAddFriendsList.innerHTML = data.html;
+    bindGroupAddFriendCheckboxes();
+    updateSelectedAddCount();
+}
 
 function openGroupAddModal() {
     modalOverlay.style.display = "flex";
     groupAddModal.hidden = false;
     groupEditModal.hidden = true;
+    const chatId = getCurrentChatId();
+    if (chatId) {
+        loadGroupAddParticipants(chatId);
+    }
 }
 
 function closeGroupAddModal() {
@@ -73,6 +102,79 @@ function closeGroupAddModal() {
     groupAddModal.hidden = true;
 }
 
+
+function bindGroupAddFriendCheckboxes() {
+  const groupAddCheckboxes = document.querySelectorAll('.group-add-user-checkbox');
+  groupAddCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', updateSelectedAddCount);
+  });
+}
+
+function updateSelectedAddCount() {
+  if (!selectedAddCount) {
+    return;
+  }
+  const count = document.querySelectorAll('.group-add-user-checkbox:checked').length;
+  selectedAddCount.textContent = count;
+}
+
+async function saveGroupAddParticipants(chatId) {
+  if (!chatId || !groupAddFriendsList) {
+    return;
+  }
+
+  const selectedCheckboxes = document.querySelectorAll('.group-add-user-checkbox:checked');
+  if (selectedCheckboxes.length === 0) {
+    return;
+  }
+
+  const formData = new FormData();
+  selectedCheckboxes.forEach((checkbox) => {
+    formData.append('users', checkbox.value);
+  });
+
+  const response = await fetch(`/chat/add_group_participants/${chatId}/`, {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': csrfToken,
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+  if (!data.success) {
+    return;
+  }
+
+  if (data.html) {
+    const membersContainer = document.querySelector('.group-members');
+    if (membersContainer) {
+      membersContainer.innerHTML = data.html;
+      attachGroupMemberRemovalButtons();
+    }
+  }
+
+  if (data.members_amount !== undefined) {
+    const chatButton = document.querySelector(`.chat-group-button[data-chat-id="${chatId}"]`);
+    if (chatButton) {
+      chatButton.dataset.membersAmount = data.members_amount;
+    }
+    if (chatHeader && chatHeader.dataset.chatId === String(chatId)) {
+      const chatStatusElement = chatHeader.querySelector('.chat-status');
+      if (chatStatusElement) {
+        chatStatusElement.textContent = `${data.members_amount} учасників`;
+      }
+    }
+  }
+
+  loadGroupAddParticipants(chatId);
+  closeGroupAddModal();
+  if (groupEditModal) {
+    groupEditModal.hidden = false;
+    modalOverlay.style.display = 'flex';
+  }
+}
 
 function getCurrentChatId() {
     const header = document.querySelector(".chat-header-div");
@@ -381,6 +483,13 @@ async function saveGroupEdits(chatId) {
 }
 
 closeGroupAddModalButton.addEventListener("click", closeGroupAddModal);
+groupAddSaveButton.addEventListener('click', async () => {
+  const chatId = getCurrentChatId();
+  if (!chatId) {
+    return;
+  }
+  await saveGroupAddParticipants(chatId);
+});
 cancelGroupAddModalButton.addEventListener("click", openEditModal);
 openGroupAddModalButton.addEventListener("click", openGroupAddModal);
 backGroupEditStepButton.addEventListener("click", openSettingsModal);

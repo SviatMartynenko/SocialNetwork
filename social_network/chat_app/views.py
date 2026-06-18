@@ -148,6 +148,56 @@ class EditGroupView(LoginRequiredMixin, View):
             'html': render_to_string('chat_app/particles/group_members.html', {'members': members, 'chat': chat}),
         })
 
+class GroupAddParticipantsView(LoginRequiredMixin, View):
+    login_url = reverse_lazy('auth')
+
+    def get(self, request, chat_id):
+        if request.headers.get('X-Requested-With') != 'XMLHttpRequest':
+            return JsonResponse({'success': False}, status=400)
+
+        chat = get_object_or_404(Chat.objects.filter(id=chat_id), id=chat_id)
+        if not chat.is_group or not chat.users.filter(id=request.user.id).exists():
+            return JsonResponse({'success': False}, status=403)
+
+        excluded_ids = chat.users.values_list('id', flat=True)
+        friends = get_friends(request.user).exclude(id__in=excluded_ids).order_by('username')
+
+        return JsonResponse({
+            'success': True,
+            'html': render_to_string('chat_app/particles/group_add_participants_list.html', {'friends': friends}, request=request),
+        })
+
+    def post(self, request, chat_id):
+        if request.headers.get('X-Requested-With') != 'XMLHttpRequest':
+            return JsonResponse({'success': False}, status=400)
+
+        chat = get_object_or_404(Chat.objects.filter(id=chat_id), id=chat_id)
+        if not chat.is_group or not chat.users.filter(id=request.user.id).exists():
+            return JsonResponse({'success': False}, status=403)
+
+        user_ids = request.POST.getlist('users')
+        if not user_ids:
+            return JsonResponse({'success': False, 'error': 'no_users_selected'})
+
+        friend_ids = list(
+            get_friends(request.user)
+                .filter(id__in=user_ids)
+                .exclude(id__in=chat.users.values_list('id', flat=True))
+                .values_list('id', flat=True)
+        )
+
+        if not friend_ids:
+            return JsonResponse({'success': False, 'error': 'no_new_users'})
+
+        chat.users.add(*friend_ids)
+        members = chat.users.exclude(id=request.user.id)
+
+        return JsonResponse({
+            'success': True,
+            'members_amount': chat.users.count(),
+            'html': render_to_string('chat_app/particles/group_members.html', {'members': members, 'chat': chat}, request=request),
+        })
+
 class DeleteGroupView(LoginRequiredMixin, View):
     login_url = reverse_lazy('auth')
 

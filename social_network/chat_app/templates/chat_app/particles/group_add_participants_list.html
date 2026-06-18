@@ -1,0 +1,18 @@
+{% load static %}
+{% for friend in friends %}
+    {% ifchanged friend.username.0|upper %}
+        <div class="friends-letter">
+            {{ friend.username.0|upper }}
+        </div>
+    {% endifchanged %}
+
+    <label class="group-add-friend">
+        <input class="group-add-user-checkbox" type="checkbox" value="{{ friend.id }}" data-user-name="{{ friend.username }}">
+
+        <span class="friend-add-username">
+            {{ friend.username }}
+        </span>
+
+        <img class="group-add-username-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+    </label>
+{% endfor %}
