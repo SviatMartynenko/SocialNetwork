@@ -35,33 +35,33 @@ class ChatView(LoginRequiredMixin, TemplateView):
             is_group=True
         ).order_by('id')
 
-        last_messages_data = []
+        last_user_messages = []
+        last_group_messages = []
 
         for chat in context['personal_chats']:
-            last_massage = chat.messages.order_by('-created_at').first()
+            last_message = chat.messages.order_by('-created_at').first()
             
-            if last_massage:
-                last_messages_data.append({
+            if last_message:
+                last_user_messages.append({
                     'chat_id': chat.id,
-                    'message_id': last_massage.id,
-                    'text': last_massage.text[:20],
-                    'created_at': timezone.localtime(last_massage.created_at).strftime("%H:%M")
+                    'message_id': last_message.id,
+                    'text': last_message.text[:20],
+                    'created_at': timezone.localtime(last_message.created_at).strftime("%H:%M")
                 })
-
-        context['last_user_messages'] = last_messages_data
 
         for chat in context['group_chats']:
-            last_massage = chat.messages.order_by('-created_at').first()
+            last_message = chat.messages.order_by('-created_at').first()
             
-            if last_massage:
-                last_messages_data.append({
+            if last_message:
+                last_group_messages.append({
                     'chat_id': chat.id,
-                    'message_id': last_massage.id,
-                    'text': last_massage.text[:20],
-                    'created_at': timezone.localtime(last_massage.created_at).strftime("%H:%M")
+                    'message_id': last_message.id,
+                    'text': last_message.text[:20],
+                    'created_at': timezone.localtime(last_message.created_at).strftime("%H:%M")
                 })
 
-        context['last_group_messages'] = last_messages_data
+        context['last_user_messages'] = last_user_messages
+        context['last_group_messages'] = last_group_messages
 
         return context
     
@@ -85,6 +85,25 @@ class MessageHistoryView(LoginRequiredMixin, View):
             # Забороняємо читати чужі повідомлення.
             return JsonResponse({"success": False}, status=403)
 
+        unread_messages = Message.objects.filter(
+            chat_id=chat_id
+        ).exclude(
+            sender=request.user
+        ).exclude(
+            readers=request.user
+        )
+        
+        for message in unread_messages:
+            message.readers.add(request.user)
+        
+        channel_layer = get_channel_layer()
+        
+        async_to_sync(channel_layer.group_send)(
+            f"unread_{request.user.id}",
+            {
+                "type": "unread_update"
+            }
+        )
         # Новіші повідомлення йдуть першими, щоб page=1 була останньою історією.
         query = Message.objects.filter(chat_id=chat_id).select_related("sender").order_by("-created_at", "-id")
         

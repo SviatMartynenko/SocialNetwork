@@ -14,6 +14,11 @@ from .services.friend_queries import *
 from .services.friend_actions import *  
 from post_app.models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class AuthTemplateView(TemplateView):
@@ -158,9 +163,17 @@ class FriendActionView(View):
     def post(self, request, other_user_id, action, *args, **kwargs):
         other_user = User.objects.get(id=other_user_id)
         current_user = request.user
+        channel_layer = get_channel_layer()
 
         if action == "add":
-            return JsonResponse(add_friend_request(current_user, other_user))
+            result = add_friend_request(current_user, other_user)
+            async_to_sync(channel_layer.group_send)(
+                f"unread_{other_user.id}",
+                {
+                    "type": "unread_update"
+                }
+            )
+            return JsonResponse(result)
         
         if action == "dismiss":
             return JsonResponse(dismiss_recommendation(current_user, other_user))
@@ -170,6 +183,12 @@ class FriendActionView(View):
         
         if action == "accept":
             action_result = accept_friend_request(current_user, other_user)
+            async_to_sync(channel_layer.group_send)(
+                f"unread_{current_user.id}",
+                {
+                    "type": "unread_update"
+                }
+            )
             action_result["friend_html"] = render_to_string(
                 "user_app/particles/friends/friends_cards.html",
                 {"users": [action_result["friend"]], "section": "friends"},

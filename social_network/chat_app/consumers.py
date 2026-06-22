@@ -2,6 +2,7 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 
 from .models import Chat, Message
+from user_app.models import Friendship
 
 from channels.db import database_sync_to_async
 from django.template.loader import render_to_string
@@ -36,6 +37,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         sender = self.scope['user']
         if message_text:
             message = await self.save_message(message_text)
+
+            await self.send_unread_updates()
+            
             await self.channel_layer.group_send(
                 self.group_name,
                 {
@@ -43,10 +47,25 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'text': message_text,
                     'sender': sender.username,
                     'created_at': message["created_at"],
-                    "images": message['images']
+                    'images': message['images']
                 }
             )
-  
+
+    async def send_unread_updates(self):
+        user_ids = await self.get_chat_user_ids()
+
+        for user_id in user_ids:
+            await self.channel_layer.group_send(
+                f"unread_{user_id}",
+                {
+                    "type": "unread_update"
+                }
+            )
+    
+    @database_sync_to_async
+    def get_chat_user_ids(self):
+        chat = Chat.objects.get(id=self.chat_id)
+        return list(chat.users.values_list("id", flat=True))
 
     async def chat_message(self, event):
 
@@ -107,3 +126,59 @@ class OnlineStatusConsumer(AsyncWebsocketConsumer):
             'user_id': user_id,
             'status': status
         }))
+
+class UnreadConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        self.user = self.scope['user']
+        self.group_name = f"unread_{self.user.id}"
+        await self.channel_layer.group_add(self.group_name, self.channel_name)
+        await self.accept()
+        await self.send_unread_data()
+
+    async def disconnect(self, code):
+        await self.channel_layer.group_discard(self.group_name, self.channel_name)
+    
+    async def receive(self, text_data = None):
+        await self.send_unread_data()
+
+    async def unread_update(self, event):
+        await self.send_unread_data()
+
+    async def send_unread_data(self):
+        data = await self.get_unread_data()
+        await self.send(text_data=json.dumps(data))
+        
+    
+    @database_sync_to_async
+    def get_unread_data(self):
+        personal_total = 0
+        group_total = 0
+        chat_data = []
+        chats = Chat.objects.filter(users = self.user)
+        for chat in chats:
+            last_message = chat.messages.order_by('-created_at','-id').first()
+            last_text = ''
+            if last_message:
+                last_text = last_message.text[:20]
+            else:
+                last_text = 'Надіслано файл'
+                
+            unread = chat.messages.exclude(sender = self.user).exclude(readers = self.user).count()  
+
+            if chat.is_group:
+                group_total += unread   
+            else:
+                personal_total += unread 
+            
+            chat_data.append({'id': chat.id, 'unread': unread, 'last': last_text})
+
+        friend_requests_total = Friendship.objects.filter(to_user=self.user, status="pending").count()
+        return {
+            'personal_total': personal_total,
+            'group_total': group_total,
+            'total': personal_total + group_total,
+            'friend_requests_total': friend_requests_total,
+            'chats': chat_data
+        }
+    
+       

@@ -6,10 +6,14 @@ onlineSocket.onmessage = function (event) {
     userButtons.forEach((button) => {
         const username = button.dataset.chatUsername;
 
-        if (data.status == "online") {
-            button.querySelector(".last-message-header").textContent = `${username} (у мережі)`;
-        } else{
-            button.querySelector(".last-message-header").textContent = username;
+        const lastMessageHeader = button.querySelector(".last-message-header");
+        const createdAt = lastMessageHeader.querySelector(".created-at");
+        const usernameText = data.status == "online" ? `${username} (у мережі)` : username;
+
+        if (createdAt) {
+            lastMessageHeader.innerHTML = `${usernameText}${createdAt.outerHTML}`;
+        } else {
+            lastMessageHeader.textContent = usernameText;
         }
     });
     

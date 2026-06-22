@@ -5,8 +5,6 @@
     max-height: 62px;
     display: flex;
     flex-direction: column;
-    gap: clamp(0.1rem, 0.8vw, 0.75rem);
-    
 }
 
 .profile-name{
@@ -18,7 +16,7 @@
 
 .message-info{
     flex-grow: 1;
-    max-height: 44px;
+    max-height: 60px;
     justify-content: space-between;
     display: flex;
     flex-direction: column;
@@ -92,4 +90,8 @@
     color: rgba(7, 10, 28, 1);
     font-size: clamp(0.1rem, 1.3vh, 0.875rem);
     font-family: var(--FontRegular);
+}
+
+.chat-has-unread {
+    background: #E9E5EE;
 }

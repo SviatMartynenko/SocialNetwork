@@ -36,12 +36,18 @@ const editSelectedUsersList = document.querySelector("#selected-users-list");
 // Знаходимо всі чекбокси друзів у модальному вікні.
 const groupUserCheckboxes = document.querySelectorAll(".group-user-checkbox");
 // Знаходимо список груп у правому блоці сторінки.
-const groupList = document.querySelector("#group-list");
+function getGroupList() {
+  return document.querySelector("#group-list") || document.querySelector(".chat-list #group-list");
+}
+
 const modalOverlay = document.querySelector(".modal-overlay");
 
 const groupSettingsModal = document.querySelector("#group-settings-modal");
 const closeSettingsModalButton = document.querySelector("#close-settings-modal");
 const deleteGroupChatButton = document.querySelector(".group-delete-div");
+
+const groupSettingsAdmin = document.querySelector("#group-settings-admin");
+const groupSettingsUser = document.querySelector("#group-settings-user");
 
 const groupEditModal = document.querySelector("#group-edit-modal");
 const openEditModalButton = document.querySelector("#open-group-edit-modal");
@@ -214,10 +220,31 @@ function closeEditModal() {
 
 function openSettingsModal() {
     modalOverlay.style.display = "flex";
+
+    const currentUserId = chatHeader.dataset.currentUserId;
+    const adminId = chatHeader.dataset.adminId;
+
+    console.log("currentUserId:", currentUserId);
+    console.log("adminId:", adminId);
+
+    if (currentUserId === adminId) {
+        groupSettingsAdmin.hidden = false;
+        groupSettingsUser.hidden = true;
+    } else {
+        groupSettingsAdmin.hidden = true;
+        groupSettingsUser.hidden = false;
+    }
+
     groupSettingsModal.hidden = false;
     groupEditModal.hidden = true;
     modalOverlay.style.backgroundColor = "transparent";
 }
+
+groupSettingsModal.addEventListener("click", (event) => {
+    if (event.target === groupSettingsModal) {
+        closeSettingsModal();
+    }
+});
 
 function closeSettingsModal() {
     modalOverlay.style.display = "none";
@@ -336,7 +363,12 @@ function showUsersStep() {
   groupStepName.hidden = true;
 }
 
-function addGroupButton(chatId, groupName) {
+function addGroupButton(chatId, groupName, membersAmount = 0) {
+  const groupList = getGroupList();
+  if (!groupList) {
+    return;
+  }
+
   const groupEmpty = document.querySelector("#group-empty");
   if (groupEmpty) {
     groupEmpty.remove();
@@ -347,7 +379,8 @@ function addGroupButton(chatId, groupName) {
   button.className = "chat-group-button";
   button.dataset.chatId = chatId;
   button.dataset.chatTitle = groupName;
-  button.dataset.membersAmount = "0";
+  button.dataset.adminId = chatHeader?.dataset.currentUserId || "";
+  button.dataset.membersAmount = String(membersAmount);
   button.dataset.groupMembers = "";
 
   const imgWrapper = document.createElement("div");
@@ -419,7 +452,7 @@ async function createGroup() {
     return;
   }
 
-  addGroupButton(data.chat_id, data.name);
+  addGroupButton(data.chat_id, data.name, data.members_amount ?? 0);
   closeGroupModal();
 };
 
@@ -498,7 +531,6 @@ openGroupAddModalButton.addEventListener("click", openGroupAddModal);
 backGroupEditStepButton.addEventListener("click", openSettingsModal);
 openEditModalButton.addEventListener("click", openEditModal);
 closeEditModalButton.addEventListener("click", closeEditModal);
-closeSettingsModalButton.addEventListener("click", closeSettingsModal);
 openGroupModalButton.addEventListener("click", openGroupModal);
 closeGroupModalButton.addEventListener("click", closeGroupModal);
 closeGroupNameModalButton.addEventListener("click", closeGroupModal);

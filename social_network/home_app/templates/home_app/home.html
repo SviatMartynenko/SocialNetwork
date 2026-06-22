@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="{% static 'post_app/css/show_post.css' %}">
     <link rel="stylesheet" href="{% static 'post_app/css/add_tag.css' %}">
     <link rel="stylesheet" href="{% static 'chat_app/css/chat_container.css' %}">
-    <!-- <link rel="stylesheet" href="{% static 'post_app/css/add_tag.css' %}"> -->
 {% endblock %}
 
 {% block modals %}
@@ -29,6 +28,7 @@
             <div class= "title-container">
                 <div class="title-image-wrapper">
                     <img class = "img-cover img-cover-width" src="{% static 'home_app/images/people.svg' %}" alt="">
+                    <span class="badge" id="friends-home-badge"></span>
                 </div>
                 <p>Запити</p>
             </div>
@@ -54,6 +54,7 @@
             <div class= "title-container">
                 <div class="title-image-wrapper">
                     <img class = "img-cover" src="{% static 'home_app/images/chat.svg' %}" alt="">
+                    <span class="badge" id="total-badge-home"></span>
                 </div>
                 <p>Повідомлення</p>
             </div>

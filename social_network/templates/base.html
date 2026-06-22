@@ -43,12 +43,14 @@
                             <a class = "nav-item" href="{% url 'friends' %}">
                                 <div class= "nav-img-container">
                                     <img class = "img-cover" src="{% static 'images/logo/people-logo.svg' %}" alt="">
+                                    <span class="badge" id="friends-badge"></span>
                                 </div>
                                 <span class="nav-item-text">Друзі</span>
                             </a>
                             <a class = "nav-item" href="{% url 'chat' %}">
                                 <div class= "nav-img-container">
                                     <img class = "img-cover" src="{% static 'images/logo/chat-logo.svg' %}" alt="">
+                                    <span class="badge" id="total-badge"></span>
                                 </div>
                                 <span class="nav-item-text">Чати</span>
                             </a>
@@ -88,6 +90,9 @@
         </main>
         {% block scripts %}{% endblock %}
         <script src= "{% static 'js/active.js' %}"></script>
+        {% if '/auth/' not in request.path %}
+            <script src="{% static 'chat_app/js/unread_messages.js' %}"></script>
+        {% endif %}
         {% if '/auth/' not in request.path %}
             <script src= "{% static 'js/logout.js' %}"></script>
         {% endif %}

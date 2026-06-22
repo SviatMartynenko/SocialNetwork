@@ -44,6 +44,7 @@ filterUserChat.addEventListener('input', async (event) => {
 
         if (data.success) {
             sideBlockList.innerHTML = data.html_1;
+            bindUserChatButtons();
         }
 });
 
@@ -155,6 +156,7 @@ searchUsers.addEventListener('input', async (event) => {
 
         if (data.success) {
             groupFriends.innerHTML = data.html_2;
+            bindUserChatButtons();
         }
 });
 
@@ -280,7 +282,12 @@ async function openChatById(chatId, title, members = 0) {
     messages.innerHTML = "";
     connectWebsocket(chatId);
     window.resetMessages(chatId);
+
     await loadMessages();
+    
+    if (window.updateUnreadData) {
+        window.updateUnreadData();
+    }
     startObserver();
 }
 
@@ -317,7 +324,8 @@ function bindGroupChatButtons() {
             const chatHeader = document.querySelector(".chat-header-div");
             openChatById(button.dataset.chatId, button.dataset.chatTitle, button.dataset.membersAmount); 
             getGroupMembers(button.dataset.chatId);
-            chatHeader.dataset.groupMembers = button.dataset.groupMembers ;
+            chatHeader.dataset.groupMembers = button.dataset.groupMembers;
+            chatHeader.dataset.adminId = button.dataset.adminId;
         });
     });
 }
@@ -325,6 +333,21 @@ function bindGroupChatButtons() {
 bindGroupChatButtons();
 window.openChatById = openChatById;
 window.bindGroupChatButtons = bindGroupChatButtons;
+
+function bindUserChatButtons() {
+    document.querySelectorAll(".chat-user-button").forEach((button) => {
+        if (button.dataset.userButtons == "true") return;
+
+        button.dataset.userButtons = "true";
+
+        button.addEventListener("click", () => {
+            openChatWithUser(
+                button.dataset.chatUser,
+                button.dataset.chatUsername,
+            );
+        });
+    });
+}
 
 function connectWebsocket(chatId) {
     console.log("Підключаємося до чату");
@@ -394,4 +417,23 @@ if (urlParams.has('userId') && urlParams.has('username')) {
     const username = urlParams.get('username').trim();
     
     wiopenChatWithUser(usertId, username);
+}
+
+function markChatAsRead(chatId, isGroup = false) {
+    const button = document.querySelector(
+        `.chat-user-button[data-chat-id="${chatId}"],
+         .chat-group-button[data-chat-id="${chatId}"]`
+    );
+
+    if (button) {
+        button.classList.remove("chat-has-unread");
+    }
+
+    unreadSocket.send(JSON.stringify({
+        type: "mark_read",
+        chat_id: chatId,
+        is_group: isGroup
+    }));
+
+    updateUnreadData();
 }

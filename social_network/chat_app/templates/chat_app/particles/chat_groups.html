@@ -6,6 +6,7 @@
                             class="chat-group-button" 
                             data-chat-title="{{ chat.name }}" 
                             data-chat-id="{{ chat.id }}" 
+                            data-admin-id="{{ chat.admin.id }}"
                             data-members-amount="{{ chat.users.count }}"
                             data-group-members="{% for user in chat.users.all %}{{ user.id }},{% endfor %}">
                             <div class = "profile-img-wrapper">

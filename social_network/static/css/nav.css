@@ -54,3 +54,53 @@
     width: 45.5vw;
     max-width: 656px;
 }
+
+.header-img-container,
+.nav-img-container,
+.messages .title-image-wrapper,
+.requests .title-image-wrapper{
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: -0.6vh;
+    right: -0.6vh;
+    width: 1.6vh;
+    height: 1.6vh;
+    background-color: #FF4C4C;
+    border-radius: 184.5px;
+    border: 0.2vh solid #fff;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    z-index: 3;
+}
+
+.badge--dot {
+    width: 1.6vh;
+    height: 1.6vh;
+    border-radius: 184.5px;
+    background: #FF4C4C;
+    border: 0.2vh solid #fff;
+}
+
+.badge--count {
+    min-width: 1.6vh;
+    height: 1.6vh;
+    /* padding: 0 0.4vh; */
+
+    background: #FF4C4C;
+    color: white;
+
+    font-family: var(--FontMedium);
+    font-size: 0.9vh;
+
+    border-radius: 184.5px;
+    border: 0.2vh solid #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

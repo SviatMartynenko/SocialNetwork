@@ -52,4 +52,9 @@ def create_group(request: HttpRequest):
 
     chat.users.add(*User.objects.filter(id__in=friend_ids) )
 
-    return {"success": True, 'chat_id': chat.id, "name":name}
+    return {
+        "success": True,
+        'chat_id': chat.id,
+        "name": name,
+        "members_amount": chat.users.count(),
+    }

@@ -1,6 +1,6 @@
 {% load static %}
 <section class = "chat-main">
-    <div class="chat-header-div" data-default-avatar= "{% static 'home_app/images/person_4.svg' %}" data-back= "{% static 'chat_app/images/goback-arrow.svg' %}" data-action= "{% static 'chat_app/images/three-menu.svg' %}">
+    <div class="chat-header-div" data-default-avatar= "{% static 'home_app/images/person_4.svg' %}" data-back= "{% static 'chat_app/images/goback-arrow.svg' %}" data-action= "{% static 'chat_app/images/three-menu.svg' %}" data-current-user-id="{{ request.user.id }}">
     </div>
     <div class="chat-text-div">
         <p class = "chat-main-text1" id="chatTitle">Почніть нове спілкування</p>

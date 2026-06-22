@@ -84,6 +84,7 @@ async function loadMessages(prepend = false) {
   if (isLoading || !hasNext) return;
   // Позначаємо початок завантаження.
   isLoading = true;
+
   // Запам'ятовуємо стару висоту списку.
   const oldHeight = messages.scrollHeight;
   // Запитуємо сторінку історії.
@@ -131,6 +132,10 @@ if (prepend) {
 if (!hasNext && observer) observer.disconnect();
 // Дозволяємо наступне завантаження.
 isLoading = false;
+
+if (window.updateUnreadData) {
+    window.updateUnreadData();
+}
 }
 
 // Вмикаємо observer для підвантаження старих повідомлень.
