@@ -35,6 +35,7 @@ const selectedUsersList = document.querySelector("#selected-users-list");
 const editSelectedUsersList = document.querySelector("#selected-users-list");
 // Знаходимо всі чекбокси друзів у модальному вікні.
 const groupUserCheckboxes = document.querySelectorAll(".group-user-checkbox");
+
 // Знаходимо список груп у правому блоці сторінки.
 function getGroupList() {
   return document.querySelector("#group-list") || document.querySelector(".chat-list #group-list");
@@ -157,6 +158,7 @@ async function saveGroupAddParticipants(chatId) {
     const membersContainer = document.querySelector('.group-members');
     if (membersContainer) {
       membersContainer.innerHTML = data.html;
+      
       attachGroupMemberRemovalButtons();
     }
   }
@@ -535,16 +537,20 @@ openGroupModalButton.addEventListener("click", openGroupModal);
 closeGroupModalButton.addEventListener("click", closeGroupModal);
 closeGroupNameModalButton.addEventListener("click", closeGroupModal);
 cancelGroupModalButton.addEventListener("click", closeGroupModal);
+
 nextGroupStepButton.addEventListener("click", () => {
   if (hasMinimumParticipants()) {
     showNameStep();
   }
 });
+
 backGroupStepButton.addEventListener("click", () => {
   clearGroupError();
   showUsersStep();
 });
+
 createGroupButton.addEventListener("click", createGroup);
+
 createGroupEditButton.addEventListener("click", async () => {
   const chatId = getCurrentChatId();
   if (!chatId) {
@@ -618,6 +624,8 @@ if (deleteGroupChatButton) {
     }
   });
 }
+
+
 
 groupUserCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", updateSelectedCount);

@@ -11,7 +11,7 @@
                             data-group-members="{% for user in chat.users.all %}{{ user.id }},{% endfor %}">
                             <div class = "profile-img-wrapper">
                                 {% if chat.avatar %}
-                                    <img class="select-group-img" src="{{ chat.avatar.url }}" alt="{{ chat.name }}">
+                                    <img class="group-avatar" src="{{ chat.avatar.url }}" alt="{{ chat.name }}">
                                 {% else %}
                                     <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
                                 {% endif %}

@@ -16,6 +16,8 @@ const searchUsers = document.querySelector(".search-users");
 const groupFriends = document.querySelector(".group-friends");
 const chatHeader = document.querySelector(".chat-header-div");
 const chatTextDiv = document.querySelector(".chat-text-div");
+
+
 const months = [
     { value: 1, name: "Січня" },
     { value: 2, name: "Лютого" },
@@ -31,6 +33,23 @@ const months = [
     { value: 12, name: "Грудня" }
 ];
 
+// Вихід користувача з чату
+document.addEventListener('click', function(event) {
+   
+    const button = event.target.closest('#leaveGroupButton');
+    if (button) {
+        const chatHeader = document.querySelector(".chat-header-div");
+        const chatButton = document.querySelector(`.chat-group-button[data-chat-id='${chatHeader.dataset.chatId}']`)
+        const modal = document.querySelector(".modal-overlay");
+        const textMessage = document.querySelector(".chat-text-div"); 
+        deleteGroupMember(chatHeader.dataset.chatId, chatHeader.dataset.currentUserId);
+        modal.style.display = "none";
+        chatHeader.classList.remove("show");
+        chatWindow.classList.remove("is-open");
+        chatButton.remove();
+        textMessage.classList.remove("hide");
+    }
+});
 
 filterUserChat.addEventListener('input', async (event) => {
     const queryValue = event.target.value;
@@ -125,6 +144,7 @@ async function deleteGroupMember(chatId,userId){
         attachGroupMemberRemovalButtons();
         return data;
 }
+window.deleteGroupMember = deleteGroupMember;
 
 window.saveGroupMemberRemovals = async function(chatId) {
     if (!chatId) {
