@@ -484,13 +484,14 @@ async function saveGroupEdits(chatId) {
   }
 
   const removedIds = Array.from(window.pendingRemovedGroupMembers);
+  const groupAvatarInput = document.getElementById('changeAvatarInput');
   
   const formData = new FormData();
   formData.append("name", editGroupNameInput.value.trim());
   formData.append("removed_users", JSON.stringify(removedIds));
   
-  if (groupEditAvatarFile) {
-    formData.append("avatar", groupEditAvatarFile);
+  if (groupAvatarInput.files.length > 0){
+    formData.append("avatar", groupAvatarInput.files[0]);
   }
 
   const response = await fetch(`/chat/edit_group/${chatId}/`, {

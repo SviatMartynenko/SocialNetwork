@@ -1,6 +1,7 @@
 {% load static %}
 {% for member in members %}
     <div class="group-member-container">
+        <img class="group-member-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
         <p class="group-member-username">{{member.username}}</p>
         <img data-chat-id = {{chat.id}} data-member-id = {{member.id}} class = "delete-group-member" src="{% static 'chat_app/images/delete-group-member.svg' %}" alt="">
     </div>

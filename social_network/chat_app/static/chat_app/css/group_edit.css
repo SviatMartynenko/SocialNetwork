@@ -97,6 +97,7 @@
     border-radius: 1vh;
     border: rgba(205, 206, 210, 1) solid 0.1vw;
     margin-top: 2.34vh;
+    max-height: 226px;
 }
 
 .group-edit-participants{
@@ -205,13 +206,15 @@
     color: rgba(7, 10, 28, 1);
     font-size: clamp(0.1rem, 1.5vh, 1rem);
     font-family: var(--FontMedium);
+    margin-right: auto;
+    margin-left: 0.83vw;
 }
 .group-members{
     display: flex;
     flex-direction: column;
     gap: clamp(0.1rem, 0.9vh, 0.625rem);
-    
 }
+
 .group-member-container{
     display: flex;
     flex-direction: row;
@@ -225,3 +228,10 @@
     height: 1.9vh;
 }
 
+.group-member-img{
+    height: 4.5vh;
+}
+
+#changeAvatarInput{
+    display: none;
+}

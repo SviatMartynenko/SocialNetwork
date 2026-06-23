@@ -8,7 +8,9 @@
                             data-chat-id="{{ chat.id }}" 
                             data-admin-id="{{ chat.admin.id }}"
                             data-members-amount="{{ chat.users.count }}"
-                            data-group-members="{% for user in chat.users.all %}{{ user.id }},{% endfor %}">
+                            data-group-avatar = "{% if chat.avatar %}{{ chat.avatar.url }}{%endif%}"
+                            data-group-members="{% for user in chat.users.all %}{{ user.id }},{% endfor %}" >
+                            
                             <div class = "profile-img-wrapper">
                                 {% if chat.avatar %}
                                     <img class="group-avatar" src="{{ chat.avatar.url }}" alt="{{ chat.name }}">
@@ -32,7 +34,7 @@
                         </button>
                     </div>
     {% empty %}
-        <p id="group-empty">Порожньо</p>
+        <p class="no-groups" id="group-empty">Порожньо</p>
     {% endfor %}
 </div>
 

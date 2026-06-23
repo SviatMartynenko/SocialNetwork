@@ -211,6 +211,8 @@
     width: 4.4vh;
     max-width: 46px;
     max-height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .chat-header-text{

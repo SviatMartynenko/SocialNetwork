@@ -156,7 +156,7 @@ class EditGroupView(LoginRequiredMixin, View):
         except json.JSONDecodeError:
             removed_users = []
 
-        avatar = request.FILES.get('avatar')
+        avatar = request.FILES.get('avatar', "")
 
         if name:
             chat.name = name

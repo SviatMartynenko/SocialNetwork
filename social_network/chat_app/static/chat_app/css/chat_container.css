@@ -94,3 +94,10 @@
 .chat-has-unread {
     background: #E9E5EE;
 }
+
+.message-no-chats, .no-groups{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--FontRegular);
+}

@@ -387,6 +387,12 @@ function bindGroupChatButtons() {
             getGroupMembers(button.dataset.chatId);
             chatHeader.dataset.groupMembers = button.dataset.groupMembers;
             chatHeader.dataset.adminId = button.dataset.adminId;
+            const headerChatAvatar = chatHeader.querySelector(".chat-header-meta-img");
+            const editModalAvatar = document.querySelector(".group-edit-img");
+            if (button.dataset.groupAvatar){
+                headerChatAvatar.src = button.dataset.groupAvatar;
+                editModalAvatar.src = button.dataset.groupAvatar;
+            }
         });
     });
 }

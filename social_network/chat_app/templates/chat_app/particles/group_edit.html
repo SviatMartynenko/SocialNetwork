@@ -7,9 +7,12 @@
         <input id="group-edit-name" class="group-edit-name-input" type="text" placeholder="Введіть назву">
     </div>
     <div class="group-edit-photo-div">
-        <img class="group-edit-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+        <div class="group-avatar-preview-wrapper">
+                    <img class="group-edit-img" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+                </div>
         <div class="group-edit-photo-actions">
             <div class="add-group-edit-photo">
+                <input id="changeAvatarInput" type="file" accept="image/*" hidden>
                 <img class="add-group-edit-img" src="{% static 'chat_app/images/add-group-photo.svg' %}" alt="">
                 <span>Додайте фото</span>
             </div>
@@ -28,8 +31,8 @@
             </div>
         </div>
         <div class="group-members"></div>
-        <div class="list-edit-participants" id="selected-users-list">
-        </div>
+        <!-- <div class="list-edit-participants" id="selected-users-list">
+        </div> -->
     </div>
     <div class="group-edit-modal__actions">
         <button class="back-group-edit-step" id="back-group-edit-step" type="button">Назад</button>
