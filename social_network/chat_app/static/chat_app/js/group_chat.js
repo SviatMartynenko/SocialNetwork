@@ -380,7 +380,7 @@ function showUsersStep() {
   groupStepName.hidden = true;
 }
 
-function addGroupButton(chatId, groupName, membersAmount = 0) {
+function addGroupButton(chatId, groupName, membersAmount = 0, avatarUrl = "") {
   const groupList = getGroupList();
   if (!groupList) {
     return;
@@ -404,7 +404,7 @@ function addGroupButton(chatId, groupName, membersAmount = 0) {
   imgWrapper.className = "profile-img-wrapper";
   const img = document.createElement("img");
   img.className = "img-cover";
-  img.src = "/static/home_app/images/person_4.svg";
+  img.src = avatarUrl || "/static/home_app/images/person_4.svg";
   img.alt = "";
   imgWrapper.appendChild(img);
 
@@ -468,8 +468,13 @@ async function createGroup() {
     }
     return;
   }
-
-  addGroupButton(data.chat_id, data.name, data.members_amount ?? 0);
+  
+  addGroupButton(
+    data.chat_id,
+    data.name,
+    data.members_amount ?? 0,
+    data.avatar_url
+  );
   closeGroupModal();
 };
 

@@ -161,7 +161,7 @@ class UnreadConsumer(AsyncWebsocketConsumer):
             if last_message:
                 last_text = last_message.text[:20]
             else:
-                last_text = 'Надіслано файл'
+                last_text = ''
                 
             unread = chat.messages.exclude(sender = self.user).exclude(readers = self.user).count()  
 

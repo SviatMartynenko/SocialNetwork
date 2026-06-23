@@ -267,25 +267,25 @@ class DeleteGroupView(LoginRequiredMixin, View):
         chat.delete()
         return JsonResponse({'success': True})
 
-class FilterUserChats(View):
-    def get_queryset(self):
-        return get_friends(current_user = self.request.user)
+# class FilterUserChats(View):
+#     def get_queryset(self):
+#         return get_friends(current_user = self.request.user)
     
-    def get(self, request, *args, **kwargs):
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            queryset = self.get_queryset()     
+#     def get(self, request, *args, **kwargs):
+#         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+#             queryset = self.get_queryset()     
             
-            query_value = request.GET.get('value',"")
-            if query_value and query_value != "":
-                friends = queryset.filter(username__icontains = query_value)
-            else:
-                friends = queryset
+#             query_value = request.GET.get('value',"")
+#             if query_value and query_value != "":
+#                 friends = queryset.filter(username__icontains = query_value)
+#             else:
+#                 friends = queryset
 
-            return JsonResponse({
-                'success': True,
-                'html_1': render_to_string("chat_app/particles/chat_profiles.html", {'friends': friends}),
-                'html_2': render_to_string("chat_app/particles/group_friends.html", {'friends': friends}),
-            })
+#             return JsonResponse({
+#                 'success': True,
+#                 'html_1': render_to_string("chat_app/particles/chat_profiles.html", {'friends': friends}),
+#                 'html_2': render_to_string("chat_app/particles/group_friends.html", {'friends': friends}),
+#             })
         
 
 class MessageImagesUploadView(LoginRequiredMixin, View):

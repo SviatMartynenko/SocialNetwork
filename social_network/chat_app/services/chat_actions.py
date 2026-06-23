@@ -54,7 +54,8 @@ def create_group(request: HttpRequest):
 
     return {
         "success": True,
-        'chat_id': chat.id,
-        "name": name,
+        "chat_id": chat.id,
+        "name": chat.name,
         "members_amount": chat.users.count(),
+        "avatar_url": chat.avatar.url if chat.avatar else "",
     }

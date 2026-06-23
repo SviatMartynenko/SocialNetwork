@@ -87,21 +87,21 @@ document.addEventListener('click', function(event) {
     }
 });
 
-filterUserChat.addEventListener('input', async (event) => {
-    const queryValue = event.target.value;
-    const response = await fetch(`/chat/filter_chats/?value=${queryValue}`, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-            }
-        });
+// filterUserChat.addEventListener('input', async (event) => {
+//     const queryValue = event.target.value;
+//     const response = await fetch(`/chat/filter_chats/?value=${queryValue}`, {
+//             headers: {
+//                 'X-Requested-With': 'XMLHttpRequest',
+//             }
+//         });
 
-        const data = await response.json();
+//         const data = await response.json();
 
-        if (data.success) {
-            sideBlockList.innerHTML = data.html_1;
-            bindUserChatButtons();
-        }
-});
+//         if (data.success) {
+//             sideBlockList.innerHTML = data.html_1;
+//             bindUserChatButtons();
+//         }
+// });
 
 window.pendingRemovedGroupMembers = new Set();
 
