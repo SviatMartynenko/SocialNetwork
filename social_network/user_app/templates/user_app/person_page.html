@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static 'post_app/css/show_post.css' %}">
     <link rel="stylesheet" href="{% static 'user_app/css/friends/friends_cards.css' %}">
     <link rel="stylesheet" href="{% static 'user_app/css/friends/confirm_action.css' %}">
+    <link rel="stylesheet" href="{% static 'chat_app/css/chat_profiles.css' %}">
 {% endblock %}
 {% block modals %}
     {% include "user_app/particles/friends/confirm_action.html" %}
@@ -23,4 +24,5 @@
     <script src="{% static 'user_app/js/personPostList.js' %} "></script>
     <script src="{% static 'user_app/js/person_page.js' %}"></script>
     <script src="{% static 'user_app/js/friend_actions.js' %}"></script>
+    <script src="{% static 'chat_app/js/online_status.js' %}"></script>
 {% endblock %}

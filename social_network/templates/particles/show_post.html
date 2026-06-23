@@ -3,7 +3,8 @@
     <article class="post">
         <div class="post-author-div">
             <div class="author-image">
-                <img class="" src="{% static 'post_app/images/post_avatar.svg'  %}" alt="">
+                <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+                <div class="status-indicator" data-user-id="{{ post.author.id }}"></div>
             </div>
             <p class="author-name">{{ post.author.username }} </p>
         </div>

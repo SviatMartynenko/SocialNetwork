@@ -73,6 +73,21 @@ const groupAddFriendsList = document.querySelector("#group-add-friends-list");
 const selectedAddCount = document.querySelector("#selected-add-count");
 const groupAddSaveButton = document.querySelector("#group-add-save-btn");
 
+const addGroupEditPhotoButton = document.querySelector(".add-group-edit-photo");
+const selectGroupEditPhotoButton = document.querySelector(".select-group-edit-photo");
+const groupEditImg = document.querySelector(".group-edit-img");
+let groupEditAvatarFile = null;
+
+let groupEditAvatarInput = document.querySelector("#groupEditAvatarInput");
+if (!groupEditAvatarInput) {
+    groupEditAvatarInput = document.createElement("input");
+    groupEditAvatarInput.id = "groupEditAvatarInput";
+    groupEditAvatarInput.type = "file";
+    groupEditAvatarInput.accept = "image/*";
+    groupEditAvatarInput.style.display = "none";
+    document.body.appendChild(groupEditAvatarInput);
+}
+
 async function loadGroupAddParticipants(chatId) {
     if (!groupAddFriendsList) {
         return;
@@ -464,19 +479,22 @@ async function saveGroupEdits(chatId) {
   }
 
   const removedIds = Array.from(window.pendingRemovedGroupMembers);
-  const payload = {
-    name: editGroupNameInput.value.trim(),
-    removed_users: removedIds,
-  };
+  
+  const formData = new FormData();
+  formData.append("name", editGroupNameInput.value.trim());
+  formData.append("removed_users", JSON.stringify(removedIds));
+  
+  if (groupEditAvatarFile) {
+    formData.append("avatar", groupEditAvatarFile);
+  }
 
   const response = await fetch(`/chat/edit_group/${chatId}/`, {
-    method: "PUT",
+    method: "POST",
     headers: {
-      "Content-Type": "application/json",
       "X-CSRFToken": csrfToken,
       "X-Requested-With": "XMLHttpRequest",
     },
-    body: JSON.stringify(payload),
+    body: formData,
   });
 
   const data = await response.json();
@@ -494,6 +512,9 @@ async function saveGroupEdits(chatId) {
     if (typeof data.members_amount !== "undefined") {
       groupButton.dataset.membersAmount = data.members_amount;
     }
+    if (data.avatar_url && groupButton.querySelector(".group-avatar")) {
+      groupButton.querySelector(".group-avatar").src = data.avatar_url;
+    }
   }
 
   if (chatHeader && chatHeader.dataset.isGroup === "true") {
@@ -506,6 +527,9 @@ async function saveGroupEdits(chatId) {
     if (chatStatusElement && typeof data.members_amount !== "undefined") {
       chatStatusElement.textContent = `${data.members_amount} учасників`;
     }
+    if (data.avatar_url && chatHeader.querySelector(".chat-header-meta-img")) {
+      chatHeader.querySelector(".chat-header-meta-img").src = data.avatar_url;
+    }
   }
 
   if (data.html) {
@@ -517,6 +541,8 @@ async function saveGroupEdits(chatId) {
   }
 
   window.pendingRemovedGroupMembers.clear();
+  groupEditAvatarFile = null;
+  
   return data;
 }
 
@@ -624,8 +650,6 @@ if (deleteGroupChatButton) {
     }
   });
 }
-
-
 
 groupUserCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", updateSelectedCount);

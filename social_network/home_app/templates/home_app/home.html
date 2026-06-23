@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'post_app/css/show_post.css' %}">
     <link rel="stylesheet" href="{% static 'post_app/css/add_tag.css' %}">
     <link rel="stylesheet" href="{% static 'chat_app/css/chat_container.css' %}">
+    <link rel="stylesheet" href="{% static 'chat_app/css/chat_profiles.css' %}">
 {% endblock %}
 
 {% block modals %}
@@ -75,4 +76,5 @@
     <script type = "module" src="{% static 'post_app/js/createPost.js' %}"></script>
     <!-- <script type="module" src="{% static 'js/renderErrors.js' %}" ></script> -->
     <script type="module" src="{% static 'post_app/js/postList.js' %} "></script>
+    <script src="{% static 'chat_app/js/online_status.js' %}"></script>
 {% endblock %}

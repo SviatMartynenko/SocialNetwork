@@ -29,11 +29,18 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    position: relative;
+    overflow: visible;
+}
+.avatar-circle-wrapper img{
+    position: relative;
+    z-index: 1;
 }
 .user-status{
     width: 1.7vh;
     height: 1.7vh;
     position: absolute;
+    z-index: 2;
     border: solid white 0.1vw;
     border-radius: 50%;
     background-color: rgba(34, 197, 94, 1);

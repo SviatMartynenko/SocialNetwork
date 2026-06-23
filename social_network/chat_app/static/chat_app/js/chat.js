@@ -33,7 +33,43 @@ const months = [
     { value: 12, name: "Грудня" }
 ];
 
-// Вихід користувача з чату
+function getOnlineCountForMembers(memberList) {
+    if (!memberList) {
+        return 0;
+    }
+
+    return memberList
+        .split(',')
+        .filter(Boolean)
+        .filter((id) => window.chatOnlineUsers && window.chatOnlineUsers.has(String(id)))
+        .length;
+}
+
+function updateChatHeaderStatus() {
+    const chatHeader = document.querySelector(".chat-header-div");
+    if (!chatHeader) {
+        return;
+    }
+
+    const statusElement = chatHeader.querySelector(".chat-status");
+    if (!statusElement) {
+        return;
+    }
+
+    if (chatHeader.dataset.isGroup === "true") {
+        const membersCount = Number(chatHeader.dataset.membersAmount) || 0;
+        const onlineCount = getOnlineCountForMembers(chatHeader.dataset.groupMembers);
+        statusElement.textContent = `${membersCount} учасників, ${onlineCount} в мережі`;
+    } else if (chatHeader.dataset.chatUser) {
+        const isOnline = window.chatOnlineUsers && window.chatOnlineUsers.has(String(chatHeader.dataset.chatUser));
+        statusElement.textContent = isOnline ? "в мережі" : "не в мережі";
+    } else {
+        statusElement.textContent = "";
+    }
+}
+
+window.updateChatHeaderStatus = updateChatHeaderStatus;
+
 document.addEventListener('click', function(event) {
    
     const button = event.target.closest('#leaveGroupButton');
@@ -236,7 +272,7 @@ function updateDateSeparators() {
 
 window.updateDateSeparators = updateDateSeparators;
 
-async function openChatById(chatId, title, members = 0) {
+async function openChatById(chatId, title, members = 0, chatUserId = "", groupMembers = "") {
 
     document.querySelectorAll('.chat-group-button, .chat-user-button').forEach(btn => {
         btn.classList.remove('active-chat');
@@ -256,11 +292,9 @@ async function openChatById(chatId, title, members = 0) {
     chatTextDiv.classList.add("hide");
     chatHeader.classList.add("show");
     chatHeader.dataset.chatId = chatId;
-
-    let groupStatus = ""
-    if (members > 0){
-        groupStatus = `${members} учасників`;
-    }
+    chatHeader.dataset.chatUser = chatUserId;
+    chatHeader.dataset.groupMembers = groupMembers;
+    chatHeader.dataset.membersAmount = members;
 
     chatHeader.innerHTML = `
     <div class = "chat-header-left">
@@ -273,7 +307,7 @@ async function openChatById(chatId, title, members = 0) {
             </div>
             <div class = "chat-header-text">
                 <p class = "chat-name"></p>
-                <p class = "chat-status">${groupStatus}</p>
+                <p class = "chat-status"></p>
             </div>
         </div>
     </div>
@@ -308,6 +342,7 @@ async function openChatById(chatId, title, members = 0) {
     if (window.updateUnreadData) {
         window.updateUnreadData();
     }
+    updateChatHeaderStatus();
     startObserver();
 }
 
@@ -329,7 +364,7 @@ async function openChatWithUser(userId, username) {
     const data = await response.json();
 
     if (data.success) {
-        openChatById(data.chat_id, username);
+        openChatById(data.chat_id, username, 0, userId, "");
     }
 }
 
@@ -342,7 +377,13 @@ function bindGroupChatButtons() {
         button.dataset.groupButtons = "true";
         button.addEventListener("click", () => {
             const chatHeader = document.querySelector(".chat-header-div");
-            openChatById(button.dataset.chatId, button.dataset.chatTitle, button.dataset.membersAmount); 
+            openChatById(
+                button.dataset.chatId,
+                button.dataset.chatTitle,
+                button.dataset.membersAmount,
+                "",
+                button.dataset.groupMembers
+            );
             getGroupMembers(button.dataset.chatId);
             chatHeader.dataset.groupMembers = button.dataset.groupMembers;
             chatHeader.dataset.adminId = button.dataset.adminId;

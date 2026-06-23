@@ -18,3 +18,25 @@ addChatAvatarButton.addEventListener("click", () =>{
         reader.readAsDataURL(file);
     });
 });
+
+groupEditAvatarInput.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    groupEditAvatarFile = file;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        document.querySelector(".group-img").src = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+});
+
+document.querySelector(".add-group-edit-photo").addEventListener("click", () => {
+    groupEditAvatarInput.click();
+});

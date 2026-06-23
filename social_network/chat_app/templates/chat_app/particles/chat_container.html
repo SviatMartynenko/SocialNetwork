@@ -8,6 +8,7 @@
                         <button type="button" class="chat-user-button" data-chat-user="{{ person.id }}" data-chat-username="{{ person.username }}" data-chat-id="{{ chat.id }}">
                             <div class = "profile-img-wrapper">
                                 <img class = "img-cover" src="{% static 'home_app/images/person_4.svg' %}" alt="">
+                                <div class="status-indicator" data-user-id="{{ person.id }}"></div>
                             </div>
                             <div class="person-profile">
                                 <div class = "last-message-header">

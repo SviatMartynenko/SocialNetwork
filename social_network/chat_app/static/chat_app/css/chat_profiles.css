@@ -49,14 +49,59 @@
    font-family: var(--FontMedium);
 }
 
-.profile-img-wrapper{
+.profile-img-wrapper,
+.person-img-wrapper {
    display: flex;
-   width: 4.4vh;
-   height: 4.4vh;
+   width: 45px;
+   height: 45px;
    justify-content: center;
    align-items: center;
    border-radius: 50%;
+   position: relative;
+}
+
+.profile-avatar-container {
+    position: relative;
+}
+
+.author-image {
+    position: relative;
+    width: 48px;
+    height: 48px;
+}
+
+.author-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.user-avatar-container {
+    position: relative;
+}
+
+.profile-img-wrapper img,
+.person-img-wrapper img {
+   width: 100%;
+   height: 100%;
+   border-radius: 50%;
    overflow: hidden;
+}
+
+.status-indicator {
+   position: absolute;
+   right: -2px;
+   bottom: -2px;
+   width: 0.95rem;
+   height: 0.95rem;
+   border-radius: 50%;
+   background-color: #A9A9A9;
+   border: 2px solid #FFFFFF;
+   z-index: 10;
+}
+
+.status-indicator--online {
+   background-color: #2ECC71;
 }
 
 .group-avatar{
