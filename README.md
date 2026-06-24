@@ -18,6 +18,7 @@ The project is developed as a demonstration framework for a multi-user, social n
 | **Sofiia Tokarchuk** | [@SofiiaTokarchuk](https://github.com/SofiiaTokarchuk) |
 | **Roman Redkin** | [@RomanRedkin](https://github.com/RomanRedkin) |
 | **Misha Balkovyi** | [@rainofpain](https://github.com/rainofpain) |
+| **Sviatoslav Martynenko** | [@SviatMartynenko](https://github.com/SviatMartynenko) |
 
 ## Navigation
 - [Installation and Running](#installation-and-running)
