@@ -31,7 +31,7 @@ The project is developed as a demonstration framework for a multi-user, social n
 
 #### 1. Clone the repository
 ```
-git clone https://github.com/SofiiaTokarchuk/SocialNetwork.git
+https://github.com/SviatMartynenko/SocialNetwork.git
 ```
 #### 2. Create `venv` using Python 3.12 and activate it
 For Windows Bash
