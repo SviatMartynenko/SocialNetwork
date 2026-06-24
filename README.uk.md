@@ -18,6 +18,7 @@
 | **Софія Токарчук** | [@SofiiaTokarchuk](https://github.com/SofiiaTokarchuk) |
 | **Роман Редькін** | [@RomanRedkin](https://github.com/RomanRedkin) |
 | **Міша Балковий** | [@rainofpain](https://github.com/rainofpain) |
+| **Святослав Мартиненко** | [@SviatMartynenko](https://github.com/SviatMartynenko) |
 
 ## Навігація
 - [Встановлення та запуск](#встановлення-та-запуск)
