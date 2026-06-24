@@ -31,7 +31,7 @@
 
 #### 1. Клонувати репозиторій
 ```
-git clone https://github.com/SofiiaTokarchuk/SocialNetwork.git
+https://github.com/SviatMartynenko/SocialNetwork.git
 ```
 
 #### 2. Створити віртуальне оточення `venv` за версії Python 3.12 та активувати його
